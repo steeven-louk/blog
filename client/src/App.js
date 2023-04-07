@@ -2,7 +2,7 @@
 
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
-import Heros from "./components/heros/Heros";
+import Blogs from "./pages/blogs/Blogs";
 import HomePage from "./pages/homePage/HomePage";
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
 
 
       <Header/>
-      <Heros/>
-      <HomePage/>
+      {/* <HomePage/> */}
+      <Blogs/>
       <Footer/>
 
     </div>

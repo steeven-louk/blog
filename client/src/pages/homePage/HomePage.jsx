@@ -1,9 +1,12 @@
 import React from 'react'
 import Card from '../../components/card/Card'
+import Heros from '../../components/heros/Heros'
 
 const HomePage = () => {
   return (
     <div className='home'>
+      <Heros/>
+
         <div className="px-5">
             <div className="h2 text-center text-capitalize my-5">latest blogs</div>
 
