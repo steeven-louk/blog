@@ -5,6 +5,7 @@ import Header from "./components/header/Header";
 import Blogs from "./pages/blogs/Blogs";
 import Contact from "./pages/contact/Contact";
 import HomePage from "./pages/homePage/HomePage";
+import SinglePost from "./pages/singlePost/singlePost";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <Header/>
       {/* <HomePage/> */}
       {/* <Blogs/> */}
-      <Contact/>
+      {/* <Contact/> */}
+      <SinglePost/>
       <Footer/>
 
     </div>
