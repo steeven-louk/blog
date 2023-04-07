@@ -1,5 +1,6 @@
 // import './App.css';
 
+import { Route, Routes } from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import About from "./pages/about/About";
@@ -14,11 +15,14 @@ function App() {
 
 
       <Header/>
-      {/* <HomePage/> */}
-      {/* <Blogs/> */}
-      {/* <Contact/> */}
-      {/* <SinglePost/> */}
-      <About/>
+      <Routes>
+        <Route exact path="/" element={<HomePage/>}/>
+        <Route exact path="/blogs" element={<Blogs/>}/>
+        <Route exact path="/singlesPost/:id" element={<SinglePost/>}/>
+        <Route exact path="/about" element={<About/>}/>
+        <Route exact path="/contact" element={<Contact/>}/>
+      </Routes>
+      
       <Footer/>
 
     </div>

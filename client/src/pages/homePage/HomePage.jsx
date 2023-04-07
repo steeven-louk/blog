@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '../../components/card/Card'
 import Heros from '../../components/heros/Heros'
+import { Link } from 'react-router-dom'
 
 const HomePage = () => {
   return (
@@ -17,7 +18,7 @@ const HomePage = () => {
                 <Card/>
             </div>
 
-            <button className="btn btn-success mt-5 text-warning align-items-center text-center mx-auto text-capitalize fw-semibold d-flex">read more</button>
+            <Link to="/blogs" className="btn btn-success mt-5 text-warning w-25 mx-auto text-capitalize fw-semibold d-block">read more</Link>
         </div>
     </div>
   )
