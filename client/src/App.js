@@ -1,9 +1,19 @@
 // import './App.css';
 
+import Header from "./components/header/Header";
+import Heros from "./components/heros/Heros";
+import HomePage from "./pages/homePage/HomePage";
+
 function App() {
   return (
     <div className="App">
-    <span>blog</span>
+
+
+      <Header/>
+      <Heros/>
+      <HomePage/>
+
+
     </div>
   );
 }
