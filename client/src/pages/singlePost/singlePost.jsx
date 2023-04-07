@@ -21,7 +21,7 @@ const SinglePost = () => {
           src="./assets/singlePost.png"
           alt="post-img"
           style={{ height: "25em", width: "100%", objectFit: "cover" }}
-          className="img-fluid rounded w-full object-fit-cover"
+          className="img-fluid rounded object-fit-cover"
         />
       </div>
 
