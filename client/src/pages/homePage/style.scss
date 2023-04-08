@@ -1,0 +1,30 @@
+.homePage {
+  
+        .heros  form{
+            display: flex;
+            margin-bottom: 25px;
+            
+            input{
+                width: 20em;
+                border-radius: 20px;
+                outline: none;
+                border: none;
+                padding-left: 10px;
+
+                &::placeholder{
+                    color: gold;
+                    font-weight: bold;
+                    padding-left: 10px;
+                }
+            }
+
+            button{
+                border-radius: 20px;
+                width: 7em;
+                position: relative;
+                text-align: center;
+                right: 30px;
+            }
+        }
+}
+

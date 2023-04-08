@@ -1,0 +1,46 @@
+.contact{
+    overflow-x: none;
+    height: 100%;
+
+    .left-col {
+      height: 100%;
+      
+        .contact-left{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            bottom: -220px;
+        }
+    }
+
+    .right-col {
+      background: greenyellow;
+      overflow: none;
+
+      input, textarea{
+        border: none;
+        resize: none;
+        width: 100%;
+        outline: none;
+        padding: 5px 0 5px 20px;
+
+        &::placeholder{
+            color: gold;
+            font-weight: bold;
+        }
+      }
+    }
+
+    .send{
+       text-align: center;
+       align-items: center;
+       justify-content: center;
+       display: flex;
+       flex-direction: column;
+
+       .btn{
+        width: 85px;
+       }
+    }
+}

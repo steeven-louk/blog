@@ -1,13 +1,15 @@
 import React from "react";
 
+import './style.scss';
+
 const About = () => {
   return (
     <div className="about">
-      <h4 className="text-center fw-bold my-5">Master Mind Behind "Dive Into Skills"</h4>
+      <h3 className="text-center fw-bold my-5">Master Mind Behind "Dive Into Skills"</h3>
 
       <div className="container">
         <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 left-col">
           <h4 className="fw-bold">ishimaru</h4>
           <p>
             I am ishi. I am a student of master 1 of web developpement
@@ -21,7 +23,7 @@ const About = () => {
         </div>
       </div>
 
-      <div className="social-media my-4 d-flex gap-3 justify-content-center ">
+      <div className="social-media my-4 d-flex flex-wrap gap-3 justify-content-center ">
         <span>facebook</span>
         <span>insta</span>
         <span>twitter</span>

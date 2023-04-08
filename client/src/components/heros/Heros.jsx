@@ -2,7 +2,7 @@ import React from 'react'
 
 const Heros = () => {
   return (
-    <div className="bg-success">
+    <div className="heros bg-success">
       <div className="container-fluid px-5 pt-3">
         <div className="row">
           <div className="col-md-6">
@@ -15,7 +15,7 @@ const Heros = () => {
               topics or courses are published.
             </p>
             <form action="">
-              <input type="text" placeholder='Email and adresse' className="p-1" />
+              <input type="text" placeholder='Email and adresse'  />
               <button className="btn btn-warning text-dark text-capitalize fw-semibold">
                 subscribe
               </button>
@@ -24,7 +24,7 @@ const Heros = () => {
           <div className="col-md-6">
             <img
               src="./assets/Asset21.png"
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", "width":"100%" }}
               className="img-fluid"
               alt=""
             />

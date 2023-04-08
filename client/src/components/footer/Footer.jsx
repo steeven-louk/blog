@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="footer px-5 pt-5 pb-2 bg-success text-white mt-3">
+    <div className="footer px-5 pt-5 pb-2 bg-success text-white">
       <div className="row">
         <h2 className="text-warning fw-bold">Blog</h2>
         <div className="col-md-4">
@@ -21,7 +21,7 @@ const Footer = () => {
             <li>youtube</li>
           </ul>
         </div>
-        <div className="col-md-4 text-capitalize align-items-center">
+        <div className="col-md-4 text-capitalize  align-items-center">
           <ul className="nav flex-column  align-items-center text-left">
             <li className="nav-item">about</li>
             <li>contact</li>
@@ -30,7 +30,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="social-media my-4 d-flex gap-3 justify-content-center ">
+      <div className="social-media my-4 d-flex gap-3  justify-content-center ">
         <span>facebook</span>
         <span>insta</span>
         <span>twitter</span>

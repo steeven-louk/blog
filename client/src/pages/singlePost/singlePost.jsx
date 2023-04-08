@@ -66,8 +66,7 @@ const SinglePost = () => {
         Read Related Blogs
       </div>
 
-      <div className="card-container d-flex wrap gap-3 w-full">
-        <Card />
+      <div className="card-container gap-3">
         <Card />
         <Card />
         <Card />

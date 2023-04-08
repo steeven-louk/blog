@@ -3,10 +3,10 @@ import React from 'react'
 const Card = () => {
   return (
     <>
-        <div className="card"style={{ 'width':'400px' }}>
+        <div className="card">
             <div className="card-header position-relative">
-                <img src="./assets/Asset21.png" alt="" className="card-img-top img-fluid object-fit-cover" />
-                <span className="bg-success position-absolute bottom-0 start-0 fw-bold text-warning text-capitalize">category</span>
+                <img src="./assets/Asset21.png" alt="" className="card-img-top" />
+                <span className="category bg-success position-absolute bottom-0 start-0 fw-bold text-warning text-capitalize">category</span>
             </div>
             <div className="card-body bg-tertiary">
                 <h5 className="card-title">
