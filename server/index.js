@@ -3,6 +3,7 @@ const dotEnv = require('dotenv');
 const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const ConnectDb = require('./db/db');
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:true }));
 dotEnv.config();
 
+ConnectDb();
 
 
 const PORT = process.env.PORT || 3000;
