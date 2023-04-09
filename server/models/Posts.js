@@ -17,8 +17,8 @@ const PostModel = schema({
     },
     category:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
-        required: false
+
+        ref: 'Categories',
     }
 }, {timestamps: true});
 

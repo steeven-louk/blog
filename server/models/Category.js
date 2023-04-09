@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const CategoryModel = schema({
-    title:{
+    name:{
         type: String,
         required:[true, "title is required"],
     },
    
-}, {timestamp: true});
+}, {timestamps: true});
 
 const Category = mongoose.model('Categories', CategoryModel);
 

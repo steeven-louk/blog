@@ -7,7 +7,7 @@ const getAllPost = async (_, res)=>{
 
 const addPost = async(req, res) =>{
     try {
-        const data = await Post(req.body);
+        const data = await new Post(req.body);
     const saveData = await data.save();
     res.status(201).send(saveData);
     } catch (error) {
