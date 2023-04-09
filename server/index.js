@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const ConnectDb = require('./db/db');
 const postRoute = require('./routes/postRoute');
 const catRoute = require('./routes/categoriesRoutes');
+const authRoute = require('./routes/authRoutes');
 
 const app = express();
 
@@ -16,8 +17,9 @@ dotEnv.config();
 
 ConnectDb();
 
-app.use('/api/post', postRoute)
-app.use('/api/categories', catRoute)
+app.use('/api/post', postRoute);
+app.use('/api/categories', catRoute);
+app.use('/api/auth', authRoute);
 
 const PORT = process.env.PORT || 3000;
 
