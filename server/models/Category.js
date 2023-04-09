@@ -6,6 +6,7 @@ const CategoryModel = schema({
     name:{
         type: String,
         required:[true, "title is required"],
+        unique: true
     },
    
 }, {timestamps: true});

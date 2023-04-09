@@ -17,7 +17,7 @@ dotEnv.config();
 ConnectDb();
 
 app.use('/api/post', postRoute)
-app.use('/api/cat', catRoute)
+app.use('/api/categories', catRoute)
 
 const PORT = process.env.PORT || 3000;
 
