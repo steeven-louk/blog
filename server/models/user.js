@@ -23,8 +23,7 @@ const UserModel = schema({
     }, 
     post:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Posts',
-        required: false
+        ref: 'Posts'
     }],
     isAdmin:{
         type: Boolean,

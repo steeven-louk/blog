@@ -15,9 +15,12 @@ const PostModel = schema({
         type: String,
         required: false
     },
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     category:{
         type: mongoose.Schema.Types.ObjectId,
-
         ref: 'Categories',
     }
 }, {timestamps: true});

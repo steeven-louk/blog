@@ -1,4 +1,5 @@
-const Post = require('../models/Posts')
+const Post = require('../models/Posts');
+const User = require('../models/user');
 
 const getAllPost = async (_, res)=>{
     const data = await Post.find().sort({'createdAt':-1}).populate('category');
@@ -7,9 +8,15 @@ const getAllPost = async (_, res)=>{
 
 const addPost = async(req, res) =>{
     try {
+
+        const existingUser = await User.findById(req.body.user);
+        if(!existingUser) res.status(401).json("user not found");
         const data = await new Post(req.body);
-    const saveData = await data.save();
-    res.status(201).send(saveData);
+        const saveData = await data.save();
+        await existingUser.post.push(saveData);
+        await existingUser.save();
+
+    res.status(201).json(saveData);
     } catch (error) {
         res.status(400).send(error)
     }
@@ -42,10 +49,11 @@ const deletePost = async(req, res) => {
     const id = req.params.id;
 
     try {
-        const post = await Post.findByIdAndDelete(id);
-        res.status(200).json(post);
+        const post = await Post.findByIdAndDelete(id).populate('user');
+        await post.user.post.pull(post)
+        res.status(200).send({message:"blog is deleted"});
     } catch (error) {
-        res.status(400).json(error)
+        res.status(400).json(error.message)
     }
 
 }
