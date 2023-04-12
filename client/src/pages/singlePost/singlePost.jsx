@@ -1,14 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import Card from "../../components/card/Card";
+import Card from "../../components/card/Card";
 
 const SinglePost = () => {
 
   const [post, setPost] = useState({});
+  const [similarPost, setSimilar] = useState([]);
   const [loading, setLoading] = useState(false);
   const {id} = useParams();
 
+  const userId = "6432f1606032991bfd8a97cb"
 
   const getPost = async () =>{
     try {
@@ -26,11 +28,27 @@ const SinglePost = () => {
     }
   }
 
+  const getSimilarPost = async () =>{
+    try{
+      const getsimilarPost = await axios.get(`http://localhost:8080/api/user/user-post/${userId}`);
+    if(getsimilarPost.status === 200){
+
+      setSimilar(getsimilarPost.data)
+    } 
+
+    }catch(error){
+      console.log('err', error.message);
+    }
+  }
+
+  console.log('ss',similarPost.username)
   useEffect(()=>{
     getPost();
   }, []);
 
-  // console.log(post);
+  useEffect(() => {
+    getSimilarPost();
+  }, []);
   const date = new Date(post.createdAt).toDateString();
 
   return (
@@ -66,6 +84,7 @@ const SinglePost = () => {
       </div>
 
       <div className="card-container gap-3">
+      {similarPost?.post?.map((items)=> <Card items={items} key={items._id} username={similarPost.username}/>)}
         {/* <Card />
         <Card />
         <Card /> */}
