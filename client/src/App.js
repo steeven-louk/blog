@@ -8,6 +8,8 @@ import Blogs from "./pages/blogs/Blogs";
 import Contact from "./pages/contact/Contact";
 import HomePage from "./pages/homePage/HomePage";
 import SinglePost from "./pages/singlePost/singlePost";
+import Register from "./pages/authentification/register";
+import Login from "./pages/authentification/Login";
 
 function App() {
   return (
@@ -21,6 +23,9 @@ function App() {
         <Route exact path="/singlePost/:id" element={<SinglePost/>}/>
         <Route exact path="/about" element={<About/>}/>
         <Route exact path="/contact" element={<Contact/>}/>
+        <Route exact path="/register" element={<Register/>}/>
+        <Route exact path="/login" element={<Login/>}/>
+
       </Routes>
       
       <Footer/>
