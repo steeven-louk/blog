@@ -1,6 +1,47 @@
 .auth{
-    height: 100vh;
-    width: 100%;
+
+
+    .container .row {
+        display: flex;
+        margin: auto;
+      justify-content: center;
+      align-items: center;
+    
+
+ 
+
+      .left{
+        background: url(../../../public/assets/Asset21.png) no-repeat;
+        background-position: center;
+        height: 550px;
+        width: 450px;
+        object-fit: cover;
+        background-color: rgba(12, 92, 16, 0.877);
+        color: #fff;
+
+        h2{
+            font-size: 7vw;
+            text-transform: capitalize;
+            font-weight: bold;
+            text-shadow: 3px 1px 3px#000;
+            
+        }
+        span{
+            text-transform: capitalize;
+            font-weight: bold;
+            text-shadow: 3px 1px 3px#000;
+
+            em{
+                color: #fff;
+                text-decoration: underline;
+            }
+
+        }
+      }
+      .right{
+        width: 450px;
+      }
+    }
 
     form{
         input{

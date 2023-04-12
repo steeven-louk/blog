@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+
+import {Link} from 'react-router-dom'
+
+
 const Login = () => {
 
     const [email, setEmail] = useState("");
@@ -32,16 +36,19 @@ const Login = () => {
     <div className='auth'>
     <div className="container">
         <div className="row">
-            <div className="col-md-7 bg-primary">l</div>
-            <div className="col-md-5 p-5">
-                <h2 className="fw-bold">Login</h2>
+            <div className="col-md-7 p-5 left ">
+                <h2>welcom back.</h2>
+                <span>have not account? <Link to="/register"><em>register</em></Link></span>
+            </div>
+            <div className="col-md-5 right p-5">
+                <h1 className="fw-bold mb-5">Login</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, quas.</p>
                 
                 <form onSubmit={handleSubmit} className='form d-flex flex-column gap-3'>
                     <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='email' required className="form-control " />
                     <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='password' required className="form-control " />
                     <br />
-                    <button className='d-inline-block pull-right  text-white bg-success border-0 p-1 fw-semibold'>Login</button>
+                    <button className='rounded text-white bg-success border-0 p-1 fw-semibold'>Login</button>
                 </form>
             </div>
         </div>

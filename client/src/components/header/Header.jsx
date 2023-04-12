@@ -2,6 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
+  let username = JSON.parse(localStorage.getItem('username'));
+  let token = JSON.parse(localStorage.getItem('token'));
+  
+  
+
   return (
     <div className='header'>
         <nav className="navbar navbar-expand-lg bg-success">
@@ -27,7 +32,19 @@ const Header = () => {
           <Link className="nav-link text-white" to="/contact">Contact</Link>
         </li>
       </ul>
-      
+
+    {!token &&
+      <div className="authentification mx-3 gap-3 d-flex text-capitalize fw-bold">
+        <Link to='/register' className=' text-white'>register</Link>
+        <Link to='/login' className=' text-white'>login</Link>
+      </div>
+    }
+    {token &&
+      <div className="user-group ps-2">
+        <img src="./assets/asset21.png" width={45} height={45} className='rounded-pill object-fit-cover bg-danger mx-2' alt="" />
+        <span className='text-white fw-bold'>{username}</span>
+      </div>
+    }
     </div>
   </div>
 </nav>
