@@ -2,7 +2,7 @@ const Post = require('../models/Posts');
 const User = require('../models/user');
 
 const getAllPost = async (_, res)=>{
-    const data = await Post.find().sort({'createdAt':-1}).populate('category');
+    const data = await Post.find().sort({'createdAt':-1}).populate(['category','user']);
     res.status(200).json({data});
 }
 
@@ -50,13 +50,16 @@ const deletePost = async(req, res) => {
 
     try {
         const post = await Post.findByIdAndDelete(id).populate('user');
-        await post.user.post.pull(post)
-        res.status(200).send({message:"blog is deleted"});
+        await post.user.post.pull(post);
+        await post.user.save();
+       return res.status(200).send({message:"blog is deleted"});
     } catch (error) {
         res.status(400).json(error.message)
     }
 
 }
+
+
 
 
 module.exports = {getAllPost, addPost, getPost, deletePost,updatePost};

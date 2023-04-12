@@ -8,6 +8,7 @@ const ConnectDb = require('./db/db');
 const postRoute = require('./routes/postRoute');
 const catRoute = require('./routes/categoriesRoutes');
 const authRoute = require('./routes/authRoutes');
+const userRoute = require('./routes/userRoute');
 
 const app = express();
 
@@ -22,6 +23,7 @@ ConnectDb();
 app.use('/api/post', postRoute);
 app.use('/api/categories', catRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/user', userRoute);
 
 const PORT = process.env.PORT || 3000;
 
