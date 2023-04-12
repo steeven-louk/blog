@@ -9,6 +9,11 @@ const Register = async (req, res) =>{
 
     if(!existingUser) {
         try {
+
+            if(username =="" || password =="" || email == ""){
+              return  res.status(403).send("required fields are missing");
+            }
+
             const salt = await bcrypt.genSalt(10);
             const hash = await bcrypt.hashSync(password, salt)
             const addUser = await User({
@@ -17,14 +22,13 @@ const Register = async (req, res) =>{
                 password: hash,
             });
          
-            const save = await addUser.save();
-            res.status(201).json(save);
+            await addUser.save();
+            res.status(201).send("user successfully registered");
         } catch (error) {
             res.status(400).json(error.message);
-            console.log('err', error.message);
         }
     } else{
-        res.status(401).send('user as ready exist');
+        res.status(401).json({message:'user as ready exist'});
         return;
     }
 }
@@ -41,9 +45,13 @@ const Login = async (req, res) =>{
         
         const {password,isAdmin, ...info} = existingUser._doc;
         const token = await jwt.sign({id:existingUser._id}, process.env.JWT_TOKEN,{expiresIn: '1d'});
-        res.status(200).json({user:info, token})
+        res.status(200).json({
+            id:info._id,
+            username:info.username,
+            token
+        })
       } catch (error) {
-        res.status(400).json(error.message);
+        res.status(400).json({error:error.message});
       }
 
 }
