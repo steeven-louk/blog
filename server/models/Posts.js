@@ -13,6 +13,7 @@ const PostModel = schema({
     },
     picture:{
         type: String,
+        default:'',
         required: false
     },
     user:{

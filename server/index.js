@@ -3,6 +3,7 @@ const dotEnv = require('dotenv');
 const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const ConnectDb = require('./db/db');
 const postRoute = require('./routes/postRoute');
 const catRoute = require('./routes/categoriesRoutes');
@@ -13,6 +14,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:true }));
+app.use(cors());
 dotEnv.config();
 
 ConnectDb();
