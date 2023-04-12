@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<HomePage/>}/>
         <Route exact path="/blogs" element={<Blogs/>}/>
-        <Route exact path="/singlePost" element={<SinglePost/>}/>
+        <Route exact path="/singlePost/:id" element={<SinglePost/>}/>
         <Route exact path="/about" element={<About/>}/>
         <Route exact path="/contact" element={<Contact/>}/>
       </Routes>
