@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
+import parse from 'html-react-parser'
+
 const Card = (props) => {
 
-    const {category,content,createdAt,title, user, _id} = props?.items;
+    const {category,content,createdAt,title, user, _id,picture} = props?.items;
     let date = new Date(createdAt).toDateString();
     let username = props?.username
 
@@ -12,7 +14,7 @@ const Card = (props) => {
         <div className="card">
            <Link to={`/singlePost/${_id}`}>
            <div className="card-header position-relative">
-                <img src="./assets/Asset21.png" alt="" className="card-img-top" />
+                <img src={`http://localhost:8080/assets/posts/${picture}`} alt="" className="card-img-top" />
                     {category && 
                    <span className="category bg-success position-absolute bottom-0 start-0 fw-bold text-warning text-capitalize">
                         {category?.name}
@@ -23,7 +25,7 @@ const Card = (props) => {
                 <h5 className="card-title">{title}</h5>
 
                 <p className="card-desc text-muted">
-                    {content}   
+                    {parse(content)}   
                 </p>
             </div>
            </Link>

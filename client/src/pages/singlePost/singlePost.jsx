@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../../components/card/Card";
 
+import parse from 'html-react-parser';
+
+import './style.scss'
 const SinglePost = () => {
 
   const [post, setPost] = useState({});
@@ -41,25 +44,28 @@ const SinglePost = () => {
     }
   }
 
-  console.log('ss',similarPost.username)
+  // eslint-disable-next-line 
   useEffect(()=>{
     getPost();
   }, []);
-
+  
   useEffect(() => {
     getSimilarPost();
   }, []);
   const date = new Date(post.createdAt).toDateString();
 
   return (
-    <div className="p-5">
+    <div className="singlePage container">
         {loading && <div>Loading...</div>}
 
+      <div className="d-flex justify-content-between align-items-baseline" >
       <h1 className="text-dark"> {post?.title} </h1>
+      <span>save</span>
+      </div>
       <div className="user_group text-dark my-4 d-flex justify-content-between align-items-center">
         <div className="user d-inline-flex align-items-center">
           <img src="" alt="user" className="user-img" />
-          <span className="fw-bold text-capitalize ms-2">el ishi</span>
+          <span className="fw-bold text-capitalize ms-2">{post?.user?.username}</span>
         </div>
         <span>{date}</span>
       </div>
@@ -67,24 +73,25 @@ const SinglePost = () => {
       <div className="post-img">
        {post?.picture &&
         <img
-          src={post?.picture}
+          src={`http://localhost:8080/assets/posts/${post?.picture}`}
           alt={post?.title}
           style={{ height: "25em", width: "100%", objectFit: "cover" }}
-          className="img-fluid rounded"
+          className="rounded"
         />
         }
       </div>
 
       <div className="post-desc mt-5">
-        <p className="text-dark"> {post?.content} </p>
+        <p className="text-dark"> {parse(post?.content)} </p>
       </div>
-
+        <br />
+        <hr />
       <div className="h2 text-center text-capitalize my-5">
         Read Related Blogs
       </div>
 
       <div className="card-container gap-3">
-      {similarPost?.post?.map((items)=> <Card items={items} key={items._id} username={similarPost.username}/>)}
+      {similarPost?.post?.slice(0,3).map((items)=> <Card items={items} key={items._id} username={similarPost.username}/>)}
         {/* <Card />
         <Card />
         <Card /> */}

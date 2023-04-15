@@ -1,10 +1,13 @@
 import React from 'react'
+import { useState } from 'react';
 import { Link } from 'react-router-dom'
+
+import './style.scss'
 
 const Header = () => {
   let username = JSON.parse(localStorage.getItem('username'));
   let token = JSON.parse(localStorage.getItem('token'));
-  
+  const [toggleMenu, setToggleMenu] = useState(false)
   
 
   return (
@@ -40,9 +43,20 @@ const Header = () => {
       </div>
     }
     {token &&
-      <div className="user-group ps-2">
-        <img src="./assets/asset21.png" width={45} height={45} className='rounded-pill object-fit-cover bg-danger mx-2' alt="" />
-        <span className='text-white fw-bold'>{username}</span>
+      <div className="user-group ps-2 position-relative">
+        <img src="./assets/asset21.png" onClick={()=>setToggleMenu(!toggleMenu)} width={45} height={45} className='rounded-pill object-fit-cover bg-danger mx-2' alt="" />
+        {/* <span className='text-white fw-bold'>{username}</span> */}
+       
+       {toggleMenu &&
+        <div className="user-group_subMenu text-white bg-dark rounded  position-absolute">
+          <ul className='nav flex-column gap-1 text-capitalize'>
+            <li className='bg-primary'>{username}</li>
+            <li>write post</li>
+            <li>favories</li>
+            <li className='bg-danger'>Logout</li>
+          </ul>
+        </div>
+       }
       </div>
     }
     </div>

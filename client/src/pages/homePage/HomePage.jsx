@@ -32,13 +32,13 @@ const HomePage = () => {
   
   return (
     <div className='homePage'>
-    {loading && <div>Loading...</div>}
       <Heros/>
 
-        <div className="px-3">
+        <div className="px-3 mb-4">
             <div className="h2 text-center text-capitalize my-5">latest blogs</div>
 
             <div className="card-container gap-3">
+    {loading && <div>Loading...</div>}
                 {posts?.slice(0,4).map((items)=>(
 
                 <Card items={items} key={items?._id}/>
