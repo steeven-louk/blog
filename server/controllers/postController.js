@@ -2,7 +2,7 @@ const Post = require('../models/Posts');
 const User = require('../models/user');
 
 const getAllPost = async (_, res)=>{
-    const data = await Post.find().sort({'createdAt':-1}).populate(['category','user']);
+    const data = await Post.find().sort({'createdAt':-1}).populate('user',['username','_id']).populate('category').limit(20);
     res.status(200).json({data});
 }
 
@@ -25,7 +25,7 @@ const addPost = async(req, res) =>{
 const getPost = async(req, res) => {
     const {id} = req.params;
     try {
-        const post = await Post.findById(id);
+        const post = await Post.findById(id).populate('user',['username','_id']);
         res.status(200).json(post);
     } catch (error) {
         res.status(400).send(error)

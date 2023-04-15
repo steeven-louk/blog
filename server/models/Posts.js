@@ -6,6 +6,7 @@ const PostModel = schema({
     title:{
         type: String,
         required:[true, "title is required"],
+        max: 250
     },
     content:{
         type: String,
