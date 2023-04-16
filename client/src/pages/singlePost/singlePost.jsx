@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../../components/card/Card";
 
-import parse from 'html-react-parser';
+// import parse from 'html-react-parser';
 // import parse from 'html-react-parser/dist/html-react-parser'
 
 
@@ -12,11 +12,14 @@ const SinglePost = () => {
 
   const [post, setPost] = useState({});
   const [similarPost, setSimilar] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false)
+  // const [user, setUser] = useState({})
   const [loading, setLoading] = useState(false);
   const {id} = useParams();
 
   const userId = "6432f1606032991bfd8a97cb"
-
+  const user_Id = JSON.parse(localStorage.getItem('id'));
+  
   const getPost = async () =>{
     try {
       setLoading(true)
@@ -46,7 +49,51 @@ const SinglePost = () => {
     }
   }
 
+
+  // const getUser = async () => {
+  //   try {
+  //     const user = await axios.get("http://localhost:8080/api/user/" + user_Id);
+
+  //     if (user.status === 200) {
+  //       let { data } = user;
+  //       setUser(data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const addToFavorite = async () =>{
+    if(isFavorite === false) {
+       try {
+      const fav = await axios.post(`http://localhost:8080/api/user/${user_Id}/favorite/${id}`);
+      if(fav.status === 200){
+        setIsFavorite(true);
+      }
+    console.log('fav', fav);
+    } catch (error) {
+      console.log(error)
+    }
+  } else{
+    try {
+      const del = await axios.delete(`http://localhost:8080/api/user/${user_Id}/favorite/${id}`);
+      if(del.status === 200){
+        setIsFavorite(false);
+      }
+    console.log('fav', del);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+   
+  }
+
+  // console.log(isFavorite)
+
   // eslint-disable-next-line 
+  // useEffect(() => {
+  //   getUser();
+  // }, [])
   useEffect(()=>{
     getPost();
   }, []);
@@ -62,7 +109,8 @@ const SinglePost = () => {
 
       <div className="d-flex justify-content-between align-items-baseline" >
       <h1 className="text-dark"> {post?.title} </h1>
-      <span>save</span>
+
+
       </div>
       <div className="user_group text-dark my-4 d-flex justify-content-between align-items-center">
         <div className="user d-inline-flex align-items-center">
@@ -81,10 +129,12 @@ const SinglePost = () => {
           className="rounded"
         />
         }
+        <span className="btn text-uppercase fw-semibold mt-2 btn-success" onClick={addToFavorite}>{isFavorite === false ? 'add to favorite' : 'remove to favorite'}</span>
+
       </div>
 
       <div className="post-desc mt-5">
-        <p className="text-dark"> {parse(post?.content)} </p>
+        <p className="text-dark"> {post?.content} </p>
       </div>
         <br />
         <hr />

@@ -63,9 +63,10 @@
             align-items: center;
             justify-content: center;
             gap: 30px;
+            flex-wrap: wrap;
 
             li{
-                font-size: 2.5vw;
+                font-size: 15px;
             }
             
         }

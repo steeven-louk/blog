@@ -63,7 +63,7 @@ useEffect(()=>{
 
         
     {!token &&
-      <div className="authentification mx-3 gap-3 d-flex text-capitalize fw-bold">
+      <div className="authentification mx-3 mt-2 gap-3 d-flex text-capitalize fw-bold">
         <Link to='/register' className=' text-white'>register</Link>
         <Link to='/login' className=' text-white'>login</Link>
       </div>
