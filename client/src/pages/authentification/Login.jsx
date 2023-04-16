@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios';
 
-import {Link} from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import { UserContext } from '../../services/userProvider';
 
 
@@ -21,14 +21,15 @@ const Login = () => {
             password
         })
         if(login.status === 200) {
+            setUser(login.data);
              localStorage.setItem("id", JSON.stringify(login.data.id));
              localStorage.setItem("token", JSON.stringify(login.data.token));
              localStorage.setItem("username", JSON.stringify(login.data.username));
-            setUser(login.data);
              setTimeout(() => {
-                window.location.replace("/");
-             }, 2000);
+                <Navigate to="/" />;
+             }, 3000);
         }
+
        } catch (error) {
         // console.log(error?.response?.data);
         throw new Error(error);

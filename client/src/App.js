@@ -13,6 +13,7 @@ import Login from "./pages/authentification/Login";
 import { UserContextProvider } from "./services/userProvider";
 import { Redirect } from "./services/redirection";
 import Write from "./pages/write/Write";
+import Profile from "./pages/profil/Profile";
 
 function App() {
   return (
@@ -27,8 +28,9 @@ function App() {
         <Route exact path="/singlePost/:id" element={<SinglePost/>}/>
         <Route exact path="/about" element={<About/>}/>
         <Route exact path="/contact" element={<Contact/>}/>
-        <Route exact path="/register" element={<Redirect> <Register/></Redirect>}/>
-        <Route exact path="/login" element={<Redirect><Login/></Redirect>}/>
+        <Route exact path="/register" element={<Register/>}/>
+        <Route exact path="/login" element={<Login/>}/>
+        <Route exact path="/profile" element={<Profile/>}/>
         <Route exact path="/write" element={<Write/>}/>
 
       </Routes>

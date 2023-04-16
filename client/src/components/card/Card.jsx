@@ -21,8 +21,8 @@ const Card = (props) => {
                     </span>
                     }
             </div>
-            <div className="card-body bg-tertiary">
-                <h5 className="card-title">{title}</h5>
+            <div className="card-body">
+                <h5 className="card-title text-dark">{title}</h5>
 
                 <p className="card-desc text-muted">
                     {parse(content)}   

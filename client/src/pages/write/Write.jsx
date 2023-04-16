@@ -61,8 +61,8 @@ const handleSubmit = async (e)=>{
     }
     
     try {
-     const t= await axios.post("http://localhost:8080/api/post", newPost);
-     console.log('fff', t) 
+    await axios.post("http://localhost:8080/api/post", newPost);
+
      setTitle('');
       setContent('');
       setFile(null);
@@ -95,7 +95,7 @@ const handleSubmit = async (e)=>{
        <form onSubmit={handleSubmit} className='flex-column d-flex gap-3' encType="multipart/form-data">
             <input type="text" value={title} onChange={(e)=> setTitle(e.target.value)} placeholder='Title' className='p-2' />
             <input type="file" name='img-post'  onChange={(e)=> setFile(e.target.files[0])} />
-            <select name="categories" onChange={(e)=>setSelectCat(e.target.value)} id="" className='w-25 p-1 text-capitalize'>
+            <select name="categories" onChange={(e)=>setSelectCat(e.target.value)}  className='w-25 p-1 border border-2 fw-semibold rounded border-success text-capitalize'>
               {categories?.map((category)=>(
 
               <option key={category._id} value={category._id}>{category.name}</option>

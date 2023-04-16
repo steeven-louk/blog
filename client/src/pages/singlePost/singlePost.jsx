@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import Card from "../../components/card/Card";
 
 import parse from 'html-react-parser';
+// import parse from 'html-react-parser/dist/html-react-parser'
+
 
 import './style.scss'
 const SinglePost = () => {

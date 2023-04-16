@@ -3,6 +3,7 @@ body {
   padding: 0;
   outline: none;
   box-sizing: border-box;
+  background-color: #F8F4EC;
   
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -30,6 +31,7 @@ a{
    
    .card{
        width: 300px;
+       background-color: #DCDE9F;
 
        .card-header {
            .card-img-top{
@@ -61,4 +63,14 @@ a{
         }
        }
    }
+  }
+
+  .footer > .social-media span{
+    cursor: pointer;
+    font-size: 30px;
+    transition: transform .4s;
+
+    &:hover{
+      transform: translateY(5px);
+    }
   }

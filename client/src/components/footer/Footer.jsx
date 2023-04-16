@@ -1,10 +1,11 @@
 import React from "react";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 const Footer = () => {
   return (
     <div className="footer px-5 pt-5 pb-2 bg-success text-white">
       <div className="row">
-        <h2 className="text-warning fw-bold">Blog</h2>
+        <h1 className="text-warning fw-bold">Blog</h1>
         <div className="col-md-4">
           <p>
             {" "}
@@ -31,14 +32,15 @@ const Footer = () => {
         </div>
       </div>
       <div className="social-media my-4 d-flex gap-3  justify-content-center ">
-        <span>facebook</span>
-        <span>insta</span>
-        <span>twitter</span>
-        <span>linkedin</span>
-        <span>youtube</span>
-        <span>slack</span>
-        <span>discord</span>
+        <span><FontAwesomeIcon icon="fa-brands fa-facebook"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-instagram"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-twitter"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-linkedin"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-youtube"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-slack"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-discord"  /></span>
       </div>
+      
 
       <div className="copyright d-flex justify-content-evenly ">
         <span>&copy; COPYRIGHT @ 2023 Blog</span>

@@ -1,10 +1,17 @@
 .header{
 
+    .user-group{
+        img{
+            cursor: pointer;
+        }
+    }
+    
     .user-group_subMenu{
         right: 10px;
         margin-top: 2px;
         overflow: hidden;
         width: 150px;
+        z-index: 1000;
 
         ul >li{
             cursor: pointer;
