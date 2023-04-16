@@ -45,8 +45,8 @@ const addUserPhoto = async (req, res) =>{
 const addBgPhoto = async (req, res) =>{
     const id = req.params.id;
     try {
-        const user = await User.findByIdAndUpdate(id, {bg_picture:req.body.photo}, {new: true});
-         await user.save();
+        const user = await User.findByIdAndUpdate(id, {bg_picture:req.body.bg_picture}, {new: true});
+        await user.save();
 
         res.status(200).send(user);
     } catch (error) {
@@ -55,4 +55,47 @@ const addBgPhoto = async (req, res) =>{
 }
 
 
-module.exports = {getPostByUser, getUser, addBgPhoto, addUserPhoto};
+const addToFavories = async (req, res) =>{
+    const id = req.params.userId;
+    const postId = await Post.findById(req.params.postId);
+    const user = await User.findById(id);
+
+    try {
+        
+    if(!user) return res.status(404).send('user not found, connected first');
+    if(!postId) return res.status(404).json({message:"post not found"});
+    
+    if(user.favories.includes(postId)) return res.status(404).json({message:"Post already exists"});
+
+    user.favories.addToSet(postId);
+   const addFav = await user.save();
+   res.status(200).json(addFav);
+
+    } catch (error) {
+        res.status(500).json(error);
+    }
+
+}
+
+const removeToFavories = async (req, res) =>{
+    const id = req.params.userId;
+    const postId = await Post.findById(req.params.postId);
+    const user = await User.findById(id);
+
+    try {
+        
+    if(!user) return res.status(404).send('user not found, connected first');
+    if(!postId) return res.status(404).json({message:"post not found"});
+    
+    if(!user.favories.includes(postId)) return res.status(404).json({message:"Post not in favorite"});
+
+    user.favories.pull(postId);
+    await user.save();
+    res.status(200).json({message:"Post removed from favorite"});
+
+    } catch (error) {
+        res.status(500).json(error);
+    }
+
+}
+module.exports = {getPostByUser, getUser, addBgPhoto, removeToFavories, addUserPhoto, addToFavories};
