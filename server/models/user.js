@@ -16,6 +16,11 @@ const UserModel = schema({
         type: String,
         required:[true, "password is required"],
     },
+    bg_picture:{
+        type: String,
+        default:'',
+        required: false
+    },
     photo:{
         type: String,
         default:'',

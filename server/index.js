@@ -24,7 +24,7 @@ dotEnv.config();
 
 ConnectDb();
 
-const storage = multer.diskStorage({
+const Poststorage = multer.diskStorage({
     destination: (req,file, cb)=>{
         cb(null, './assets/posts/')
     },
@@ -34,8 +34,30 @@ const storage = multer.diskStorage({
     }
 });
 
+const Profilestorage = multer.diskStorage({
+    destination: (req,file, cb)=>{
+        cb(null, './assets/profile/')
+    },
+    filename:(req,file, cb)=>{
+        cb(null,file.originalname)
+        console.log(file)
+    }
+});
 
-const upload_post = multer({storage: storage});
+const bg_profilestorage = multer.diskStorage({
+    destination: (req,file, cb)=>{
+        cb(null, './assets/profile/bg_picture/')
+    },
+    filename:(req,file, cb)=>{
+        cb(null,file.originalname)
+        console.log(file)
+    }
+});
+
+
+const upload_post = multer({storage: Poststorage});
+const upload_profile = multer({storage: Profilestorage});
+const upload_bg_profile = multer({storage: bg_profilestorage});
 
 app.use('/api/post', postRoute);
 app.use('/api/categories', catRoute);
@@ -43,10 +65,22 @@ app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
 
 app.use("/assets/posts", express.static(path.join(__dirname,"/assets/posts")));
+app.use("/assets/profile", express.static(path.join(__dirname,"/assets/profile")));
+app.use("/assets/profile/bg_picture", express.static(path.join(__dirname,"/assets/profile/bg_picture")));
 
 app.post('/api/upload-post', upload_post.single("img-post"),(req,res)=>{
     res.send("Image uploaded");
     res.status(200).json("file has been upload");
+});
+
+app.post('/api/upload-profile',upload_profile.single('img-profil'), (req, res)=>{
+    res.send("Profile uploaded");
+    res.status(200).json("profile has been uploaded");
+});
+
+app.post('/api/upload-bg_profile',upload_bg_profile.single('bg-picture'), (req, res)=>{
+    res.send("bg-picture uploaded");
+    res.status(200).json("bg-picture has been uploaded");
 });
 
 
