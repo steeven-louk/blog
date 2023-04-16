@@ -1,6 +1,8 @@
 .contact{
-    overflow-x: none;
+    overflow: hidden;
     height: 100%;
+    background: #183114;
+    color: #fff;
 
     .left-col {
       height: 100%;
@@ -15,18 +17,19 @@
     }
 
     .right-col {
-      background: greenyellow;
+      background: #446129;
       overflow: none;
 
       input, textarea{
-        border: none;
+        border: 3px solid #FCEE21;
         resize: none;
         width: 100%;
         outline: none;
         padding: 5px 0 5px 20px;
+        background: NONE;
 
         &::placeholder{
-            color: gold;
+            color: #FCEE21;
             font-weight: bold;
         }
       }
@@ -38,9 +41,16 @@
        justify-content: center;
        display: flex;
        flex-direction: column;
+       color: #000;
 
        .btn{
+        background: #FCEE21;
         width: 85px;
+       }
+
+       .social-media {
+         color: #FCEE21;
+         font-size: 30px;
        }
     }
 }

@@ -1,11 +1,12 @@
 import React from 'react'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 import './style.scss';
 
 const Contact = () => {
   return (
-    <div className='contact bg-success ps-5'>
-       <div className="row ">
+    <div className='contact ps-5'>
+       <div className="row">
        <div className="col-md-6 container left-col p-3 ">
           <h2>Have a Query in Mind</h2>
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum iusto incidunt perferendis enim quasi. Perferendis.</p>
@@ -43,13 +44,13 @@ const Contact = () => {
               <span className='text-white or'>or</span>
 
               <div className="social-media mt-4 d-flex gap-3">
-                <span>facebook</span>
-                <span>insta</span>
-                <span>twitter</span>
-                <span>linkedin</span>
-                <span>youtube</span>
-                <span>slack</span>
-                <span>discord</span>
+              <span><FontAwesomeIcon icon="fa-brands fa-facebook"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-instagram"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-twitter"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-linkedin"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-youtube"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-slack"  /></span>
+        <span><FontAwesomeIcon icon="fa-brands fa-discord"  /></span>
               </div>
 
             </div>

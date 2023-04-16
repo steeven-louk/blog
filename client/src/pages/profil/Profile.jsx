@@ -1,18 +1,17 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../components/card/Card";
 
 import './style.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { UserContext } from "../../services/userProvider";
 
 const Profile = () => {
+  
   const [blogs, setBlogs] = useState([]);
   const [userFile, setUserFile] = useState("");
   const [pictureFile, setPictureFile] = useState("");
   const [userData, setUserData] = useState({})
 
-  // const {user} = useContext(UserContext);
 
   
   const id =JSON.parse(localStorage.getItem('id'))
@@ -81,10 +80,11 @@ const Profile = () => {
       }
 
       try {
-        const setUser = await axios.post('http://localhost:8080/api/user/add-bg_picture/'+ id, {bg_picture:userFile.name});
+        const setUser = await axios.post('http://localhost:8080/api/user/add-bg_picture/'+ id, {bg_picture:pictureFile.name});
           if(setUser.status === 200){
             let { data } = setUser;
-            setUser(data.data)
+            // setUser(data.data)
+            console.log(data);
           }
         console.log('fff',setUser);
       } catch (error) {
@@ -123,17 +123,20 @@ const Profile = () => {
     <div className="profile px-3 mt-3">
       <header>
         <div className="profile-background rounded position-relative">
-        {userData?.bg_picture ? <img src="./assets/singlePost.png" className="rounded" alt="" /> :
+        {userData?.bg_picture ? <img src={`http://localhost:8080/assets/profile/bg_picture/${userData?.bg_picture}`} className="rounded" alt="" /> :
+        
         <form onSubmit={handleSubmitBg} >
-           <input type="file" name="bg-picture"  id="bg-picture" className="d-none" />
+           <input type="file" name="bg-picture" onChange={(e)=>setPictureFile(e.target.files[0])}  id="bg-picture" className="d-none" />
         <label htmlFor="bg-picture" className="bg-picture_btn">
           <FontAwesomeIcon icon="fa-solid fa-plus" className="icon"/>
         </label>
         <button className="btn btn-primary text-capitalize fw-bold" type="submit">add bg</button>
         </form>
+
        }
-          {/*  */}
+
         </div>
+
         <div
           className="profile_picture  mx-auto position-relative rounded-pill"
         >
@@ -144,7 +147,7 @@ const Profile = () => {
             <FontAwesomeIcon icon="fa-solid fa-user" className="icon" />
         </label>
           <input type="file" onChange={(e)=> setUserFile(e.target.files[0])} name="img-profil" id="img-profil" className="d-none" />
-          <button type="submit" className="btn btn-success text-capitalize ms-5">add</button>
+          <button type="submit" style={{ 'top':'95px','right':'38px' }} className="btn position-relative  btn-success text-capitalize ms-5">add</button>
         </form>
         }
             

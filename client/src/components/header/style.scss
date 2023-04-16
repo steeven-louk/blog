@@ -1,4 +1,29 @@
 .header{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to right, #183114 15%,#446129 75%);
+    z-index: 2000;
+
+
+    .container-fluid{
+        display: flex;
+        align-items: center;
+
+        .navbar-brand{
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 35px;
+        }
+
+        .collapse{
+            position: relative;
+            top: 0px;
+            width: 100%;
+            font-size: 20px;
+        }
+    }
 
     .user-group{
         img{
@@ -7,17 +32,44 @@
     }
     
     .user-group_subMenu{
-        right: 10px;
+        left:10;
+        right: 0;
+        padding: 5px;
         margin-top: 2px;
         overflow: hidden;
-        width: 150px;
-        z-index: 1000;
+        width: 190px;
+        z-index: 50;
 
         ul >li{
             cursor: pointer;
             width: 100%;
             padding: 5px;
             font-weight: 500;
+            
         }
     }
+
+    .navbar-collapse{
+        @media only screen and (max-width: 997px) {
+
+            width: 100%;
+            top: 10px;
+            height: 150px;
+            position: relative;
+
+         .navbar-nav{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+
+            li{
+                font-size: 2.5vw;
+            }
+            
+        }
+    }
+    }
+   
 }

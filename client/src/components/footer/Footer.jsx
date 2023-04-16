@@ -3,9 +3,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 const Footer = () => {
   return (
-    <div className="footer px-5 pt-5 pb-2 bg-success text-white">
+    <div className="footer px-5 pt-5 pb-2 text-white" style={{ 'background':'#183114' }}>
       <div className="row">
-        <h1 className="text-warning fw-bold">Blog</h1>
+        <h1 className="text-warning fw-bold text-uppercase">Blog</h1>
         <div className="col-md-4">
           <p>
             {" "}

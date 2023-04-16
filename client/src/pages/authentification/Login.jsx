@@ -26,7 +26,7 @@ const Login = () => {
              localStorage.setItem("token", JSON.stringify(login.data.token));
              localStorage.setItem("username", JSON.stringify(login.data.username));
              setTimeout(() => {
-                <Navigate to="/" />;
+                <Navigate to={"/"} />;
              }, 3000);
         }
 
