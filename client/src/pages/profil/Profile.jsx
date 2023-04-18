@@ -43,8 +43,7 @@ const Profile = () => {
      
       try {
         
-      const setImg = await axios.post('http://localhost:8080/api/upload-profile', data);
-      console.log(setImg);
+       await axios.post('http://localhost:8080/api/upload-profile', data);
       } catch (error) {
         console.log('err', error)
       }
@@ -55,7 +54,6 @@ const Profile = () => {
             let { data } = setUser;
             setUser(data.data)
           }
-        console.log('fff',setUser);
       } catch (error) {
         console.log('err', error);
       }
@@ -73,8 +71,7 @@ const Profile = () => {
      
       try {
         
-      const setBg = await axios.post('http://localhost:8080/api/upload-bg_profile', data);
-      console.log(setBg);
+      await axios.post('http://localhost:8080/api/upload-bg_profile', data);
       } catch (error) {
         console.log('err', error)
       }

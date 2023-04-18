@@ -14,6 +14,7 @@ import { UserContextProvider } from "./services/userProvider";
 import { Redirect } from "./services/redirection";
 import Write from "./pages/write/Write";
 import Profile from "./pages/profil/Profile";
+import Favories from "./pages/favories/favories";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/profile" element={<Profile/>}/>
         <Route exact path="/write" element={<Write/>}/>
+        <Route exact path="/favoris" element={<Favories/>}/>
 
       </Routes>
       </UserContextProvider>
