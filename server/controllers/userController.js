@@ -98,4 +98,20 @@ const removeToFavories = async (req, res) =>{
     }
 
 }
-module.exports = {getPostByUser, getUser, addBgPhoto, removeToFavories, addUserPhoto, addToFavories};
+
+const getFavories = async (req, res) =>{
+    try {
+        const id = req.params.id;
+    const user = await User.findById(id).populate('favories');
+    if(!user) return res.status(404).send('user not found')
+
+    res.status(200).json({favoris:user.favories});
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+
+
+
+module.exports = {getPostByUser, getFavories, getUser, addBgPhoto, removeToFavories, addUserPhoto, addToFavories};
