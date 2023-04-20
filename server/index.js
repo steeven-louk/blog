@@ -12,13 +12,15 @@ const postRoute = require('./routes/postRoute');
 const catRoute = require('./routes/categoriesRoutes');
 const authRoute = require('./routes/authRoutes');
 const userRoute = require('./routes/userRoute');
+const favorisRoute = require('./routes/favorisRoute');
 
 const app = express();
 
 
 app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended:true }));
+app.use(bodyParser.json({limit:"50mb", extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended:true }));
+app.use(express.json());
 app.use(cors());
 dotEnv.config();
 
@@ -63,6 +65,7 @@ app.use('/api/post', postRoute);
 app.use('/api/categories', catRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
+app.use('/api/favoris', favorisRoute);
 
 app.use("/assets/posts", express.static(path.join(__dirname,"/assets/posts")));
 app.use("/assets/profile", express.static(path.join(__dirname,"/assets/profile")));

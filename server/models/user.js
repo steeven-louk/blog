@@ -30,8 +30,9 @@ const UserModel = schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Posts'
     }],
-    favories:{
-        type: Array,
+    favoris:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Favoris',
         required: false
     },
     isAdmin:{
