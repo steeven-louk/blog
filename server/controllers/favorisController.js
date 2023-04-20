@@ -4,6 +4,7 @@ const User = require("../models/user");
 
 
 const addFavoris = async (req,res) =>{
+    
     const {postId, userId} = req.params;
 
     try {
@@ -55,9 +56,15 @@ const getFavoris = async (req, res) => {
         const user = await User.findById(id);
         if (!user) return res.status(404).send('user not found');
 
-       const favoris = await Favoris.find({user: id}).populate('post')
+       const favoris = await Favoris.find({user: id});
 
-        res.status(200).json({ favoris: favoris });
+       // Récupérer les données des posts favoris avec les informations de la catégorie associée
+       const posts = await Post.find({ _id: { $in: favoris.map((favori) => favori.post) } })
+         .populate('category')
+         .exec();
+   
+
+        res.status(200).json({ favoris: posts });
     } catch (error) {
         res.status(500).json(error);
     }

@@ -13,10 +13,6 @@ const FavoriesSchema = schema({
         ref: 'Posts'
     },
 
-    // category:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Categories'
-    // },
 }, {timestamps: true});
 
 const Favoris = mongoose.model('Favoris', FavoriesSchema);
