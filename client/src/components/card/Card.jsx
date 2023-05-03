@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-
 const Card = (props) => {
 
     const {category,content,createdAt,title, user, _id,picture} = props?.items;

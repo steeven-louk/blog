@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 
 import './style.scss';
+import { LoadingCard } from '../../components/Loading';
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -38,10 +39,11 @@ const HomePage = () => {
             <div className="h2 text-center text-capitalize my-5">latest blogs</div>
 
             <div className="card-container gap-3">
-    {loading && <div>Loading...</div>}
+    
                 {posts?.slice(0,4).map((items)=>(
-
-                <Card items={items} key={items?._id}/>
+                  <>
+                    {loading? <LoadingCard/> : <Card items={items} key={items?._id}/>}
+                  </>
                 ))}
             </div>
 

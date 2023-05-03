@@ -8,6 +8,7 @@ import Card from "../../components/card/Card";
 import './style.scss'
 import { useDispatch, useSelector } from "react-redux";
 import { addToFavoris, removeFromFavorites } from "../../redux/favoritesSlice";
+import { SinglePageLoading } from "../../components/Loading";
 const SinglePost = () => {
 
   const {id} = useParams();
@@ -25,7 +26,7 @@ const SinglePost = () => {
   const [favoris_Id, setfavoris_Id] = useState([favorisId])
 
   const isFavorite = favoris_Id.includes(post?._id)
-  // const favExiste = isFavorite.includes(id);
+
   const getPost = async () =>{
     try {
       setLoading(true)
@@ -79,7 +80,7 @@ const SinglePost = () => {
         dispatch(addToFavoris(post._id));
         localStorage.setItem('favoris_id', JSON.stringify(post?._id))
       }
-    console.log('fav', fav);
+    // console.log('fav', fav);
     } catch (error) {
       console.log(error)
     }
@@ -103,8 +104,6 @@ const SinglePost = () => {
    
   }
 
-console.log(favoris_Id)
-
 
   useEffect(()=>{
     getPost();
@@ -120,9 +119,10 @@ console.log(favoris_Id)
 
   return (
     <div className="singlePage container">
-        {loading && <div>Loading...</div>}
-
-      <div className="d-flex justify-content-between align-items-baseline" >
+        {loading ? <SinglePageLoading/> : 
+        (
+          <>
+          <div className="d-flex justify-content-between align-items-baseline" >
       <h1 className="text-dark"> {post?.title} </h1>
 
       </div>
@@ -155,6 +155,10 @@ console.log(favoris_Id)
       <div className="h2 text-center text-capitalize my-5">
         Read Related Blogs
       </div>
+          </>
+        )}
+
+
 
       <div className="card-container gap-3">
       {similarPost?.post?.slice(0,3).map((items)=> <Card items={items} key={items._id} username={similarPost.username}/>)}
