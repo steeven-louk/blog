@@ -2,7 +2,9 @@ import React from 'react'
 
 const Heros = () => {
   return (
-    <div className="heros bg-success">
+    // background: linear-gradient(to right, #183114 15%,#446129 75%);
+
+    <div className="heros" style={{ 'background':'linear-gradient(to right, #183114 15%,#446129 75%)' }}>
       <div className="container-fluid px-5 pt-3">
         <div className="row">
           <div className="col-md-6">

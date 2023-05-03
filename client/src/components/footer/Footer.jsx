@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="footer px-5 pt-5 text-white" style={{ 'background':'#183114' }}>
       <div className="row">
-        <h1 className="text-warning fw-bold text-uppercase">Blog</h1>
+        <h1 className="text-warning fw-bold text-uppercase">tech-talk</h1>
         <div className="col-md-4">
           <p>
             {" "}

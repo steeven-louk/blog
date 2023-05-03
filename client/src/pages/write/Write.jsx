@@ -89,6 +89,7 @@ const handleSubmit = async (e)=>{
   }, []);
 
 
+
     return (
     <>
        <div className="write container my-3">
@@ -100,14 +101,14 @@ const handleSubmit = async (e)=>{
 
               <option key={category._id} value={category._id}>{category.name}</option>
               ))}
-              <option value="react.js">react.js</option>
-              <option value="javascript">javascript</option>
-              <option value="other">javascript</option>
             </select>
-            <ReactQuill theme="snow" className='content' formats={formats} modules={modules} value={content} onChange={(newValue)=> setContent(newValue)}/>
+            <ReactQuill theme="snow" className='content' formats={formats} modules={modules} value={content}  onChange={(newValue)=> setContent(newValue)}/>
             <button className='btn btn-success'>Create post</button>
         </form>
        </div>
+       <p>
+       
+       </p>
     </>
   )
 }

@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import axios from 'axios'
 
 import './style.scss'
@@ -40,32 +40,32 @@ useEffect(()=>{
     <div className='header'>
         <nav className="navbar navbar-expand-lg container-fluid ">
   <div className="container">
-    <a className="navbar-brand text-warning fw-bold" href="/">Blog</a>
+    <a className="navbar-brand text-warning fw-bold" href="/">tech-talk</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav ms-auto mb-2 fw-bold mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link active text-warning" aria-current="page" to="/">Home</Link>
+          <NavLink  className='nav-link text-white' to="/">Home</NavLink>
         </li>
         <li className="nav-item">
-          <Link className="nav-link text-white" to="/blogs">Blogs</Link>
-        </li>
-
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/about">About</Link>
+          <NavLink className="nav-link text-white" to="/blogs">Blogs</NavLink>
         </li>
 
         <li className="nav-item">
-          <Link className="nav-link text-white" to="/contact">Contact</Link>
+          <NavLink className="nav-link text-white" to="/about">About</NavLink>
+        </li>
+
+        <li className="nav-item">
+          <NavLink   className="nav-link text-white" to="/contact">Contact</NavLink>
         </li>
 
         
     {!token &&
       <div className="authentification mx-3 mt-2 gap-3 d-flex text-capitalize fw-bold">
-        <Link to='/register' className=' text-white'>register</Link>
-        <Link to='/login' className=' text-white'>login</Link>
+        <NavLink to='/register' className=' text-white'>register</NavLink>
+        <NavLink to='/login' className=' text-white'>login</NavLink>
       </div>
     }
 
@@ -82,7 +82,7 @@ useEffect(()=>{
           <ul className='nav flex-column gap-1 text-capitalize'>
             <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to='/profile'>{username}</Link></li>
             <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to="/write">write post</Link></li>
-            <li className=' text-white'onClick={()=>setToggleMenu(false)}>favories</li>
+            <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to={`${id}/favoris`} >favories</Link></li>
             <li className='bg-danger p-1' onClick={()=>setToggleMenu(false)}>Logout</li>
           </ul>
         </div>

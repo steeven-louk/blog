@@ -1,20 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-import parse from 'html-react-parser'
 
 const Card = (props) => {
 
     const {category,content,createdAt,title, user, _id,picture} = props?.items;
+
     let date = new Date(createdAt).toDateString();
-    let username = props?.username
+    let username = props?.username;
 
     return (
     <>
-        <div className="card">
+        <div className="card ">
            <Link to={`/singlePost/${_id}`}>
-           <div className="card-header position-relative">
-                <img src={`http://localhost:8080/assets/posts/${picture}`} alt="" className="card-img-top" />
+           <div className="card-header position-relative p-0">
+                <img src={`http://localhost:8080/assets/posts/${picture}`} alt="card-img" width={100} height={154} className="card-img-top object-fit-cover" />
                     {category && 
                    <span className="category bg-success position-absolute bottom-0 start-0 fw-bold text-warning text-capitalize">
                         {category?.name}
@@ -24,9 +24,7 @@ const Card = (props) => {
             <div className="card-body">
                 <h5 className="card-title text-dark">{title}</h5>
 
-                <p className="card-desc text-muted">
-                    {parse(content)}   
-                </p>
+                <p className="card-desc text-muted" dangerouslySetInnerHTML={{ __html: content }}></p>
             </div>
            </Link>
             <div className="card-footer d-flex justify-content-between align-items-center">

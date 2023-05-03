@@ -2,7 +2,11 @@
 
 
     .left-col{
-        background: red;
-        width: 40vw;
+        // width: 40vw;
+        p{
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
     }
 }

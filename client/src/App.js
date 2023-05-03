@@ -33,7 +33,7 @@ function App() {
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/profile" element={<Profile/>}/>
         <Route exact path="/write" element={<Write/>}/>
-        <Route exact path="/favoris" element={<Favories/>}/>
+        <Route exact path="/:id/favoris" element={<Favories/>}/>
 
       </Routes>
       </UserContextProvider>
