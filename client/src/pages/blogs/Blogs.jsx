@@ -53,7 +53,7 @@ const Blogs = () => {
           <select className="text-capitalize fw-semibold p-1 rounded">
 
           {category?.map((cat)=>(
-            <option value={cat._id}>{ cat.name }</option>
+            <option key={cat?._id} value={cat._id}>{ cat.name }</option>
           ))}
           </select>
        

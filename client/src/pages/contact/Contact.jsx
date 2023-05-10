@@ -7,27 +7,22 @@ const Contact = () => {
   return (
     <div className="contact ps-5">
       <div className="row">
-        <div className="col-md-6 container left-col p-3 ">
+        <div className="col-md-6 left-col p-3 ">
           <h2>CONTACTEZ-NOUS</h2>
+          <hr />
           <p>
             Nous sommes toujours heureux de discuter avec nos visiteurs et nos
             membres. Si vous avez des questions, des commentaires ou des
             suggestions concernant notre blog, n'hésitez pas à nous contacter à
             tout moment. Vous pouvez nous contacter via notre formulaire de
-            contact en ligne ci-dessous ou en nous envoyant un e-mail à
-            l'adresse suivante : [adresse e-mail]. Nous sommes également
-            présents sur les réseaux sociaux, alors n'hésitez pas à nous suivre
-            sur Twitter, Facebook et LinkedIn pour rester au courant de nos
-            dernières mises à jour et pour interagir avec notre communauté.
-            Notre adresse postale est la suivante : [adresse postale]. Si vous
-            souhaitez nous envoyer du courrier, veuillez utiliser cette adresse.
-            Nous sommes ouverts du lundi au vendredi, de 9 h à 17 h. Si vous
-            avez besoin d'une assistance en dehors de ces heures, veuillez nous
+            contact en ligne ci-dessous.
+             Si vous
+            avez besoin d'une assistance, veuillez nous
             contacter par e-mail et nous vous répondrons dans les plus brefs
             délais.
           </p>
 
-          <div className="contact-left">
+          <div className="d-flex flex-column gap-1 mt-5">
             <span>div@gmail.com</span>
             <span>+952456582</span>
             <span>+952456582</span>

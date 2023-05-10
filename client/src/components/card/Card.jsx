@@ -10,7 +10,7 @@ const Card = (props) => {
 
     return (
     <>
-        <div className="card ">
+        <div className="card">
            <Link to={`/singlePost/${_id}`}>
            <div className="card-header position-relative p-0">
                 <img src={`http://localhost:8080/assets/posts/${picture}`} alt="card-img" width={100} height={154} className="card-img-top object-fit-cover" />

@@ -16,10 +16,12 @@ import Write from "./pages/write/Write";
 import Profile from "./pages/profil/Profile";
 import Favories from "./pages/favories/favories";
 
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className="App">
-
+  <ToastContainer/>
       <UserContextProvider>
       <Header/>
 

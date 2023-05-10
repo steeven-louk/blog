@@ -1,7 +1,7 @@
 import React,{ useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom'
 import axios from 'axios'
-
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './style.scss'
 
 const Header = () => {
@@ -73,7 +73,10 @@ useEffect(()=>{
       <div className="user-group ps-2 position-relative">
        {getDataUser?.photo ?  <img src={`http://localhost:8080/assets/profile/${getDataUser?.photo}`} onClick={handleClick} width={45} height={45} style={{'objectFit':'cover'}} className='rounded-pill mx-2' alt="user-img" />
        :
-       <img src="./assets/asset21.png" onClick={handleClick} width={45} height={45} className='rounded-pill object-fit-cover bg-danger mx-2' alt="default-img" />
+      
+       <div className='rounded-pill border p-2'>
+        <FontAwesomeIcon icon="fa-solid fa-user" />
+       </div>
        }
     
        

@@ -7,25 +7,24 @@ import Card from "../../components/card/Card";
 
 import './style.scss'
 import { useDispatch, useSelector } from "react-redux";
-import { addToFavoris, removeFromFavorites } from "../../redux/favoritesSlice";
+import { addToFavoris, removeFromFavorites, selectFavorites } from "../../redux/favoritesSlice";
 import { SinglePageLoading } from "../../components/Loading";
+import { toast } from 'react-toastify';
+
+
 const SinglePost = () => {
 
   const {id} = useParams();
   const user_Id = JSON.parse(localStorage.getItem('id'));
 
+ 
+
   const [post, setPost] = useState({});
   const [similarPost, setSimilar] = useState([]);
-
+  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
-
-  const dispatch = useDispatch();
-  const favorites = useSelector(state=> state.favorites);
-
-  const favorisId = JSON.parse(localStorage.getItem('favoris_id'));
-  const [favoris_Id, setfavoris_Id] = useState([favorisId])
-
-  const isFavorite = favoris_Id.includes(post?._id)
+  
+  // const [isFavorite, setIsFavorite] = useState(false);
 
   const getPost = async () =>{
     try {
@@ -55,55 +54,85 @@ const SinglePost = () => {
       console.log('err', error.message);
     }
   }
+  
 
+useEffect(() => {
+  const getUser = async () => {
+    try {
+      const user = await axios.get("http://localhost:8080/api/user/" + user_Id);
+console.log(user)
+      if (user.status === 200) {
+        let { data } = user;
+        setUser(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  getUser();
+}, [user_Id])
 
-  // const getUser = async () => {
-  //   try {
-  //     const user = await axios.get("http://localhost:8080/api/user/" + user_Id);
-
-  //     if (user.status === 200) {
-  //       let { data } = user;
-  //       setUser(data);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
+const dispatch = useDispatch();
+const isFavorite = useSelector(selectFavorites);
 
   const addToFavorite = async () =>{
-    if(!isFavorite) {
+    if(isFavorite === false) {
        try {
-      const fav = await axios.post(`http://localhost:8080/api/favoris/${user_Id}/${id}`);
-      console.log(fav)
-      if(fav.status === 201){
-        dispatch(addToFavoris(post._id));
-        localStorage.setItem('favoris_id', JSON.stringify(post?._id))
-      }
-    // console.log('fav', fav);
+        const fav = await axios.post(`http://localhost:8080/api/favoris/${user_Id}/${post?._id}`);
+        console.log(fav)
+
+        if(fav.status === 201){
+      
+      dispatch(addToFavoris(id));
+
+    }
     } catch (error) {
-      console.log(error)
+      toast.error(error?.response?.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     }
   } 
 
   else{
     try {
-      const del = await axios.delete(`http://localhost:8080/api/favoris/${id}`);
-      // const del = await axios.delete(`http://localhost:8080/api/user/${user_Id}/${id}`);
+      // const isInFavorite = JSON.parse(localStorage.getItem('favoris_id'))
+      // console.log('is',isInFavorite);
+      const del = await axios.delete(`http://localhost:8080/api/favoris/${user_Id}/${id}`);
+      
+
       if(del.status === 200){
-       dispatch(removeFromFavorites(post._id));
-       isFavorite.push(post._id);
-       localStorage.setItem('favoris_id', JSON.stringify(isFavorite));
+        dispatch(removeFromFavorites(post?._id))
         
+     
+      //  localStorage.setItem('favoris_id', JSON.stringify(isFavorite));
       }
     console.log('fav', del);
     } catch (error) {
-      console.log(error);
+      console.log('errr',error);
+      toast.error(error?.response?.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     }
   }
    
   }
 
+
+  console.log('favorite', selectFavorites);
 
   useEffect(()=>{
     getPost();
@@ -143,7 +172,7 @@ const SinglePost = () => {
           className="rounded"
         />
         }
-        <span className="btn text-uppercase fw-semibold mt-2 btn-success" onClick={addToFavorite}>{!isFavorite ? 'add to favoris' : 'remove to favoris'}</span>
+        <span className="btn text-uppercase fw-semibold mt-2 btn-success" onClick={addToFavorite}>{!isFavorite? 'add to favoris' : 'remove to favoris'}</span>
 
       </div>
 

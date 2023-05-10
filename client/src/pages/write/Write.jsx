@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
+
+import { toast } from 'react-toastify';
+
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+
 
 import './style.scss'
 import axios from 'axios';
@@ -66,9 +70,23 @@ const handleSubmit = async (e)=>{
      setTitle('');
       setContent('');
       setFile(null);
-      // console.log(post)
+
+      toast.success("L'article a été publier avec succes", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+        setTimeout(() => {
+          window.location.replace('/blogs');
+        }, 3500);
     } catch (error) {
-      console.log('err', error);
+      console.log('errWrite', error);
+      // throw Error(error);
     }
   }
 
@@ -89,10 +107,10 @@ const handleSubmit = async (e)=>{
   }, []);
 
 
-
     return (
     <>
        <div className="write container my-3">
+
        <form onSubmit={handleSubmit} className='flex-column d-flex gap-3' encType="multipart/form-data">
             <input type="text" value={title} onChange={(e)=> setTitle(e.target.value)} placeholder='Title' className='p-2' />
             <input type="file" name='img-post'  onChange={(e)=> setFile(e.target.files[0])} />
