@@ -6,7 +6,7 @@ const FavoriesSchema = schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    },
+    }, 
 
     post:{
         type: mongoose.Schema.Types.ObjectId,

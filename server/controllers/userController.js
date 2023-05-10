@@ -22,7 +22,8 @@ const getPostByUser = async (req, res) => {
 const getUser = async (req, res) => {
     const id = req.params.id;
     try {
-        const user = await User.findById(id).populate('post');
+        const user = await User.findById(id).populate('favoris');
+        console.log('userServer', user);
         const { password,isAdmin, ...others } = user._doc;
         res.status(200).send(others);
     } catch (error) {

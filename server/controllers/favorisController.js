@@ -23,7 +23,7 @@ const addFavoris = async (req,res) =>{
         await User.findByIdAndUpdate(userId, {$push: {favoris: favoris._id}}, {new: true})
       
         
-        res.status(201).json("favoris added");
+        res.status(201).json({message:"favoris added"});
     } catch (error) {
         res.status(404).json(error.message);
     }
@@ -31,13 +31,15 @@ const addFavoris = async (req,res) =>{
 
 
 const removeFavoris = async (req, res) => {
-    const favorisId = req.params.id;
+    const favorisId = req.params.postId;
+    const user_id = req.params.userId
 
     const favoris = await Favoris.findById(favorisId)
+    const user = await User.findById(user_id);
 
     try {
-
-        if(!favoris) return res.status(404).send('post not found');
+        if(!user) return res.status(404).json({message:'user not found'})
+        if(!favoris) return res.status(404).json({message:'post not found'});
 
         await Favoris.findByIdAndDelete(favorisId)
         await User.findByIdAndUpdate(favoris.user, {$pull: {favoris: favoris._id}})
@@ -53,16 +55,14 @@ const removeFavoris = async (req, res) => {
 const getFavoris = async (req, res) => {
     try {
         const id = req.params.id;
-        const user = await User.findById(id);
+        const user = await User.findById(id).populate('favoris');
         if (!user) return res.status(404).send('user not found');
 
        const favoris = await Favoris.find({user: id});
 
-       // Récupérer les données des posts favoris avec les informations de la catégorie associée
+       //Récupérer les données des posts favoris avec les informations de la catégorie associée
        const posts = await Post.find({ _id: { $in: favoris.map((favori) => favori.post) } })
-         .populate('category')
-         .exec();
-   
+         .populate('category');   
 
         res.status(200).json({ favoris: posts });
     } catch (error) {

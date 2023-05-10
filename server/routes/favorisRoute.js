@@ -2,9 +2,9 @@ const { addFavoris, removeFavoris, getFavoris } = require('../controllers/favori
 
 const favorisRoute = require('express').Router();
 
-favorisRoute.post('/:userId/:postId', addFavoris);
-favorisRoute.delete('/:id', removeFavoris);
-
 favorisRoute.get('/:id/favoris', getFavoris );
+favorisRoute.post('/:userId/:postId', addFavoris);
+favorisRoute.delete('/:userId/:postId', removeFavoris);
+
 
 module.exports = favorisRoute;

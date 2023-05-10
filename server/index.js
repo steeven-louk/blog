@@ -61,11 +61,11 @@ const upload_post = multer({storage: Poststorage});
 const upload_profile = multer({storage: Profilestorage});
 const upload_bg_profile = multer({storage: bg_profilestorage});
 
-app.use('/api/post', postRoute);
-app.use('/api/categories', catRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
+app.use('/api/post', postRoute);
 app.use('/api/favoris', favorisRoute);
+app.use('/api/categories', catRoute);
 
 app.use("/assets/posts", express.static(path.join(__dirname,"/assets/posts")));
 app.use("/assets/profile", express.static(path.join(__dirname,"/assets/profile")));
