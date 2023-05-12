@@ -11,21 +11,18 @@ const Favories = () => {
 
     const id = JSON.parse(localStorage.getItem('id'));
 
-    const getFavoris = async() =>{
-        setLoading(true);
-        const fav = await axios.get(`http://localhost:8080/api/favoris/${id}/favoris`)
-        if(fav.status === 200){
-            let {data} = fav;
-            setFavoris(data?.favoris);
-            setLoading(false);
-        }
-    }
-
-    // console.log('fav',favoris);
-
     useEffect(() => {
+        const getFavoris = async() =>{
+            setLoading(true);
+            const fav = await axios.get(`http://localhost:8080/api/favoris/${id}/favoris`)
+            if(fav.status === 200){
+                let {data} = fav;
+                setFavoris(data?.favoris);
+                setLoading(false);
+            }
+        }
         getFavoris();
-    }, []);
+    }, [id]);
 
 
 
@@ -36,7 +33,7 @@ const Favories = () => {
         <div className="container card-container gap-3">
         {favoris?.map((items) =>(
             <>
-                {loading ? <LoadingCard/> : <Card items={items} category={items?.category} key={items?._id}/>}
+                {loading ? <LoadingCard/> : <Card key={items._id} items={items} category={items?.category} />}
             </>
         ))}
         </div>

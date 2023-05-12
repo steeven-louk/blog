@@ -11,15 +11,18 @@ import SinglePost from "./pages/singlePost/singlePost";
 import Register from "./pages/authentification/register";
 import Login from "./pages/authentification/Login";
 import { UserContextProvider } from "./services/userProvider";
-import { Redirect } from "./services/redirection";
+// import { Redirect } from "./services/redirection";
 import Write from "./pages/write/Write";
 import Profile from "./pages/profil/Profile";
 import Favories from "./pages/favories/favories";
 
 import { ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
-function App() {
+
+
+  function App() {
   return (
+    
     <div className="App">
   <ToastContainer/>
       <UserContextProvider>
