@@ -1,9 +1,10 @@
-const { addFavoris, removeFavoris, getFavoris } = require('../controllers/favorisController');
+const { addFavoris, getFavoris, getFavorisId, removeFavoris } = require('../controllers/favorisController');
 
 const favorisRoute = require('express').Router();
 
-favorisRoute.get('/:id/favoris', getFavoris );
-favorisRoute.post('/:userId/:postId', addFavoris);
+favorisRoute.get('/:userId/favoris', getFavoris );
+favorisRoute.get('/:userId/favoris-ids', getFavorisId );
+favorisRoute.put('/:userId/:postId', addFavoris);
 favorisRoute.delete('/:userId/:postId', removeFavoris);
 
 
