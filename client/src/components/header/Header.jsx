@@ -1,22 +1,24 @@
 import React,{ useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate, } from 'react-router-dom'
 import axios from 'axios'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './style.scss'
 
+import { toast } from 'react-toastify';
+
 const Header = () => {
   let username = JSON.parse(localStorage.getItem('username'));
   let token = JSON.parse(localStorage.getItem('token'));
-  const id =JSON.parse(localStorage.getItem('id'))
+  const id =JSON.parse(localStorage.getItem('id'));
 
   const [toggleMenu, setToggleMenu] = useState(false)
   const [getDataUser, setUser] = useState({});
+  const navigate = useNavigate()
+
 
   const handleClick = ()=>{
     setToggleMenu(!toggleMenu)
   }
-
-  
 
   
 useEffect(()=>{
@@ -35,6 +37,18 @@ useEffect(()=>{
 
   getUser();
 }, [id]);
+
+const logout = () =>{
+  localStorage.removeItem('token');
+  localStorage.removeItem('id');
+  localStorage.removeItem('username');
+
+  toast.success('see you later');
+
+  setTimeout(() => {
+    navigate('/', {replace: true});
+  }, 2000);
+}
   
 
   return (
@@ -88,7 +102,7 @@ useEffect(()=>{
             <li className=' text-white w-100' onClick={()=>setToggleMenu(false)}><Link to='/profile'>{username}</Link></li>
             <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to="/write">write post</Link></li>
             <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to={`${id}/favoris`} >favories</Link></li>
-            <li className='bg-danger p-1' onClick={()=>setToggleMenu(false)}>Logout</li>
+            <li className='bg-danger p-1' onClick={()=>logout}>Logout</li>
           </ul>
         </div>
        }

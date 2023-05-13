@@ -28,7 +28,7 @@ const Profile = () => {
       const filename = data.name;
       data.append('name', filename);
       data.append('img-profil', userFile)
-     
+
       try {
         
        await axios.post('http://localhost:8080/api/upload-profile', data);
