@@ -55,7 +55,23 @@ const addBgPhoto = async (req, res) => {
     }
 }
 
+const  updateUser = async (req, res) =>{
+    const userId = req.params.userId;
+    
+    try {
+        const user = await User.findById(userId);
+        if(!user) return res.status(404).send('user not found');
+
+        const update = await User.findByIdAndUpdate(user, {$set: req.body}, {new: true});
+        await update.save();
+        
+        res.status(200).json({update, message:"information modifier avec success"});
+    } catch (error) {
+        res.status(400).json(error.message);
+    }
+}
 
 
 
-module.exports = { getPostByUser, getUser, addBgPhoto, addUserPhoto };
+
+module.exports = { getPostByUser, getUser, addBgPhoto, addUserPhoto, updateUser };

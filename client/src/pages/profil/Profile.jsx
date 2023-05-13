@@ -95,7 +95,7 @@ const Profile = () => {
     }
   };
 
-// console.log(userData)
+
   useEffect(() => {
     const getBlogs = async () => {
       try {
