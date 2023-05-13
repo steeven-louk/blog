@@ -5,9 +5,9 @@ import "./style.scss";
 
 const Contact = () => {
   return (
-    <div className="contact ps-5">
+    <div className="contact ">
       <div className="row">
-        <div className="col-md-6 left-col p-3 ">
+        <div className="col-md-6 left-col p-4 ">
           <h2>CONTACTEZ-NOUS</h2>
           <hr />
           <p>

@@ -3,9 +3,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 const Footer = () => {
   return (
-    <div className="footer px-5 pt-5 text-white" style={{ 'background':'#183114' }}>
-      <div className="row">
+    <div className="footer px-5 pt-5 mt-5 pb-2 text-white" style={{ 'background':'#183114' }}>
         <h1 className="text-warning fw-bold text-uppercase">tech-talk</h1>
+      <div className="d-flex justify-content-between flex-wrap  ">
         <div className="col-md-4">
           <p>
             {" "}
@@ -14,16 +14,16 @@ const Footer = () => {
             or courses are published.
           </p>
         </div>
-        <div className="col-md-4 text-capitalize align-items-center">
-          <ul className="nav flex-column align-items-center">
+        <div className=" text-capitalize">
+          <ul className="nav flex-column ">
             <li>home</li>
             <li>blogs</li>
             <li>courses</li>
             <li>youtube</li>
           </ul>
         </div>
-        <div className="col-md-4 text-capitalize  align-items-center">
-          <ul className="nav flex-column  align-items-center text-left">
+        <div className=" text-capitalize">
+          <ul className="nav flex-column">
             <li className="nav-item">about</li>
             <li>contact</li>
             <li>privacy policy</li>
@@ -31,6 +31,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
+
       <div className="social-media my-4 d-flex gap-3  justify-content-center ">
         <span><FontAwesomeIcon icon="fa-brands fa-facebook"  /></span>
         <span><FontAwesomeIcon icon="fa-brands fa-instagram"  /></span>

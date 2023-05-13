@@ -4,6 +4,7 @@ import Card from "../../components/card/Card";
 
 import './style.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EditProfile from "./EditProfile";
 
 const Profile = () => {
   
@@ -11,26 +12,13 @@ const Profile = () => {
   const [userFile, setUserFile] = useState("");
   const [pictureFile, setPictureFile] = useState("");
   const [userData, setUserData] = useState({})
+  const [showEdit, setShowEdit] = useState(false)
 
 
   
   const id =JSON.parse(localStorage.getItem('id'))
 
-  const getBlogs = async () => {
-    try {
-      const posts = await axios.get(
-        "http://localhost:8080/api/user/user-post/" + id
-      );
-      if (posts.status === 200) {
-        // console.log('ee', posts)
-        let { data } = posts;
-        setBlogs(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+ 
 
   const handleSubmitProfil = async(e) =>{
     e.preventDefault();
@@ -109,15 +97,32 @@ const Profile = () => {
 
 // console.log(userData)
   useEffect(() => {
+    const getBlogs = async () => {
+      try {
+        const posts = await axios.get(
+          "http://localhost:8080/api/user/user-post/" + id
+        );
+        if (posts.status === 200) {
+          // console.log('ee', posts)
+          let { data } = posts;
+          setBlogs(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
     getBlogs();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     getUser();
   }, []);
 
   return (
-    <div className="profile px-3 mt-3">
+    <>
+    {showEdit && <EditProfile show_Edit={setShowEdit}/>}
+         <div className="profile px-3 mt-3">
       <header>
         <div className="profile-background rounded position-relative">
         {userData?.bg_picture ? <img src={`http://localhost:8080/assets/profile/bg_picture/${userData?.bg_picture}`} className="rounded" alt="" /> :
@@ -164,7 +169,10 @@ const Profile = () => {
       <main>
         <section className="search-zone rounded p-4 bg-white mb-5">
           <div className="d-flex justify-content-between align-items-center ">
+            <div className="d-flex flex-column">
             <span>{userData?.username} ({blogLength})</span>
+            <span className="btn btn-primary" onClick={()=> setShowEdit(!showEdit)}>editer le profil</span>
+            </div>
             <div className=" d-inline-flex">
               <input
                 type="text"
@@ -189,6 +197,7 @@ const Profile = () => {
         </section>
       </main>
     </div>
+    </>
   );
 };
 

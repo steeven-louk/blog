@@ -120,7 +120,7 @@ const handleSubmit = async (e)=>{
               <option key={category._id} value={category._id}>{category.name}</option>
               ))}
             </select>
-            <ReactQuill theme="snow" className='content' formats={formats} modules={modules} value={content}  onChange={(newValue)=> setContent(newValue)}/>
+            <ReactQuill theme="snow" className='content border-success border rounded' formats={formats} modules={modules} value={content}  onChange={(newValue)=> setContent(newValue)}/>
             <button className='btn btn-success'>Create post</button>
         </form>
        </div>

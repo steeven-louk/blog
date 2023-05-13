@@ -16,6 +16,10 @@ const Header = () => {
     setToggleMenu(!toggleMenu)
   }
 
+  
+
+  
+useEffect(()=>{
   const getUser = async () => {
     try {
       const user = await axios.get("http://localhost:8080/api/user/" + id);
@@ -29,10 +33,8 @@ const Header = () => {
     }
   };
 
-  
-useEffect(()=>{
   getUser();
-}, [])
+}, [id]);
   
 
   return (
@@ -46,18 +48,18 @@ useEffect(()=>{
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav ms-auto mb-2 fw-bold mb-lg-0">
-        <li className="nav-item">
+        <li className="nav-item"  onClick={()=>setToggleMenu(false)}>
           <NavLink  className='nav-link text-white' to="/">Home</NavLink>
         </li>
-        <li className="nav-item">
+        <li className="nav-item"  onClick={()=>setToggleMenu(false)}>
           <NavLink className="nav-link text-white" to="/blogs">Blogs</NavLink>
         </li>
 
-        <li className="nav-item">
+        <li className="nav-item"  onClick={()=>setToggleMenu(false)}>
           <NavLink className="nav-link text-white" to="/about">About</NavLink>
         </li>
 
-        <li className="nav-item">
+        <li className="nav-item"  onClick={()=>setToggleMenu(false)}>
           <NavLink   className="nav-link text-white" to="/contact">Contact</NavLink>
         </li>
 
@@ -71,19 +73,19 @@ useEffect(()=>{
 
     {token &&
       <div className="user-group ps-2 position-relative">
-       {getDataUser?.photo ?  <img src={`http://localhost:8080/assets/profile/${getDataUser?.photo}`} onClick={handleClick} width={45} height={45} style={{'objectFit':'cover'}} className='rounded-pill mx-2' alt="user-img" />
+       {getDataUser?.photo ?  <img src={`http://localhost:8080/assets/profile/${getDataUser?.photo}`} onClick={handleClick} width={40} height={40} style={{'objectFit':'cover'}} className='rounded-pill mx-2' alt="user-img" />
        :
       
        <div className='rounded-pill border p-2'>
-        <FontAwesomeIcon icon="fa-solid fa-user" />
+        <FontAwesomeIcon icon="fa-solid fa-user" onClick={handleClick} width={30} height={30} />
        </div>
        }
     
        
        {toggleMenu &&
         <div className="user-group_subMenu text-white bg-dark rounded  position-absolute">
-          <ul className='nav flex-column gap-1 text-capitalize'>
-            <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to='/profile'>{username}</Link></li>
+          <ul className='nav flex-column gap-1 p-0 text-capitalize'>
+            <li className=' text-white w-100' onClick={()=>setToggleMenu(false)}><Link to='/profile'>{username}</Link></li>
             <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to="/write">write post</Link></li>
             <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to={`${id}/favoris`} >favories</Link></li>
             <li className='bg-danger p-1' onClick={()=>setToggleMenu(false)}>Logout</li>
