@@ -76,12 +76,12 @@ app.post('/api/upload-post', upload_post.single("img-post"),(req,res)=>{
     res.status(200).json("file has been upload");
 });
 
-app.post('/api/upload-profile',upload_profile.single('img-profil'), (req, res)=>{
+app.post('/api/upload-profile',upload_profile.single('img-profil'), (_, res)=>{
     res.send("Profile uploaded");
     res.status(200).json("profile has been uploaded");
 });
 
-app.post('/api/upload-bg_profile',upload_bg_profile.single('bg-picture'), (req, res)=>{
+app.post('/api/upload-bg_profile',upload_bg_profile.single('bg-picture'), (_, res)=>{
     res.send("bg-picture uploaded");
     res.status(200).json("bg-picture has been uploaded");
 });

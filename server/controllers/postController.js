@@ -1,5 +1,7 @@
 const Post = require('../models/Posts');
 const User = require('../models/user');
+const fs = require('fs');
+
 
 const getAllPost = async (_, res)=>{
     const data = await Post.find().sort({'createdAt':-1}).populate('user',['username','_id']).populate('category').limit(20);
@@ -46,13 +48,30 @@ const updatePost = async(req, res) => {
 }
 
 const deletePost = async(req, res) => {
-    const id = req.params.id;
+    const { postId, userId } = req.params;
 
     try {
-        const post = await Post.findByIdAndDelete(id).populate('user');
-        await post.user.post.pull(post);
-        await post.user.save();
-       return res.status(200).send({message:"blog is deleted"});
+        const posts = await Post.findByIdAndDelete(postId).populate('user');
+        const user = await User.findById(userId);
+        if(!user) return res.status(404).json('user not found');
+        if(!posts) return res.status(404).json('post not found');
+
+                // Supprime l'image associée au post
+
+                if (posts.picture) {
+
+await fs.unlink(`./assets/posts/${posts.picture}`,(err) => {
+if (err) throw err;
+console.log(' was deleted');
+});
+}
+
+        await user.post.pull(posts);
+        await user.save();
+
+
+
+        return res.status(200).send({message:"blog is deleted"});
     } catch (error) {
         res.status(400).json(error.message)
     }

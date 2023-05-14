@@ -5,7 +5,7 @@ const postRoute = require('express').Router();
 postRoute.get('/', getAllPost);
 postRoute.post('/', addPost);
 postRoute.get('/:id', getPost);
-postRoute.delete('/:id', deletePost);
+postRoute.delete('/:userId/:postId', deletePost);
 postRoute.put('/:id', updatePost);
 
 

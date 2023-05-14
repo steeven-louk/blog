@@ -64,7 +64,7 @@ const  updateUser = async (req, res) =>{
 
         const update = await User.findByIdAndUpdate(user, {$set: req.body}, {new: true});
         await update.save();
-        
+        await user.save();
         res.status(200).json({update, message:"information modifier avec success"});
     } catch (error) {
         res.status(400).json(error.message);
