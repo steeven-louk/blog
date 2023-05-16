@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Card from "../../components/card/Card";
@@ -11,10 +12,11 @@ const Profile = () => {
   const [blogs, setBlogs] = useState([]);
   const [userFile, setUserFile] = useState("");
   const [pictureFile, setPictureFile] = useState("");
-  const [userData, setUserData] = useState({})
-  const [showEdit, setShowEdit] = useState(false)
+  const [userData, setUserData] = useState({});
+  const [showEdit, setShowEdit] = useState(false);
+  const [search, setSearch] = useState("");
   
-  const id =JSON.parse(localStorage.getItem('id'))
+  const id =JSON.parse(localStorage.getItem('id'));
 
   const handleSubmitProfil = async(e) =>{
     e.preventDefault();
@@ -44,6 +46,7 @@ const Profile = () => {
     }
   }
 
+  console.log(blogs)
   const handleSubmitBg = async(e) =>{
     e.preventDefault();
 
@@ -176,6 +179,8 @@ const Profile = () => {
                 name="search"
                 placeholder="Search Blogs..."
                 className="p-1 ps-3 rounded border"
+                value={search}
+                onChange={(e)=> setSearch(e.target.value)}
               />
             </div>
           </div>
@@ -185,7 +190,13 @@ const Profile = () => {
         {blogLength === 0 ? <div className="h3 my-3">vous avez aucun blogs</div> 
         :
         <>
-              {blogs?.post?.map((blog) => (
+              {blogs?.post?.filter((item)=>{
+                if(search === ""){
+                  return item;
+                } else if(item?.title.includes(search)){
+                  return item;
+                }
+              }).map((blog) => (
             <Card items={blog} username={blogs?.username} key={blog?._id} />
           ))}
         </>
