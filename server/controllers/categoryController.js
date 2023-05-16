@@ -1,4 +1,5 @@
 const Category = require("../models/Category");
+const Post = require("../models/Posts");
 
 const addCat = async(req, res) =>{
     try {
@@ -14,6 +15,7 @@ const getAllCat = async (_, res)=>{
     const data = await Category.find();
     res.status(200).json({data});
 }
+
 
 const delCat = async (req, res) =>{
     const id = req.params.id;

@@ -1,11 +1,14 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
 import Card from "../../components/card/Card";
 import axios from "axios";
 import { LoadingCard } from "../../components/Loading";
 
 const Blogs = () => {
+  
   const [posts, setPosts] = useState([]);
   const [category, setCategory] = useState([]);
+  const [selectCategory, setSelectCategory] = useState('');
   const [loading, setLoading] = useState(false);
 
   const getAllBlog = async () =>{
@@ -31,13 +34,16 @@ const Blogs = () => {
     if(getCat.status === 200){
       let {data} = getCat;
         setCategory( data.data);
+
         setLoading(false);
       }
    } catch (error) {
-    console.log('err', error);
+
     throw new Error(error.message);
    }
   }
+
+
 
   useEffect(() => {
     getAllBlog();
@@ -50,10 +56,10 @@ const Blogs = () => {
     <div className="blogs pb-4">
       <div className="px-2">
         <div className=" d-flex  gap-4 justify-content-end my-4">
-          <select className="text-capitalize fw-semibold p-1 rounded">
-
+          <select value={selectCategory} onChange={(e)=> setSelectCategory(e.target.value)} className="text-capitalize fw-semibold p-1 rounded">
+            <option value="">all</option>
           {category?.map((cat)=>(
-            <option key={cat?._id} value={cat._id}>{ cat.name }</option>
+            <option key={cat?._id} value={cat?._id}>{ cat.name }</option>
           ))}
           </select>
        
@@ -61,7 +67,14 @@ const Blogs = () => {
 
         <div className="card-container d-flex gap-3">
 
-          {posts?.map((items)=>(
+          {posts?.filter((data) =>{ 
+            if(selectCategory === "all"){
+              return data;
+            } 
+            else if (data.category?._id.includes(selectCategory)){
+              return data;
+            }
+            }).map((items)=>(
            <>
            {loading? <LoadingCard/> :  <Card items={items} key={items?._id}/>}
            </>

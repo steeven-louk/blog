@@ -6,9 +6,8 @@ import './style.scss'
 
 import { toast } from 'react-toastify';
 
-const Header = () => {
+const Header = ({token}) => {
   let username = JSON.parse(localStorage.getItem('username'));
-  let token = JSON.parse(localStorage.getItem('token'));
   const id =JSON.parse(localStorage.getItem('id'));
 
   const [toggleMenu, setToggleMenu] = useState(false)
@@ -38,7 +37,7 @@ useEffect(()=>{
   getUser();
 }, [id]);
 
-const logout = () =>{
+const Logout = () =>{
   localStorage.removeItem('token');
   localStorage.removeItem('id');
   localStorage.removeItem('username');
@@ -102,7 +101,7 @@ const logout = () =>{
             <li className=' text-white w-100' onClick={()=>setToggleMenu(false)}><Link to='/profile'>{username}</Link></li>
             <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to="/write">write post</Link></li>
             <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to={`${id}/favoris`} >favories</Link></li>
-            <li className='bg-danger p-1' onClick={()=>logout}>Logout</li>
+            <li className='bg-danger p-1' onClick={Logout}>Logout</li>
           </ul>
         </div>
        }

@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import { toast } from 'react-toastify';
 
-const EditProfile = ({show_Edit}) => {
+const EditProfile = ({show_Edit, userName}) => {
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState('');
@@ -82,7 +82,7 @@ const EditProfile = ({show_Edit}) => {
   return (
     <div className='editProfile'>
         <div className="container justify-content-center align-items-center d-flex my-auto">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="form-group text-capitalize fw-semibold d-flex flex-column">
                     <label htmlFor="profile">profile</label>
                     <input type="file" onChange={(e)=> setBgPhoto(e.target.files[0])} name="bg_picture" />
@@ -95,7 +95,7 @@ const EditProfile = ({show_Edit}) => {
                 <hr />
                 <div className="form-group text-capitalize fw-semibold d-flex flex-column">
                     <label htmlFor="username">name</label>
-                    <input type="text" value={username} onChange={(e)=> setUsername(e.target.value)} className='form-control' name="username" />
+                    <input type="text" value={username} placeholder={userName} onChange={(e)=> setUsername(e.target.value)} className='form-control' name="username" />
                 </div>
                 <div className="form-group text-capitalize fw-semibold d-flex flex-column">
                     <label htmlFor="name">email</label>

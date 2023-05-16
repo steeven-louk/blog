@@ -13,12 +13,8 @@ const Profile = () => {
   const [pictureFile, setPictureFile] = useState("");
   const [userData, setUserData] = useState({})
   const [showEdit, setShowEdit] = useState(false)
-
-
   
   const id =JSON.parse(localStorage.getItem('id'))
-
- 
 
   const handleSubmitProfil = async(e) =>{
     e.preventDefault();
@@ -121,7 +117,7 @@ const Profile = () => {
 
   return (
     <>
-    {showEdit && <EditProfile show_Edit={setShowEdit}/>}
+    {showEdit && <EditProfile show_Edit={setShowEdit} userName={userData.username}/>}
          <div className="profile px-3 mt-3">
       <header>
         <div className="profile-background rounded position-relative">
@@ -172,6 +168,7 @@ const Profile = () => {
             <div className="d-flex flex-column">
             <span>{userData?.username} ({blogLength})</span>
             <span className="btn btn-primary" onClick={()=> setShowEdit(!showEdit)}>editer le profil</span>
+            <span className="btn btn-outline-danger text-capitalize fw-semibold mt-2">delete my account</span>
             </div>
             <div className=" d-inline-flex">
               <input

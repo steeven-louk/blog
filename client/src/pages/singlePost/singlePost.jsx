@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "../../components/card/Card";
-
 
 import './style.scss'
 
 import { SinglePageLoading } from "../../components/Loading";
 import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 const SinglePost = () => {
@@ -23,22 +23,9 @@ const SinglePost = () => {
   const [loading, setLoading] = useState(false);
   const [favoriteId, setFavoriteId] = useState([]);
   
+  const navigate = useNavigate();
 
-  const getPost = async () =>{
-    try {
-      setLoading(true)
-      
-      const getPost = await axios.get(`http://localhost:8080/api/post/${id}`);
-     if(getPost.status === 200){
-       let {data} = getPost;
-         setPost(data);
-         setLoading(false);
-       }
-    } catch (error) {
-     console.log('err', error);
-     throw new Error(error.message);
-    }
-  }
+
 
   const getSimilarPost = async () =>{
     try{
@@ -106,10 +93,41 @@ const SinglePost = () => {
     }
   }
   
+  const deletePost = async () =>{
+    try {
+      let del = await axios.delete(`http://localhost:8080/api/post/${user_Id}/${id}`);
+      
+      if(del.status === 200){
+        toast.info(del.data.message, {hideProgressBar: true, position: "top-center",autoClose:2000});
+        
+        setTimeout(() => {
+          navigate('/blogs', {replace: true});
+        }, 1200);
+
+      }
+    } catch (error) {
+      console.log('error delete', error)
+    }
+  }
 
   useEffect(()=>{
+    const getPost = async () =>{
+      try {
+        setLoading(true)
+        
+        const getPost = await axios.get(`http://localhost:8080/api/post/${id}`);
+       if(getPost.status === 200){
+         let {data} = getPost;
+           setPost(data);
+           setLoading(false);
+         }
+      } catch (error) {
+       console.log('err', error);
+       throw new Error(error.message);
+      }
+    }
     getPost();
-  }, []);
+  }, [id]);
   
   useEffect(() => {
     const getFavorisId = async () => {
@@ -138,7 +156,14 @@ const SinglePost = () => {
       </div>
       <div className="user_group text-dark my-4 d-flex justify-content-between align-items-center">
         <div className="user d-inline-flex align-items-center">
-          <img src="" alt="user" className="user-img" />
+         {post?.photo ? <img src="" alt="user" className="user-img" /> 
+         :
+         
+        <div className='rounded-pill border border-success p-2'>
+        <FontAwesomeIcon icon="fa-solid fa-user" width={30} height={30} />
+       </div>
+         }
+
           <span className="fw-bold text-capitalize ms-2">{post?.user?.username}</span>
         </div>
         <span>{date}</span>
@@ -152,13 +177,21 @@ const SinglePost = () => {
           style={{ height: "25em", width: "100%", objectFit: "cover" }}
           className="rounded"
         />
+       
         }
-        {!existingFav(post._id) ? 
-        <button className="btn text-uppercase fw-semibold mt-2 btn-success"   onClick={addToFavorite}>add to favoris</button>
+        {post?.user?._id === user_Id &&
+        
+          <>
+          {!existingFav(post._id) ? 
+        <button className="btn text-uppercase fw-semibold mt-2 btn-success" onClick={addToFavorite}>add to favoris</button>
           : 
-        <button className="btn text-uppercase fw-semibold mt-2 btn-danger"   onClick={removeToFavorite}>remove to favoris</button>
+        <button className="btn text-uppercase fw-semibold mt-2 btn-danger" onClick={removeToFavorite}>remove to favoris</button>
           
           }
+          <button className="btn text-uppercase fw-semibold btn-outline-danger mt-2 ms-3" onClick={deletePost}>delete post</button>
+      
+          </>
+        }
       </div>
 
       <div className="post-desc mt-5">
@@ -171,12 +204,8 @@ const SinglePost = () => {
       </div>
           </>
         )}
-
-
-
       <div className="card-container gap-3">
-      {similarPost?.post?.slice(0,3).map((items)=> <Card items={items} key={items._id} username={similarPost.username}/>)}
-      
+        {similarPost?.post?.slice(0,3).map((items)=> <Card items={items} key={items._id} username={similarPost.username}/>)}
       </div>
     </div>
   );
