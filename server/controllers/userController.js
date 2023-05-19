@@ -1,5 +1,5 @@
-const Post = require('../models/Posts');
 const User = require('../models/user');
+const fs = require('fs');
 
 
 const getPostByUser = async (req, res) => {
@@ -57,14 +57,34 @@ const addBgPhoto = async (req, res) => {
 
 const  updateUser = async (req, res) =>{
     const userId = req.params.userId;
+
+
     
     try {
         const user = await User.findById(userId);
         if(!user) return res.status(404).send('user not found');
 
+                // Supprime l'image associée au post
+                if (user.photo) {
+
+                await fs.unlink(`./assets/profile/${user.photo}`, (err) => {
+                    if (err) throw err;
+                    console.log(' was deleted');
+                });
+            }
+
+                if (user.bg_picture) {
+
+                await fs.unlink(`./assets/profile/bg_picture/${user.bg_picture}`, (err) => {
+                    if (err) throw err;
+                    console.log(' was deleted');
+                });
+                }
+
         const update = await User.findByIdAndUpdate(user, {$set: req.body}, {new: true});
         await update.save();
         await user.save();
+
         res.status(200).json({update, message:"information modifier avec success"});
     } catch (error) {
         res.status(400).json(error.message);

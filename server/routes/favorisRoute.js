@@ -1,4 +1,5 @@
 const { addFavoris, getFavoris, getFavorisId, removeFavoris } = require('../controllers/favorisController');
+// const verifyUserToken = require('../middlewares/authMiddleware');
 
 const favorisRoute = require('express').Router();
 

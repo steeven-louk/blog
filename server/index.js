@@ -13,6 +13,7 @@ const catRoute = require('./routes/categoriesRoutes');
 const authRoute = require('./routes/authRoutes');
 const userRoute = require('./routes/userRoute');
 const favorisRoute = require('./routes/favorisRoute');
+// const verifyUserToken = require('./middlewares/authMiddleware');
 
 const app = express();
 

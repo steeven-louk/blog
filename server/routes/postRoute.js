@@ -1,4 +1,5 @@
 const { getAllPost, addPost, getPost, deletePost, updatePost } = require('../controllers/postController');
+const verifyUserToken = require('../middlewares/authMiddleware');
 
 const postRoute = require('express').Router();
 
@@ -6,7 +7,7 @@ postRoute.get('/', getAllPost);
 postRoute.post('/', addPost);
 postRoute.get('/:id', getPost);
 postRoute.delete('/:userId/:postId', deletePost);
-postRoute.put('/:id', updatePost);
+postRoute.put('/:id',verifyUserToken, updatePost);
 
 
 module.exports = postRoute;

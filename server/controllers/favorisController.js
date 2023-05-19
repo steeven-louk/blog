@@ -15,14 +15,10 @@ const addFavoris = async (req,res) =>{
 
         const existingFavoris = await User.findOne({favoris:postId});
         if(existingFavoris) return res.status(409).json('post already exist');
-        
-        // const favoris = await new Favoris({user: userId,post: post});
 
-        // await User.findByIdAndUpdate(userId, {$push: {favoris: postId}}, {new: true})
         await user.favoris.push(post);
         await user.save();
       
-        
         res.status(201).json({message:"favoris added"});
     } catch (error) {
         res.status(404).json({message:error});

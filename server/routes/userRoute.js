@@ -1,4 +1,5 @@
 const {getPostByUser, getUser, addUserPhoto, addBgPhoto, updateUser } = require('../controllers/userController');
+const verifyUserToken = require('../middlewares/authMiddleware');
 
 const userRoute = require('express').Router();
 

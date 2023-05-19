@@ -1,5 +1,4 @@
 const Category = require("../models/Category");
-const Post = require("../models/Posts");
 
 const addCat = async(req, res) =>{
     try {
