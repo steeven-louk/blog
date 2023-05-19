@@ -24,7 +24,7 @@ const Blogs = () => {
       throw new Error(error);
     }
   };
-
+ 
   const getAllCategories = async () => {
     try {
       setLoading(true);

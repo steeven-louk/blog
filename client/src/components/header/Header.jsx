@@ -102,7 +102,7 @@ const Logout = () =>{
         <div className="user-group_subMenu text-white bg-dark rounded  position-absolute">
           <ul className='nav flex-column gap-1 p-0 text-capitalize'>
             <li className=' text-white w-100' onClick={()=>setToggleMenu(false)}><Link to='/profile'>{username}</Link></li>
-            <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to="/write">write post</Link></li>
+            <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to="write">write post</Link></li>
             <li className=' text-white' onClick={()=>setToggleMenu(false)}><Link to={`${id}/favoris`} >favories</Link></li>
             <li className='bg-danger p-1' onClick={Logout}>Logout</li>
           </ul>

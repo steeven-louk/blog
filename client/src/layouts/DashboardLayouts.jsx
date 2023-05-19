@@ -1,15 +1,22 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
+import './styles/dashboard.scss'
+import { Sidebar } from '../admin/components/sidebare'
+
 const DashboardLayout = () => {
   return (
-    <div>
-        <nav className="sidebar">
-          sidebar
-        </nav>
-        <main>
+    <div className='admin_layout'>
+      	    {/* ======================  left sidebar =======================  */}
+              <Sidebar/>
+      	    {/* ======================  End left sidebar =======================  */}
+
+     
+     <main>
+
           <Outlet/>
-        </main>
+     </main>
+       
     </div>
   )
 }

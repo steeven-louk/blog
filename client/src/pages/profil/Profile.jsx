@@ -132,13 +132,7 @@ const Profile = ({token}) => {
         </label>
 
        }
-        {/* <form onSubmit={handleSubmitBg} >
-           <input type="file" name="bg-picture" onChange={(e)=>setPictureFile(e.target.files[0])}  id="bg-picture" className="d-none" />
-        <label htmlFor="bg-picture" className="bg-picture_btn">
-          <FontAwesomeIcon icon="fa-solid fa-plus" className="icon"/>
-        </label>
-        <button className="btn btn-primary text-capitalize fw-bold" type="submit">add bg</button>
-        </form> */}
+
 
         </div>
 

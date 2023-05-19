@@ -18,6 +18,8 @@ import Dashboard from "./admin/Dashboard";
 
 import DashboardLayout from "./layouts/DashboardLayouts";
 import UserLayout from "./layouts/UserLayout";
+import { UserScreen } from "./admin/userScreen";
+import { CategoryScreen } from "./admin/CategoryScreen";
 
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
       <Routes>
         <Route path="/admin/" element={<DashboardLayout/>}>
           <Route path="dashboard" element={<Dashboard/>}/>
+          <Route path="users" element={<UserScreen/>} />
+          <Route path="category" element={<CategoryScreen/>} />
         </Route>
         
         <Route path="/" exact element={<UserLayout/>}>
@@ -40,7 +44,6 @@ function App() {
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="*" element={<HomePage />} />
         <Route exact path="blogs" element={<Blogs />} />
-        <Route exact path="singlePost/:id" element={<SinglePost />} />
         <Route exact path="singlePost/:id" element={<SinglePost token={token}/>} />
         <Route exact path="about" element={<About />} />
         <Route exact path="contact" element={<Contact />} />
@@ -48,7 +51,7 @@ function App() {
         {token? 
           <>
             <Route exact path="profile" element={<Profile />} />
-            <Route exact path="Edit" element={<Write token={token} />} />
+            <Route exact path="Write" element={<Write token={token} />} />
             <Route exact path=":id/favoris" element={<Favories />} />
           </>
           :
