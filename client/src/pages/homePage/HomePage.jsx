@@ -40,9 +40,9 @@ const HomePage = () => {
 
             <div className="card-container gap-3">
     
-                {posts?.slice(0,4).map((items)=>(
+                {posts?.slice(0,4).map((items, index)=>(
                   <>
-                    {loading? <LoadingCard/> : <Card items={items} key={items?._id}/>}
+                    {loading? <LoadingCard key={index}/> : <Card key={items?._id} items={items}/>}
                   </>
                 ))}
             </div>

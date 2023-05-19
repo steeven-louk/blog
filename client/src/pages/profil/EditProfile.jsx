@@ -1,16 +1,19 @@
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react'
+// import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const EditProfile = ({show_Edit, userName}) => {
+const EditProfile = ({show_Edit, userName, token}) => {
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState('');
-    const [photo, setPhoto] = useState(null);
-    const [bgPhoto, setBgPhoto] = useState(null);
+    const [photo, setPhoto] = useState();
+    const [bgPhoto, setBgPhoto] = useState();
 
     const userId =JSON.parse(localStorage.getItem('id'))
+
+    // const navigate = useNavigate();
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
@@ -22,12 +25,12 @@ const EditProfile = ({show_Edit, userName}) => {
     
         if(photo){
           const data = new FormData();
-          const filename = data.name;
+          const filename = photo.name;
           data.append('name', filename);
           data.append('img-profil', photo);
           updatePost.photo = filename;
     
-    
+          console.log('data',data)
           try {
             await axios.post("http://localhost:8080/api/upload-profile", data);
           } catch (error) {
@@ -37,13 +40,13 @@ const EditProfile = ({show_Edit, userName}) => {
 
         if(bgPhoto){
             const data = new FormData();
-            const filename = data.name;
+            const filename = bgPhoto.name;
             data.append('name', filename);
             data.append('bg-picture', bgPhoto)
             updatePost.bg_picture = filename;
 
            
-            try {
+          try {
               
             await axios.post('http://localhost:8080/api/upload-bg_profile', data);
             } catch (error) {
@@ -52,17 +55,18 @@ const EditProfile = ({show_Edit, userName}) => {
           }
         
         try {
-       const updateU = await axios.put("http://localhost:8080/api/user/update/" + userId, updatePost);
+
+          await axios.put("http://localhost:8080/api/user/update/" + userId, updatePost);
     
-         setUsername('');
+          setUsername('');
           setEmail('');
           setPhoto(null);
           setBgPhoto(null);
-            console.log('uuuu',updateU);
+
             
           toast.success("L'article a été modifier avec succes", {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
@@ -70,10 +74,13 @@ const EditProfile = ({show_Edit, userName}) => {
             progress: undefined,
             theme: "colored",
             });
+
+            show_Edit(false);
+            window.location.reload();
             
         } catch (error) {
           console.log('errWrite', error);
-          // throw Error(error);
+          throw Error(error);
         }
       }
      

@@ -7,92 +7,98 @@ import './style.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditProfile from "./EditProfile";
 
-const Profile = () => {
+const Profile = ({token}) => {
   
   const [blogs, setBlogs] = useState([]);
-  const [userFile, setUserFile] = useState("");
-  const [pictureFile, setPictureFile] = useState("");
+  // const [userFile, setUserFile] = useState("");
+  // const [pictureFile, setPictureFile] = useState("");
   const [userData, setUserData] = useState({});
   const [showEdit, setShowEdit] = useState(false);
   const [search, setSearch] = useState("");
   
   const id =JSON.parse(localStorage.getItem('id'));
 
-  const handleSubmitProfil = async(e) =>{
-    e.preventDefault();
+  // const handleSubmitProfil = async(e) =>{
+  //   e.preventDefault();
 
-    if(userFile){
-      const data = new FormData();
-      const filename = data.name;
-      data.append('name', filename);
-      data.append('img-profil', userFile)
+  //   if(userFile){
+  //     const data = new FormData();
+  //     const filename = data.name;
+  //     data.append('name', filename);
+  //     data.append('img-profil', userFile)
 
-      try {
+  //     try {
         
-       await axios.post('http://localhost:8080/api/upload-profile', data);
-      } catch (error) {
-        console.log('err', error)
-      }
+  //      await axios.post('http://localhost:8080/api/upload-profile', data);
+  //     } catch (error) {
+  //       console.log('err', error)
+  //     }
 
-      try {
-        const setUser = await axios.post('http://localhost:8080/api/user/add-photo/'+ id, {photo:userFile.name});
-          if(setUser.status === 200){
-            let { data } = setUser;
-            setUser(data.data)
-          }
-      } catch (error) {
-        console.log('err', error);
-      }
-    }
-  }
+  //     try {
+  //       const setUser = await axios.post('http://localhost:8080/api/user/add-photo/'+ id, {photo:userFile.name});
+  //         if(setUser.status === 200){
+  //           let { data } = setUser;
+  //           setUser(data.data)
+  //         }
+  //     } catch (error) {
+  //       console.log('err', error);
+  //     }
+  //   }
+  // }
 
-  console.log(blogs)
-  const handleSubmitBg = async(e) =>{
-    e.preventDefault();
 
-    if(pictureFile){
-      const data = new FormData();
-      const filename = data.name;
-      data.append('name', filename);
-      data.append('bg-picture', pictureFile)
+  // const handleSubmitBg = async(e) =>{
+  //   e.preventDefault();
+
+  //   if(pictureFile){
+  //     const data = new FormData();
+  //     const filename = data.name;
+  //     data.append('name', filename);
+  //     data.append('bg-picture', pictureFile)
      
-      try {
+  //     try {
         
-      await axios.post('http://localhost:8080/api/upload-bg_profile', data);
-      } catch (error) {
-        console.log('err', error)
-      }
+  //     await axios.post('http://localhost:8080/api/upload-bg_profile', data);
+  //     } catch (error) {
+  //       console.log('err', error)
+  //     }
 
-      try {
-        const setUser = await axios.post('http://localhost:8080/api/user/add-bg_picture/'+ id, {bg_picture:pictureFile.name});
-          if(setUser.status === 200){
-            let { data } = setUser;
-            // setUser(data.data)
-            console.log(data);
-          }
-        console.log('fff',setUser);
-      } catch (error) {
-        console.log('err', error);
-      }
-    }
-  }
+  //     try {
+  //       const setUser = await axios.post('http://localhost:8080/api/user/add-bg_picture/'+ id, {bg_picture:pictureFile.name});
+  //         if(setUser.status === 200){
+  //           let { data } = setUser;
+  //           // setUser(data.data)
+  //           console.log(data);
+  //         }
+  //       console.log('fff',setUser);
+  //     } catch (error) {
+  //       console.log('err', error);
+  //     }
+  //   }
+  // }
 
   const blogLength = blogs?.post?.length;
 
 
-  const getUser = async () => {
-    try {
-      const user = await axios.get(
-        "http://localhost:8080/api/user/" + id);
-      if (user.status === 200) {
-        // console.log('ee', posts)
-        let { data } = user;
-        setUserData(data);
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const user = await axios.get("http://localhost:8080/api/user/" + id,{
+          headers:{
+            Authorization: token,
+          }
+        }); 
+        if (user.status === 200) {
+          let { data } = user;
+          setUserData(data);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+    getUser();
+  }, [id, token]);
+
 
 
   useEffect(() => {
@@ -102,7 +108,6 @@ const Profile = () => {
           "http://localhost:8080/api/user/user-post/" + id
         );
         if (posts.status === 200) {
-          // console.log('ee', posts)
           let { data } = posts;
           setBlogs(data);
         }
@@ -114,27 +119,26 @@ const Profile = () => {
     getBlogs();
   }, [id]);
 
-  useEffect(() => {
-    getUser();
-  }, []);
 
   return (
     <>
-    {showEdit && <EditProfile show_Edit={setShowEdit} userName={userData.username}/>}
+    {showEdit && <EditProfile token={token} show_Edit={setShowEdit} userName={userData.username}/>}
          <div className="profile px-3 mt-3">
       <header>
         <div className="profile-background rounded position-relative">
         {userData?.bg_picture ? <img src={`http://localhost:8080/assets/profile/bg_picture/${userData?.bg_picture}`} className="rounded" alt="" /> :
-        
-        <form onSubmit={handleSubmitBg} >
+        <label htmlFor="bg-picture" className="bg-picture_btn">
+          <FontAwesomeIcon icon="fa-solid fa-plus" className="icon"/>
+        </label>
+
+       }
+        {/* <form onSubmit={handleSubmitBg} >
            <input type="file" name="bg-picture" onChange={(e)=>setPictureFile(e.target.files[0])}  id="bg-picture" className="d-none" />
         <label htmlFor="bg-picture" className="bg-picture_btn">
           <FontAwesomeIcon icon="fa-solid fa-plus" className="icon"/>
         </label>
         <button className="btn btn-primary text-capitalize fw-bold" type="submit">add bg</button>
-        </form>
-
-       }
+        </form> */}
 
         </div>
 
@@ -143,14 +147,17 @@ const Profile = () => {
         >
         
         {userData?.photo ? <img src={`http://localhost:8080/assets/profile/${userData?.photo}`} alt='profil_image' className=""/> :
-        <form onSubmit={handleSubmitProfil} encType="multipart/form-data">
+        <label htmlFor="img-profil" className="user-picture_btn">
+            <FontAwesomeIcon icon="fa-solid fa-user" className="icon" />
+        </label>
+        }
+        {/* <form onSubmit={handleSubmitProfil} encType="multipart/form-data">
         <label htmlFor="img-profil" className="user-picture_btn">
             <FontAwesomeIcon icon="fa-solid fa-user" className="icon" />
         </label>
           <input type="file" onChange={(e)=> setUserFile(e.target.files[0])} name="img-profil" id="img-profil" className="d-none" />
           <button type="submit" style={{ 'top':'95px','right':'38px' }} className="btn position-relative  btn-success text-capitalize ms-5">add</button>
-        </form>
-        }
+        </form> */}
             
         </div>
      
@@ -167,10 +174,10 @@ const Profile = () => {
 
       <main>
         <section className="search-zone rounded p-4 bg-white mb-5">
-          <div className="d-flex justify-content-between align-items-center ">
-            <div className="d-flex flex-column">
+          <div className="d-flex flex-wrap gap-2 justify-content-between align-items-center ">
+            <div className="d-flex flex-column text-capitalize">
             <span>{userData?.username} ({blogLength})</span>
-            <span className="btn btn-primary" onClick={()=> setShowEdit(!showEdit)}>editer le profil</span>
+            <span className="btn btn-primary fw-semibold" onClick={()=> setShowEdit(!showEdit)}>editer le profil</span>
             <span className="btn btn-outline-danger text-capitalize fw-semibold mt-2">delete my account</span>
             </div>
             <div className=" d-inline-flex">

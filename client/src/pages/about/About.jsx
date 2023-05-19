@@ -1,10 +1,12 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./style.scss";
+import { Social } from "../../components/Social";
 
 const About = () => {
+
   return (
+
     <div className="about">
       <h3 className="text-center fw-bold my-5">
         Master Mind Behind "TECH-TALK"
@@ -38,29 +40,7 @@ const About = () => {
         </div>
       </div>
 
-      <div className="social-media my-4 d-flex gap-3  justify-content-center ">
-        <span>
-          <FontAwesomeIcon icon="fa-brands fa-facebook" />
-        </span>
-        <span>
-          <FontAwesomeIcon icon="fa-brands fa-instagram" />
-        </span>
-        <span>
-          <FontAwesomeIcon icon="fa-brands fa-twitter" />
-        </span>
-        <span>
-          <FontAwesomeIcon icon="fa-brands fa-linkedin" />
-        </span>
-        <span>
-          <FontAwesomeIcon icon="fa-brands fa-youtube" />
-        </span>
-        <span>
-          <FontAwesomeIcon icon="fa-brands fa-slack" />
-        </span>
-        <span>
-          <FontAwesomeIcon icon="fa-brands fa-discord" />
-        </span>
-      </div>
+      <Social/>
     </div>
   );
 };

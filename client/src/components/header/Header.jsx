@@ -23,7 +23,10 @@ const Header = ({token}) => {
 useEffect(()=>{
   const getUser = async () => {
     try {
-      const user = await axios.get("http://localhost:8080/api/user/" + id);
+      const user = await axios.get("http://localhost:8080/api/user/" + id, {
+        headers:{
+          Authorization: token
+        }});
 
       if (user.status === 200) {
         let { data } = user;
@@ -35,7 +38,7 @@ useEffect(()=>{
   };
 
   getUser();
-}, [id]);
+}, [id, token]);
 
 const Logout = () =>{
   localStorage.removeItem('token');

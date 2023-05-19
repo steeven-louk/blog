@@ -1,7 +1,8 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 import "./style.scss";
+import { Social } from "../../components/Social";
 
 const Contact = () => {
   return (
@@ -71,29 +72,7 @@ const Contact = () => {
 
               <span className="text-white or">or</span>
 
-              <div className="social-media mt-4 d-flex gap-3">
-                <span>
-                  <FontAwesomeIcon icon="fa-brands fa-facebook" />
-                </span>
-                <span>
-                  <FontAwesomeIcon icon="fa-brands fa-instagram" />
-                </span>
-                <span>
-                  <FontAwesomeIcon icon="fa-brands fa-twitter" />
-                </span>
-                <span>
-                  <FontAwesomeIcon icon="fa-brands fa-linkedin" />
-                </span>
-                <span>
-                  <FontAwesomeIcon icon="fa-brands fa-youtube" />
-                </span>
-                <span>
-                  <FontAwesomeIcon icon="fa-brands fa-slack" />
-                </span>
-                <span>
-                  <FontAwesomeIcon icon="fa-brands fa-discord" />
-                </span>
-              </div>
+              <Social/>
             </div>
           </form>
         </div>
