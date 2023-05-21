@@ -7,12 +7,10 @@ export const Card = () => {
         <div className="card">
           <div className="card-body">
             <div className="d-inline-block">
-              <h5 className="text-muted">Total Views</h5>
+              <h5 className="text-muted">Total Blogs <i class="fa-solid fa-blog"></i></h5>
               <h2 className="mb-0"> 10,28,056</h2>
             </div>
-            <div className="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
-              <i className="fa fa-eye fa-fw fa-sm text-info"></i>
-            </div>
+            
           </div>
         </div>
       </div>{" "}
@@ -22,12 +20,10 @@ export const Card = () => {
             <div className="card">
             <div className="card-body">
                 <div className="d-inline-block">
-                <h5 className="text-muted">Total Views</h5>
+                <h5 className="text-muted">Total User <i class="fa-solid fa-users"></i></h5>
                 <h2 className="mb-0"> 10,28,056</h2>
                 </div>
-                <div className="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
-                <i className="fa fa-eye fa-fw fa-sm text-info"></i>
-                </div>
+                
             </div>
             </div>
         </div>{" "}

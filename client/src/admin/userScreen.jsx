@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export const UserScreen = () => {
 
     const [users, setUsers] = useState([]);
+    // const userID = JSON.parse(localStorage.getItem('id'));
 
   
   useEffect(() => {
@@ -24,7 +26,66 @@ export const UserScreen = () => {
   }
 
     getAllUsers();
-  }, [])
+  }, []);
+
+  // const deletePost = async () => {
+  //   try {
+  //     let del = await axios.delete(`http://localhost:8080/api/post/${userID}/${users._id}`);
+
+  //     if (del.status === 200) {
+  //       toast.info(del.data.message, {
+  //         hideProgressBar: true,
+  //         position: "top-center",
+  //         autoClose: 2000,
+  //       });
+
+  //       // setTimeout(() => {
+  //       //   navigate("/blogs", { replace: true });
+  //       // }, 1200);
+  //     }
+  //   } catch (error) {
+  //     console.log("error delete", error);
+  //   }
+  // };
+
+  const showAlert = () =>{
+
+const swalWithBootstrapButtons = Swal.mixin({
+customClass: {
+confirmButton: 'btn btn-success',
+cancelButton: 'btn btn-danger'
+},
+buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+title: 'Are you sure?',
+text: "You won't be able to revert this!",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonText: 'Yes, delete it!',
+cancelButtonText: 'No, cancel!',
+reverseButtons: true
+}).then((result) => {
+if (result.isConfirmed) {
+  // deletePost();
+swalWithBootstrapButtons.fire(
+  'Deleted!',
+  'Your file has been deleted.',
+  'success'
+)
+} else if (
+/* Read more about handling dismissals below */
+result.dismiss === Swal.DismissReason.cancel
+) {
+swalWithBootstrapButtons.fire(
+  'Cancelled',
+  'Your imaginary file is safe :)',
+  'error'
+)
+}
+})
+}
 
   return (
     <>
@@ -59,9 +120,11 @@ export const UserScreen = () => {
                   <td className="fw-bold text-uppercase">{item.username} </td>
                   <td>{item?.email}</td>
                   <td>{item?.post?.length}</td>
-                  <td className='d-flex mt-4 align-items-center gap-3'>
-                  <i className="fa-solid fa-pen-to-square text-success"></i>
-                  <i className="fa-solid fa-trash text-danger"></i>
+                  <td>
+                    <div className='d-flex gap-3 align-items-center pt-1'>
+                      <i className="fa-solid fa-pen-to-square text-success"></i>
+                      <span onClick={showAlert}><i className="fa-solid fa-trash text-danger"></i></span>
+                    </div>
                   </td>
                  
                 </tr>

@@ -1,30 +1,109 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "./components/card";
 
+import Swal from "sweetalert2";
 import axios from "axios";
+// import { toast } from "react-toastify";
 
 const Dashboard = () => {
-  const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([]);
+  const userID = JSON.parse(localStorage.getItem('id'));
 
   const getAllBlogs =async () =>{
     try {
-      setLoading(true);
+      // setLoading(true);
       const post = await axios.get("http://localhost:8080/api/post");
       if (post.status === 200) {
         let { data } = post;
         setPosts(data.data);
-        setLoading(false);
+        // setLoading(false);
       }
     } catch (error) {
       console.log("err", error);
       throw new Error(error);
     }
   }
+// console.log(posts, userID)
+  // const deletePost = async () => {
+  //   try {
+  //     let del = await axios.delete(`http://localhost:8080/api/post/${userID}/${posts?._id}`);
+
+  //     if (del.status === 200) {
+  //       toast.info(del.data.message, {
+  //         hideProgressBar: true,
+  //         position: "top-center",
+  //         autoClose: 2000,
+  //       });
+
+  //       // setTimeout(() => {
+  //       //   navigate("/blogs", { replace: true });
+  //       // }, 1200);
+  //     }
+  //   } catch (error) {
+  //     console.log("error delete", error);
+  //   }
+  // };
+
+  const showAlert = (postId) =>{
+
+  const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+});
+
+swalWithBootstrapButtons.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, cancel!',
+  reverseButtons: true
+}).then(async(result) => {
+  if (result.isConfirmed) {
+    try {
+      let del = await axios.delete(`http://localhost:8080/api/post/${userID}/${postId}`);
+
+      if (del.status === 200) {
+        // toast.info(del.data.message, {
+        //   hideProgressBar: true,
+        //   position: "top-center",
+        //   autoClose: 2000,
+        // });
+
+        // setTimeout(() => {
+        //   navigate("/blogs", { replace: true });
+        // }, 1200);
+        swalWithBootstrapButtons.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+      }
+    } catch (error) {
+      console.log("error delete", error);
+    }
+  
+   
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'Cancelled',
+      'Your imaginary file is safe :)',
+      'error'
+    )
+  }
+})
+  }
 
   useEffect(() => {
   getAllBlogs();
-  }, [])
+  }, []);
 
 
   return (
@@ -33,7 +112,7 @@ const Dashboard = () => {
 
       <div className="col-lg-12">
         <div className="section-block">
-          <h3 className="section-title">My Active Campaigns</h3>
+          <h3 className="section-title fw-bold text-decoration-underline text-uppercase">Blogs</h3>
         </div>
         <div className="card">
           <div className="campaign-table table-responsive">
@@ -61,7 +140,7 @@ const Dashboard = () => {
                   <td>
                     <div>
                     <i className="fa-solid fa-pen-to-square text-success"></i>
-                    <i className="fa-solid fa-trash text-danger ms-3"></i>
+                    <span onClick={()=>showAlert(item._id)}><i className="fa-solid fa-trash text-danger ms-3"></i></span>
                     </div>
                   </td>
                 </tr>
