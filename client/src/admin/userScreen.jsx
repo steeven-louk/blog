@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 export const UserScreen = () => {
 
@@ -8,7 +9,6 @@ export const UserScreen = () => {
     // const userID = JSON.parse(localStorage.getItem('id'));
 
   
-  useEffect(() => {
     const getAllUsers =async () =>{
     try {
 
@@ -24,39 +24,22 @@ export const UserScreen = () => {
       throw new Error(error);
     }
   }
+  useEffect(() => {
 
     getAllUsers();
   }, []);
 
-  // const deletePost = async () => {
-  //   try {
-  //     let del = await axios.delete(`http://localhost:8080/api/post/${userID}/${users._id}`);
 
-  //     if (del.status === 200) {
-  //       toast.info(del.data.message, {
-  //         hideProgressBar: true,
-  //         position: "top-center",
-  //         autoClose: 2000,
-  //       });
 
-  //       // setTimeout(() => {
-  //       //   navigate("/blogs", { replace: true });
-  //       // }, 1200);
-  //     }
-  //   } catch (error) {
-  //     console.log("error delete", error);
-  //   }
-  // };
-
-  const showAlert = () =>{
+  const showAlert = (userId) =>{
 
 const swalWithBootstrapButtons = Swal.mixin({
 customClass: {
-confirmButton: 'btn btn-success',
-cancelButton: 'btn btn-danger'
+  confirmButton: 'btn btn-success',
+  cancelButton: 'btn btn-danger'
 },
 buttonsStyling: false
-})
+});
 
 swalWithBootstrapButtons.fire({
 title: 'Are you sure?',
@@ -66,26 +49,45 @@ showCancelButton: true,
 confirmButtonText: 'Yes, delete it!',
 cancelButtonText: 'No, cancel!',
 reverseButtons: true
-}).then((result) => {
+}).then(async(result) => {
 if (result.isConfirmed) {
-  // deletePost();
-swalWithBootstrapButtons.fire(
-  'Deleted!',
-  'Your file has been deleted.',
-  'success'
-)
+  try {
+      let del = await axios.delete(`localhost:8080/api/user/delete/${userId}`);
+
+      if (del.status === 200) {
+        toast.info(del.data.message, {
+          hideProgressBar: true,
+          position: "top-center",
+          autoClose: 2000,
+        });
+
+        swalWithBootstrapButtons.fire(
+      'Deleted!',
+      'User has been deleted.',
+      'success'
+    )
+  getAllUsers();
+
+      }
+
+  } catch (error) {
+    console.log("error delete", error);
+  }
+
+ 
 } else if (
-/* Read more about handling dismissals below */
-result.dismiss === Swal.DismissReason.cancel
+  /* Read more about handling dismissals below */
+  result.dismiss === Swal.DismissReason.cancel
 ) {
-swalWithBootstrapButtons.fire(
-  'Cancelled',
-  'Your imaginary file is safe :)',
-  'error'
-)
+  swalWithBootstrapButtons.fire(
+    'Cancelled',
+    'Your imaginary file is safe :)',
+    'error'
+  )
 }
 })
 }
+
 
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import axios from 'axios';
-
+import {toast} from 'react-toastify'
 export const CategoryScreen = () => {
 
     const [category, setCategory] = useState([]);
@@ -10,48 +10,64 @@ export const CategoryScreen = () => {
     const addCategory = async (e)=>{
         e.preventDefault();
         try {
-        const data = await axios.post("http://localhost:8080/api/categories");
-            console.log(data);
-            setToggleCategory(false);
+        const data = await axios.post("http://localhost:8080/api/categories", {
+          name: input
+        });
+            if(data === 201){
+              toast.success(data.statusText,{position: "top center"})
+              setToggleCategory(false);
+              getAllCategories();
+              setInput("");
+            }
         } catch (error) {
             console.log(error);
             throw new Error(error.message);
         }
     }
 
-    const deleteCategory = async (e, id)=>{
-        e.preventDefault();
+
+
+    const getAllCategories = async () => {
+try {
+  const getCat = await axios.get("http://localhost:8080/api/categories");
+  if (getCat.status === 200) {
+    let { data } = getCat;
+    setCategory(data.data);
+
+  }
+} catch (error) {
+  throw new Error(error.message);
+}
+};
+
+    
+    const deleteCategory = async ( id)=>{
         try {
         const data = await axios.delete("http://localhost:8080/api/categories/"+id);
             console.log(data);
+            if(data.status === 200){
+              toast.success("category has been deleted",{position: "top center"})
+              getAllCategories();
+            }
         } catch (error) {
             console.log(error);
             throw new Error(error.message);
         }
     }
 
-
     useEffect(() => {
-        const getAllCategories = async () => {
-    try {
-      const getCat = await axios.get("http://localhost:8080/api/categories");
-      if (getCat.status === 200) {
-        let { data } = getCat;
-        setCategory(data.data);
-
-      }
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  };
-  getAllCategories();
-
+      getAllCategories();
     }, []);
 
 
   return (
+
     <div className="col-lg-12 p-3">
-        {toggleCategory && <div className='position-absolute w-50 top-50 start-50 shadow translate-middle z-2 card p-3'>
+        {toggleCategory && <div style={{'zIndex':'10'  }} className='position-absolute border border-2 border-success w-50 top-50 start-50 shadow translate-middle card p-3'>
+          <div onClick={()=>setToggleCategory(false)}>
+          <i className="fa-solid fa-circle-xmark ms-auto d-flex align-items-end justify-content-end btn"></i>
+
+          </div>         
             <form onSubmit={addCategory}>
                 <input type="text" className="form-control" placeholder='Name' value={input} onChange={(e)=> setInput(e.target.value)}/>
                 <button type='submit' className="btn w-25 mx-auto d-block btn-success text-uppercase fw-semibold mt-2">add</button>
@@ -70,7 +86,6 @@ export const CategoryScreen = () => {
                   <th className="border-0">index</th>
                   <th className="border-0">name</th>
                   <th className="border-0">created At</th>
-                 
                   <th className="border-0" colSpan={2}>Action</th>
                 </tr>
               </thead>
@@ -85,10 +100,9 @@ export const CategoryScreen = () => {
                   <td>
                     <div>
                         <i className="fa-solid fa-pen-to-square text-success"></i>
-                       <span onClick={deleteCategory(item._id)}> <i className="fa-solid fa-trash text-danger"></i></span>
+                       <span onClick={()=>deleteCategory(item._id)}> <i className="fa-solid fa-trash text-danger"></i></span>
                     </div>
                   </td>
-                 
                 </tr>
               ))}
                 

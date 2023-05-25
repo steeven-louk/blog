@@ -30,7 +30,8 @@ const Login = () => {
             toast.success(`Welcome ${login.data.username}`, {position: "top-center"});
             
             setTimeout(() => {
-                navigate("/");
+                navigate("/", {replace: true});
+                window.location.reload();
              }, 1000);
         }
 

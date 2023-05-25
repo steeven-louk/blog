@@ -3,7 +3,6 @@ import { Card } from "./components/card";
 
 import Swal from "sweetalert2";
 import axios from "axios";
-// import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -23,26 +22,8 @@ const Dashboard = () => {
       throw new Error(error);
     }
   }
-// console.log(posts, userID)
-  // const deletePost = async () => {
-  //   try {
-  //     let del = await axios.delete(`http://localhost:8080/api/post/${userID}/${posts?._id}`);
 
-  //     if (del.status === 200) {
-  //       toast.info(del.data.message, {
-  //         hideProgressBar: true,
-  //         position: "top-center",
-  //         autoClose: 2000,
-  //       });
 
-  //       // setTimeout(() => {
-  //       //   navigate("/blogs", { replace: true });
-  //       // }, 1200);
-  //     }
-  //   } catch (error) {
-  //     console.log("error delete", error);
-  //   }
-  // };
 
   const showAlert = (postId) =>{
 
@@ -68,20 +49,15 @@ swalWithBootstrapButtons.fire({
       let del = await axios.delete(`http://localhost:8080/api/post/${userID}/${postId}`);
 
       if (del.status === 200) {
-        // toast.info(del.data.message, {
-        //   hideProgressBar: true,
-        //   position: "top-center",
-        //   autoClose: 2000,
-        // });
-
-        // setTimeout(() => {
-        //   navigate("/blogs", { replace: true });
-        // }, 1200);
+        
         swalWithBootstrapButtons.fire(
       'Deleted!',
       'Your file has been deleted.',
       'success'
     )
+
+  getAllBlogs();
+
       }
     } catch (error) {
       console.log("error delete", error);
@@ -116,7 +92,7 @@ swalWithBootstrapButtons.fire({
         </div>
         <div className="card">
           <div className="campaign-table table-responsive">
-            <table className="table">
+            <table className="table table-responsive table-hover">
               <thead>
                 <tr className="border-0">
                   <th className="border-0">index</th>
