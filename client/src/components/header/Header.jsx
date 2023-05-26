@@ -41,14 +41,12 @@ const Header = ({ token }) => {
   }, [id, token]);
 
   const Logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("username");
-
+    localStorage.clear();
+    
     toast.success("see you later");
 
     setTimeout(() => {
-      navigate("/", { replace: true });
+      window.location.reload();
     }, 2000);
   };
 

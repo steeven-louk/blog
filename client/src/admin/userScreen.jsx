@@ -103,7 +103,7 @@ if (result.isConfirmed) {
                   <th className="border-0">username</th>
                   <th className="border-0">email</th>
                   <th className="border-0">post count</th>
-                  <th className="border-0" colSpan={2}>Action</th>
+                  <th className="border-0">Action</th>
                 </tr>
               </thead>
               <tbody>

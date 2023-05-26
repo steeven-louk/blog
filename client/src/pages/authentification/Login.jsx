@@ -3,40 +3,46 @@ import axios from 'axios';
 
 import {Link, useNavigate} from 'react-router-dom'
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { hideLoading, showLoading } from '../../redux/loadingSlice';
 
 
 const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const {setUser} = useContext(UserContext);
 
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    
     const handleSubmit = async (e) =>{
         e.preventDefault();
 
        try {
+        dispatch(showLoading)
         const login = await axios.post('http://localhost:8080/api/auth/login',{
             email,
             password
         })
+        dispatch(hideLoading)
         if(login.status === 200) {
 
-            localStorage.setItem("id", JSON.stringify(login.data.id));
-            localStorage.setItem("token", JSON.stringify(login.data.token));
-            localStorage.setItem("username", JSON.stringify(login.data.username));
-            
+            localStorage.setItem("id", JSON.stringify(login.data?.info._id));
+            localStorage.setItem("token", JSON.stringify(login.data?.token));
+            localStorage.setItem("username", JSON.stringify(login.data?.info.username));
+            console.log(login)
             toast.success(`Welcome ${login.data.username}`, {position: "top-center"});
             
             setTimeout(() => {
                 navigate("/", {replace: true});
-                window.location.reload();
-             }, 1000);
+                // window.location.reload();
+             }, 1200);
         }
 
        } catch (error) {
-        throw new Error(error);
+        dispatch(hideLoading);
+        toast.error(error.response.data, {position:"top-center"}) 
+        throw Error(error);
        }
     }
 
@@ -47,6 +53,7 @@ const Login = () => {
         <div className="row">
             <div className="col-md-7 p-5 left ">
                 <h2>welcome back.</h2>
+                <br />
                 <span>have not account? <Link to="/register"><em>register</em></Link></span>
             </div>
             <div className="col-md-5 right p-5">

@@ -22,17 +22,18 @@ import { UserScreen } from "./admin/userScreen";
 import { CategoryScreen } from "./admin/CategoryScreen";
 import EditAdmin from "./admin/EditAdmin";
 
-
+import { useSelector} from 'react-redux';
 function App() {
 
   let token =localStorage.getItem('token') && JSON.parse(localStorage.getItem('token'));
+const loading = useSelector(state => state.loading);
 
   return (
 
     <div className="App">
       <ToastContainer />
 
-
+      {loading ===true ? <h2>loading....</h2> :
       <Routes>
         <Route path="/admin/" element={<DashboardLayout/>}>
           <Route path="dashboard" element={<Dashboard/>}/>
@@ -64,7 +65,7 @@ function App() {
         }
         </Route>
       </Routes>
-
+      }
     </div>
   );
 }
