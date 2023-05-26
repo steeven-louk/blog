@@ -85,8 +85,8 @@ if (result.isConfirmed) {
 	        <div className="menu-list">
 			<div className="user card bg-dark shadow-lg p-2">
 					<div className="img_container">
-						<img src="./assets/Asset21.png" style={{ "width":"6em", "height":"6em" }} alt="" className="d-block mx-auto img-fluid card-img-top rounded-pill border border-success" />
-						</div>
+						<img src="/assets/Asset21.png" style={{ "width":"6em", "height":"6em", "objectFit":"cover" }} alt="" className="d-block mx-auto img-fluid card-img-top rounded-pill border border-success" />
+					</div>
 						<hr />
 						<span className="h5 text-center fw-bold text-uppercase">{username}</span>
 					</div>
@@ -122,13 +122,16 @@ if (result.isConfirmed) {
 									isPending ? "pending" : isActive ? "active nav-link" : " nav-link"}to={"category"}><i className="fa-solid fa-list"></i> Categories </NavLink>
 	                        </li>
 
+
 							
 
 							<li className="nav-divider">Admin</li>
-							<li className='nav-item'>
+							<li className="nav-item">
+	                            <NavLink className={({ isActive, isPending }) => 
+									isPending ? "pending" : isActive ? "active nav-link" : "nav-link"}to={"edit"}><i className="fa-solid fa-pen-to-square"></i> Edit </NavLink>
+	                        </li>
 							
-								<Link className='nav-link'><i className="fa-solid fa-pen-to-square"></i> Edit</Link>
-							</li>
+
 							<hr />
 							<li className="nav-item bg-danger mb-2 rounded">
 	                            <span className="nav-link text-white  fw-semibold" onClick={Logout}>

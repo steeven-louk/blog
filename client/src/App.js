@@ -20,6 +20,7 @@ import DashboardLayout from "./layouts/DashboardLayouts";
 import UserLayout from "./layouts/UserLayout";
 import { UserScreen } from "./admin/userScreen";
 import { CategoryScreen } from "./admin/CategoryScreen";
+import EditAdmin from "./admin/EditAdmin";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard/>}/>
           <Route path="users" element={<UserScreen/>} />
           <Route path="category" element={<CategoryScreen/>} />
+          <Route path="edit" element={<EditAdmin/>} />
         </Route>
         
         <Route path="/" exact element={<UserLayout/>}>

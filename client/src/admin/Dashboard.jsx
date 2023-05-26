@@ -3,6 +3,7 @@ import { Card } from "./components/card";
 
 import Swal from "sweetalert2";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -19,7 +20,8 @@ const Dashboard = () => {
       }
     } catch (error) {
       console.log("err", error);
-      throw new Error(error);
+      toast.error(error.message);
+          throw new Error(error);
     }
   }
 
@@ -61,6 +63,8 @@ swalWithBootstrapButtons.fire({
       }
     } catch (error) {
       console.log("error delete", error);
+      toast.error(error.message);
+          throw Error(error);
     }
   
    

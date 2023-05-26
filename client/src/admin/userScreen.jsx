@@ -6,9 +6,7 @@ import { toast } from 'react-toastify';
 export const UserScreen = () => {
 
     const [users, setUsers] = useState([]);
-    // const userID = JSON.parse(localStorage.getItem('id'));
 
-  
     const getAllUsers =async () =>{
     try {
 
