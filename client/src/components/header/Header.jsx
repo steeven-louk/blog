@@ -1,34 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./style.scss";
 
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../redux/userSlice";
 
 const Header = ({ token }) => {
   let username = JSON.parse(localStorage.getItem("username"));
   const id = JSON.parse(localStorage.getItem("id"));
 
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [toggleNav, setToggleNav] = useState(false);
+  // const [toggleNav, setToggleNav] = useState(false);
   const [getDataUser, setUser] = useState({});
-  const navigate = useNavigate();
 
+  
   const handleClick = () => {
     setToggleMenu(!toggleMenu);
   };
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getUser = async () => {
       try {
         const user = await axios.get("http://localhost:8080/api/user/" + id, {
           headers: {
-            Authorization: token,
+            Authorization: `Bearer ${token}`,
           },
         });
 
-        if (user.status === 200) {
+        if (user?.status === 200) {
           let { data } = user;
           setUser(data);
         }
@@ -42,9 +46,10 @@ const Header = ({ token }) => {
 
   const Logout = () => {
     localStorage.clear();
-    
+     
     toast.success("see you later");
-
+    dispatch(setUserData(null));
+    setToggleMenu(false)
     setTimeout(() => {
       window.location.reload();
     }, 2000);
@@ -139,6 +144,12 @@ const Header = ({ token }) => {
                           onClick={() => setToggleMenu(false)}
                         >
                           <Link to="write">write post</Link>
+                        </li>
+                        <li
+                          className=" text-white"
+                          onClick={() => setToggleMenu(false)}
+                        >
+                          <Link to="/admin/dashboard">Dashboard</Link>
                         </li>
                         <li
                           className=" text-white"

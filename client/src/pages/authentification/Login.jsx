@@ -5,6 +5,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { hideLoading, showLoading } from '../../redux/loadingSlice';
+import { setIsAdmin, setUserData } from '../../redux/userSlice';
 
 
 const Login = () => {
@@ -19,19 +20,24 @@ const Login = () => {
         e.preventDefault();
 
        try {
-        dispatch(showLoading)
+        dispatch(showLoading())
         const login = await axios.post('http://localhost:8080/api/auth/login',{
             email,
             password
         })
-        dispatch(hideLoading)
+        dispatch(hideLoading())
         if(login.status === 200) {
 
             localStorage.setItem("id", JSON.stringify(login.data?.info._id));
             localStorage.setItem("token", JSON.stringify(login.data?.token));
             localStorage.setItem("username", JSON.stringify(login.data?.info.username));
             console.log(login)
-            toast.success(`Welcome ${login.data.username}`, {position: "top-center"});
+            dispatch(setUserData(login.data))
+            if(login?.data.isAdmin === true){ 
+                //  dispatch(setIsAdmin(login?.data.isAdmin));
+                 localStorage.setItem("isAdmin", JSON.stringify(login?.data?.isAdmin));
+            }
+            toast.success(`Welcome ${login.data?.info.username}`, {position: "top-center"});
             
             setTimeout(() => {
                 navigate("/", {replace: true});
@@ -40,7 +46,8 @@ const Login = () => {
         }
 
        } catch (error) {
-        dispatch(hideLoading);
+        dispatch(hideLoading());
+        console.log(error)
         toast.error(error.response.data, {position:"top-center"}) 
         throw Error(error);
        }

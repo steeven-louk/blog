@@ -4,6 +4,7 @@ import Card from "../../components/card/Card";
 import axios from "axios";
 import { LoadingCard } from "../../components/Loading";
 
+
 const Blogs = () => {
   const [posts, setPosts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -46,6 +47,8 @@ const Blogs = () => {
   useEffect(() => {
     getAllCategories();
   }, []);
+
+
 
   return (
     <div className="blogs pb-4">

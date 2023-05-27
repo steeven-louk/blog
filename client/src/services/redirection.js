@@ -1,23 +1,17 @@
-// import { createContext } from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-// export const redirectionContext = createContext();
 
-// export const redirectionProvider = ({children})=>{
-//     const token = JSON.parse(localStorage.getItem("token"));
+export const AdminRedirect = ({ children }) => {
+    const user = useSelector(state => state.user);
 
-//     if(!token){
-//         return window.location.replace('/login');
-//     }else{
-//         return {children}
-//     }
-// }
-
-export const Redirect = ({children}) =>{
-    const token = JSON.parse(localStorage.getItem("token"));
-
-    if(!token){
-        return window.location.replace('/login');
-    }else{
-        return {children}
+    if (!user?.isAdmin) {
+        toast.error("Not Authorized", { position: 'top-center' });
+        return <Navigate to='/' />
     }
+    else {
+        return children
+    }
+
 }
