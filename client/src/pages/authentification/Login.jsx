@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 
-import {Link, useNavigate} from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
+
 import { useDispatch } from 'react-redux';
 import { hideLoading, showLoading } from '../../redux/loadingSlice';
-import { setIsAdmin, setUserData } from '../../redux/userSlice';
+import { setUserData } from '../../redux/userSlice';
 
 
 const Login = () => {
@@ -13,7 +14,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
     
     const handleSubmit = async (e) =>{
@@ -34,13 +35,13 @@ const Login = () => {
             console.log(login)
             dispatch(setUserData(login.data))
             if(login?.data.isAdmin === true){ 
-                //  dispatch(setIsAdmin(login?.data.isAdmin));
                  localStorage.setItem("isAdmin", JSON.stringify(login?.data?.isAdmin));
             }
             toast.success(`Welcome ${login.data?.info.username}`, {position: "top-center"});
             
             setTimeout(() => {
-                navigate("/", {replace: true});
+                // navigate("/", {replace: true});
+                <Navigate to="/" />
                 // window.location.reload();
              }, 1200);
         }

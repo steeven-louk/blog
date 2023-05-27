@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Card } from "./components/card";
 
@@ -5,27 +6,49 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const Dashboard = () => {
+const Dashboard = ({token}) => {
   const [posts, setPosts] = useState([]);
+  const [userCount, setUserCount] = useState([]);
+  const [postCount, setPostCount] = useState([]);
   const userID = JSON.parse(localStorage.getItem('id'));
+
 
   const getAllBlogs =async () =>{
     try {
-      // setLoading(true);
-      const post = await axios.get("http://localhost:8080/api/post");
+
+      const post = await axios.get("http://localhost:8080/api/post",{
+        headers:{
+          Authorization: `Bearer ${token}`
+      }
+      });
       if (post.status === 200) {
         let { data } = post;
         setPosts(data.data);
-        // setLoading(false);
+
       }
     } catch (error) {
       console.log("err", error);
       toast.error(error.message);
           throw new Error(error);
-    }
   }
+}
 
-
+  const getUserCount = async ()=>{
+    let {data} = await axios.get("http://localhost:8080/api/admin/users/count",{
+      headers:{
+        Authorization: `Bearer ${token}`
+    }
+    });
+    setUserCount(data.count);
+  }
+  const getPostCount = async ()=>{
+    let {data} = await axios.get("http://localhost:8080/api/admin/posts/count",{
+      headers:{
+        Authorization: `Bearer ${token}`
+    }
+    });
+    setPostCount(data.count);
+  }
 
   const showAlert = (postId) =>{
 
@@ -74,7 +97,7 @@ swalWithBootstrapButtons.fire({
   ) {
     swalWithBootstrapButtons.fire(
       'Cancelled',
-      'Your imaginary file is safe :)',
+      'Your Post is safe :)',
       'error'
     )
   }
@@ -83,12 +106,14 @@ swalWithBootstrapButtons.fire({
 
   useEffect(() => {
   getAllBlogs();
+  getUserCount();
+  getPostCount();
   }, []);
 
 
   return (
     <div className=" p-2">
-      <Card />
+      <Card countUser={userCount} countPost={postCount}/>
 
       <div className="col-lg-12">
         <div className="section-block">
@@ -109,7 +134,7 @@ swalWithBootstrapButtons.fire({
               </thead>
               <tbody>
               {posts?.map((item, index)=>(
-                <tr key={item._id}>
+                <tr key={item?._id}>
                   <td>{index +1}</td>
                   <td>
                   <img src={`http://localhost:8080/assets/posts/${item?.picture}`} alt="card-img" width={20} height={50} className="card-img-top object-fit-cover" />
@@ -119,8 +144,7 @@ swalWithBootstrapButtons.fire({
                   <td>{item?.category.name}</td>
                   <td>
                     <div>
-                    <i className="fa-solid fa-pen-to-square text-success"></i>
-                    <span onClick={()=>showAlert(item._id)}><i className="fa-solid fa-trash text-danger ms-3"></i></span>
+                    <span style={{ "cursor":"pointer" }} onClick={()=>showAlert(item._id)}><i className="fa-solid fa-trash text-danger ms-3"></i></span>
                     </div>
                   </td>
                 </tr>

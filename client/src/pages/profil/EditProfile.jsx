@@ -13,8 +13,6 @@ const EditProfile = ({show_Edit, userName, token}) => {
 
     const userId =JSON.parse(localStorage.getItem('id'))
 
-    // const navigate = useNavigate();
-
     const handleSubmit = async (e)=>{
         e.preventDefault();
     
@@ -30,7 +28,6 @@ const EditProfile = ({show_Edit, userName, token}) => {
           data.append('img-profil', photo);
           updatePost.photo = filename;
     
-          console.log('data',data)
           try {
             await axios.post("http://localhost:8080/api/upload-profile", data);
           } catch (error) {
@@ -56,7 +53,12 @@ const EditProfile = ({show_Edit, userName, token}) => {
         
         try {
 
-          await axios.put("http://localhost:8080/api/user/update/" + userId, updatePost);
+          await axios.put("http://localhost:8080/api/user/update/" + userId,{
+            headers:{
+              Authorization: `Bearer ${token}`
+            }
+          },
+           updatePost);
     
           setUsername('');
           setEmail('');

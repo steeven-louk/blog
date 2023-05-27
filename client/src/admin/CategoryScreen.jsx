@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import axios from 'axios';
 import {toast} from 'react-toastify'
-export const CategoryScreen = () => {
+export const CategoryScreen = ({token}) => {
 
     const [category, setCategory] = useState([]);
     const [toggleCategory, setToggleCategory] = useState(false);
@@ -12,8 +12,13 @@ export const CategoryScreen = () => {
         try {
         const data = await axios.post("http://localhost:8080/api/categories", {
           name: input
+        },
+        {
+          headers:{
+            Authorization: `Bearer ${token}`
+        }
         });
-            if(data === 201){
+            if(data.status === 201){
               toast.success(data.statusText,{position: "top center"})
               setToggleCategory(false);
               getAllCategories();
@@ -24,7 +29,6 @@ export const CategoryScreen = () => {
             throw new Error(error.message);
         }
     }
-
 
 
     const getAllCategories = async () => {
@@ -43,7 +47,11 @@ try {
     
     const deleteCategory = async ( id)=>{
         try {
-        const data = await axios.delete("http://localhost:8080/api/categories/"+id);
+        const data = await axios.delete("http://localhost:8080/api/categories/"+id,{
+          headers:{
+            Authorization: `Bearer ${token}`
+        }
+        });
             console.log(data);
             if(data.status === 200){
               toast.success("category has been deleted",{position: "top center"})
@@ -99,7 +107,6 @@ try {
                   
                   <td>
                     <div>
-                        <i className="fa-solid fa-pen-to-square text-success"></i>
                        <span onClick={()=>deleteCategory(item._id)}> <i className="fa-solid fa-trash text-danger"></i></span>
                     </div>
                   </td>

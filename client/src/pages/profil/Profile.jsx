@@ -10,72 +10,13 @@ import EditProfile from "./EditProfile";
 const Profile = ({token}) => {
   
   const [blogs, setBlogs] = useState([]);
-  // const [userFile, setUserFile] = useState("");
-  // const [pictureFile, setPictureFile] = useState("");
+
   const [userData, setUserData] = useState({});
   const [showEdit, setShowEdit] = useState(false);
   const [search, setSearch] = useState("");
   
   const id =JSON.parse(localStorage.getItem('id'));
 
-  // const handleSubmitProfil = async(e) =>{
-  //   e.preventDefault();
-
-  //   if(userFile){
-  //     const data = new FormData();
-  //     const filename = data.name;
-  //     data.append('name', filename);
-  //     data.append('img-profil', userFile)
-
-  //     try {
-        
-  //      await axios.post('http://localhost:8080/api/upload-profile', data);
-  //     } catch (error) {
-  //       console.log('err', error)
-  //     }
-
-  //     try {
-  //       const setUser = await axios.post('http://localhost:8080/api/user/add-photo/'+ id, {photo:userFile.name});
-  //         if(setUser.status === 200){
-  //           let { data } = setUser;
-  //           setUser(data.data)
-  //         }
-  //     } catch (error) {
-  //       console.log('err', error);
-  //     }
-  //   }
-  // }
-
-
-  // const handleSubmitBg = async(e) =>{
-  //   e.preventDefault();
-
-  //   if(pictureFile){
-  //     const data = new FormData();
-  //     const filename = data.name;
-  //     data.append('name', filename);
-  //     data.append('bg-picture', pictureFile)
-     
-  //     try {
-        
-  //     await axios.post('http://localhost:8080/api/upload-bg_profile', data);
-  //     } catch (error) {
-  //       console.log('err', error)
-  //     }
-
-  //     try {
-  //       const setUser = await axios.post('http://localhost:8080/api/user/add-bg_picture/'+ id, {bg_picture:pictureFile.name});
-  //         if(setUser.status === 200){
-  //           let { data } = setUser;
-  //           // setUser(data.data)
-  //           console.log(data);
-  //         }
-  //       console.log('fff',setUser);
-  //     } catch (error) {
-  //       console.log('err', error);
-  //     }
-  //   }
-  // }
 
   const blogLength = blogs?.post?.length;
 
@@ -84,10 +25,11 @@ const Profile = ({token}) => {
     const getUser = async () => {
       try {
         const user = await axios.get("http://localhost:8080/api/user/" + id,{
-          headers:{
-            Authorization: token,
+            headers:{
+              Authorization: `Bearer ${token}`
+            }
           }
-        }); 
+        ); 
         if (user.status === 200) {
           let { data } = user;
           setUserData(data);
@@ -104,9 +46,11 @@ const Profile = ({token}) => {
   useEffect(() => {
     const getBlogs = async () => {
       try {
-        const posts = await axios.get(
-          "http://localhost:8080/api/user/user-post/" + id
-        );
+        const posts = await axios.get("http://localhost:8080/api/user/user-post/" + id,{
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        } );
         if (posts.status === 200) {
           let { data } = posts;
           setBlogs(data);
@@ -117,7 +61,7 @@ const Profile = ({token}) => {
     };
   
     getBlogs();
-  }, [id]);
+  }, [id, token]);
 
 
   return (
@@ -145,14 +89,7 @@ const Profile = ({token}) => {
             <FontAwesomeIcon icon="fa-solid fa-user" className="icon" />
         </label>
         }
-        {/* <form onSubmit={handleSubmitProfil} encType="multipart/form-data">
-        <label htmlFor="img-profil" className="user-picture_btn">
-            <FontAwesomeIcon icon="fa-solid fa-user" className="icon" />
-        </label>
-          <input type="file" onChange={(e)=> setUserFile(e.target.files[0])} name="img-profil" id="img-profil" className="d-none" />
-          <button type="submit" style={{ 'top':'95px','right':'38px' }} className="btn position-relative  btn-success text-capitalize ms-5">add</button>
-        </form> */}
-            
+       
         </div>
      
      

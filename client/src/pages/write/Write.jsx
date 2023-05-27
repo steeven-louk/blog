@@ -73,12 +73,17 @@ const Write = ({token}) => {
     }
 
     try {
-      await axios.post("http://localhost:8080/api/post", newPost);
+      await axios.post("http://localhost:8080/api/post",{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      },
+       newPost);
 
       setTitle("");
       setContent("");
       setFile(null);
-      console.log('lol')
+
       toast.success("L'article a été publier avec succes", {
         position: "top-center",
         autoClose: 3000,
@@ -91,7 +96,7 @@ const Write = ({token}) => {
       });
       setTimeout(() => {
         window.location.replace("/blogs");
-      }, 3500);
+      }, 2000);
     } catch (error) {
       toast.error(error?.response.data.msg)
       console.log("errWrite", error);

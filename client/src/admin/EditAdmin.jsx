@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 
-const EditAdmin = () => {
+const EditAdmin = ({token}) => {
 
     const [file, setFile] = useState();
     const [username, setUsername] = useState('');
@@ -34,7 +34,11 @@ const EditAdmin = () => {
 
         try {
 
-         await axios.put("http://localhost:8080/api/user/update/" + id, updatePost);
+         await axios.put("http://localhost:8080/api/user/update/" + id,{
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        }, updatePost);
     
           setUsername('');
           setEmail('')
@@ -65,10 +69,8 @@ const EditAdmin = () => {
     <div className='p-3'>
  
         <form onSubmit={handleSubmit} className="form border p-5 rounded border-5 border-warning w-75 mx-auto">
-            {file ? <img src={URL.createObjectURL(file)} style={{ "width":"6em", "height":"6em", "objectFit":"cover" }} alt="" className="d-block mx-auto img-fluid card-img-top rounded-pill border border-success" />
-        :
-        <img src="/assets/Asset21.png" style={{ "width":"6em", "height":"6em", "objectFit":"cover" }} alt="" className="d-block mx-auto img-fluid card-img-top rounded-pill border border-success" />
-
+            {file && <img src={URL.createObjectURL(file)} style={{ "width":"6em", "height":"6em", "objectFit":"cover" }} alt="" className="d-block mx-auto img-fluid card-img-top rounded-pill border border-success" />
+        
 
 }
             <div className="form-group mb-3">

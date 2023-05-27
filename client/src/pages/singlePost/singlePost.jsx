@@ -42,7 +42,7 @@ const SinglePost = ({token}) => {
       const fav = await axios.put(
         `http://localhost:8080/api/favoris/${user_Id}/${post?._id}`,{
           headers:{
-            Authorization: token,
+            Authorization: `Bearer ${token}`
           }
         }
       );
@@ -69,7 +69,7 @@ const SinglePost = ({token}) => {
       const del = await axios.delete(
         `http://localhost:8080/api/favoris/${user_Id}/${id}`,{
           headers:{
-            Authorization: token,
+            Authorization: `Bearer ${token}`
           }
         }
       );
@@ -80,10 +80,10 @@ const SinglePost = ({token}) => {
     } catch (error) {
       toast.error(error?.response?.data.message, {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
-        pauseOnHover: true,
+        pauseOnHover: false,
         draggable: true,
         progress: undefined,
         theme: "colored",
@@ -93,7 +93,11 @@ const SinglePost = ({token}) => {
 
   const deletePost = async () => {
     try {
-      let del = await axios.delete(`http://localhost:8080/api/post/${user_Id}/${id}`);
+      let del = await axios.delete(`http://localhost:8080/api/post/${user_Id}/${id}`,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      });
 
       if (del.status === 200) {
         toast.info(del.data.message, {

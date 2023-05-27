@@ -41,10 +41,10 @@ return (
       {isLoading ? <h2>loading....</h2> :
       <Routes>
         <Route path="/admin/" element={<AdminRedirect><DashboardLayout/> </AdminRedirect>}>
-          <Route path="dashboard" element={<AdminRedirect><Dashboard/></AdminRedirect>}/>
-          <Route path="users" element={<UserScreen/>} />
-          <Route path="category" element={<CategoryScreen/>} />
-          <Route path="edit" element={<EditAdmin/>} />
+          <Route path="dashboard" element={<AdminRedirect><Dashboard token={token}/></AdminRedirect>}/>
+          <Route path="users" element={<UserScreen token={token}/>} />
+          <Route path="category" element={<CategoryScreen  token={token}/>} />
+          <Route path="edit" element={<EditAdmin token={token}/>} />
         </Route>
         
         <Route path="/" exact element={<UserLayout/>}>
@@ -60,7 +60,7 @@ return (
           <>
             <Route exact path="profile" element={<Profile />} />
             <Route exact path="Write" element={<Write token={token} />} />
-            <Route exact path=":id/favoris" element={<Favories />} />
+            <Route exact path=":id/favoris" element={<Favories token={token} />} />
           </>
           :
           <>

@@ -3,28 +3,34 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 
-export const UserScreen = () => {
+export const UserScreen = ({token}) => {
 
     const [users, setUsers] = useState([]);
 
+
     const getAllUsers =async () =>{
-    try {
-
-    const getUsers = await axios.get("http://localhost:8080/api/admin/users");
-    
-    if (getUsers.status === 200) {
-        let { data } = getUsers;
-        setUsers(data.users);
-
+      try {
+  
+      const getUsers = await axios.get("http://localhost:8080/api/admin/users", {
+        headers:{
+          Authorization: `Bearer ${token}`
+          }
+        });
+      
+        if (getUsers.status === 200) {
+          let { data } = getUsers;
+          setUsers(data.users);
+  
+          }
+        } catch (error) {
+          console.log("err", error);
+          throw new Error(error);
+        }
       }
-    } catch (error) {
-      console.log("err", error);
-      throw new Error(error);
-    }
-  }
+      
   useEffect(() => {
-
     getAllUsers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -50,7 +56,11 @@ reverseButtons: true
 }).then(async(result) => {
 if (result.isConfirmed) {
   try {
-      let del = await axios.delete(`localhost:8080/api/user/delete/${userId}`);
+      let del = await axios.delete(`localhost:8080/api/user/delete/${userId}`,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      });
 
       if (del.status === 200) {
         toast.info(del.data.message, {
@@ -108,7 +118,7 @@ if (result.isConfirmed) {
               </thead>
               <tbody>
               {users?.map((item, index)=>(
-                <tr key={item._id} >
+                <tr key={item?._id} >
                   <td>{index +1}</td>
                   <td>
                   {item?.photo ? 
@@ -122,7 +132,6 @@ if (result.isConfirmed) {
                   <td>{item?.post?.length}</td>
                   <td>
                     <div className='d-flex gap-3 align-items-center pt-1'>
-                      <i className="fa-solid fa-pen-to-square text-success"></i>
                       <span onClick={showAlert}><i className="fa-solid fa-trash text-danger"></i></span>
                     </div>
                   </td>

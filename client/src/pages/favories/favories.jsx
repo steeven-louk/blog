@@ -5,7 +5,7 @@ import Card from '../../components/card/Card';
 import { LoadingCard } from '../../components/Loading';
 
 
-const Favories = () => {
+const Favories = ({token}) => {
 
     const [favoris, setFavoris] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -15,7 +15,11 @@ const Favories = () => {
     useEffect(() => {
         const getFavoris = async() =>{
             setLoading(true);
-            const fav = await axios.get(`http://localhost:8080/api/favoris/${id}/favoris`)
+            const fav = await axios.get(`http://localhost:8080/api/favoris/${id}/favoris`,{
+                headers:{
+                  Authorization: `Bearer ${token}`
+                }
+              })
             if(fav.status === 200){
                 let {data} = fav;
                 setFavoris(data?.favoris);
@@ -23,7 +27,7 @@ const Favories = () => {
             }
         }
         getFavoris();
-    }, [id]);
+    }, [id, token]);
 
 
 
