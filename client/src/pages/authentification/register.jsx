@@ -31,8 +31,9 @@ const Register = () => {
       }
     } catch (error) {
       toast.error(error?.response.data, { position: "top-center" });
-      console.log(error.response.data);
-      throw new Error(error?.response?.data);
+      // console.log(error.response.data);
+      console.log(error)
+      // throw new Error(error?.response?.data);
     }
   };
 

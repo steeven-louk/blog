@@ -29,8 +29,7 @@ import { AdminRedirect } from "./services/redirection";
 
 function App() {
 
-  
-  let token =localStorage.getItem('token') && JSON.parse(localStorage.getItem('token'));
+  const token =localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : "";
 const {isLoading} = useSelector(state => state.loading);
 
 return (
@@ -58,7 +57,7 @@ return (
 
         {token? 
           <>
-            <Route exact path="profile" element={<Profile />} />
+            <Route exact path="profile" element={<Profile token={token} />} />
             <Route exact path="Write" element={<Write token={token} />} />
             <Route exact path=":id/favoris" element={<Favories token={token} />} />
           </>

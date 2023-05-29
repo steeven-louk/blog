@@ -17,12 +17,7 @@
             font-size: 35px;
         }
 
-        .collapse{
-            position: relative;
-            top: 0px;
-            width: 100%;
-            font-size: 20px;
-        }
+       
     }
 
     .user-group{
@@ -49,29 +44,21 @@
         }
     }
 
-    .navbar-collapse{
-        @media only screen and (max-width: 997px) {
+    .mobile-menu{
+        position: absolute;
+        top: 37px;
+        left: 0;
+        right:0;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding-top: 10px;
+    transform: translateY(-10rem);
 
-            width: 100%;
-            top: 10px;
-            height: 150px;
-            position: relative;
-
-         .navbar-nav{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-
-            li{
-                font-size: 15px;
-            }
-            
-        }
     }
-    }
-   
+   .mobile-menu.active{
+    transform: translateY(1rem);
+    transition:  .4s all ease-in-out;
+
 }
-
+}

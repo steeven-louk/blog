@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 const EditProfile = ({show_Edit, userName, token}) => {
 
-    const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
     const [email, setEmail] = useState('');
     const [photo, setPhoto] = useState();
     const [bgPhoto, setBgPhoto] = useState();
@@ -53,12 +53,12 @@ const EditProfile = ({show_Edit, userName, token}) => {
         
         try {
 
-          await axios.put("http://localhost:8080/api/user/update/" + userId,{
+          await axios.put("http://localhost:8080/api/user/update/" + userId,updatePost,{
             headers:{
               Authorization: `Bearer ${token}`
             }
           },
-           updatePost);
+           );
     
           setUsername('');
           setEmail('');
@@ -93,7 +93,7 @@ const EditProfile = ({show_Edit, userName, token}) => {
         <div className="container justify-content-center align-items-center d-flex my-auto">
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="form-group text-capitalize fw-semibold d-flex flex-column">
-                    <label htmlFor="profile">profile</label>
+                    <label htmlFor="bgPicture">background</label>
                     <input type="file" onChange={(e)=> setBgPhoto(e.target.files[0])} name="bg_picture" />
                 </div>
                 <hr />

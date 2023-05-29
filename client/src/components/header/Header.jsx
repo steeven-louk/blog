@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./style.scss";
@@ -13,10 +13,9 @@ const Header = ({ token }) => {
   const id = JSON.parse(localStorage.getItem("id"));
 
   const [toggleMenu, setToggleMenu] = useState(false);
-  // const [toggleNav, setToggleNav] = useState(false);
+  const [toggleNav, setToggleNav] = useState(false);
   const [getDataUser, setUser] = useState({});
 
-  
   const handleClick = () => {
     setToggleMenu(!toggleMenu);
   };
@@ -47,12 +46,15 @@ const Header = ({ token }) => {
   const Logout = () => {
     localStorage.clear();
      
-    toast.success("see you later");
     dispatch(setUserData(null));
+    toast.success("see you later");
+  
+    
     setToggleMenu(false)
     setTimeout(() => {
+      <Navigate to={'/'} />
       window.location.reload();
-    }, 2000);
+    }, 1000);
   };
 
   return (
@@ -63,16 +65,12 @@ const Header = ({ token }) => {
             tech-talk
           </a>
           <button
-            className="navbar-toggler"
-            type="button"
-
-            // aria-controls="navbarSupportedContent"
-            // aria-expanded="false"
-            // aria-label="Toggle navigation"
-          >
+            className="navbar-toggler d-md-none"
+            type="button" onClick={()=>setToggleNav(!toggleNav)}>
             <span className="navbar-toggler-icon"></span>
           </button>
-            <ul className="navbar-nav ms-auto mb-2 fw-bold mb-lg-0">
+
+            <ul className="nav d-none d-md-flex ms-auto mb-2 fw-bold mb-lg-0">
               <li className="nav-item" onClick={() => setToggleMenu(false)}>
                 <NavLink className="nav-link text-white" to="/">
                   Home
@@ -145,12 +143,12 @@ const Header = ({ token }) => {
                         >
                           <Link to="write">write post</Link>
                         </li>
-                        <li
+                        {/* <li
                           className=" text-white"
                           onClick={() => setToggleMenu(false)}
                         >
                           <Link to="/admin/dashboard">Dashboard</Link>
-                        </li>
+                        </li> */}
                         <li
                           className=" text-white"
                           onClick={() => setToggleMenu(false)}
@@ -167,7 +165,8 @@ const Header = ({ token }) => {
               )}
             </ul>
 
-          <div className="mobile-menu card bg-dark w-100 start-0 d-md-none position-absolute">
+          <div className={!toggleNav ? 'mobile-menu d-md-none':'mobile-menu card d-md-none active'
+          }>
             <ul className="nav d-flex  mx-auto mb-2 fw-bold mb-lg-0">
               <li className="nav-item" onClick={() => setToggleMenu(false)}>
                 <NavLink className="nav-link text-white" to="/">
@@ -203,7 +202,7 @@ const Header = ({ token }) => {
                 </div>
               )}
 
-              {token && (
+              {token ? 
                 <div className="user-group ps-2 position-relative">
                   {getDataUser?.photo ? (
                     <img
@@ -254,7 +253,7 @@ const Header = ({ token }) => {
                     </div>
                   )}
                 </div>
-              )}
+              : ""}
             </ul>
             </div>
         </div>

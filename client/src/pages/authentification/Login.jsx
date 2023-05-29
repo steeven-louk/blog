@@ -32,7 +32,7 @@ const Login = () => {
             localStorage.setItem("id", JSON.stringify(login.data?.info._id));
             localStorage.setItem("token", JSON.stringify(login.data?.token));
             localStorage.setItem("username", JSON.stringify(login.data?.info.username));
-            console.log(login)
+
             dispatch(setUserData(login.data))
             if(login?.data.isAdmin === true){ 
                  localStorage.setItem("isAdmin", JSON.stringify(login?.data?.isAdmin));
@@ -41,14 +41,17 @@ const Login = () => {
             
             setTimeout(() => {
                 // navigate("/", {replace: true});
-                <Navigate to="/" />
-                // window.location.reload();
+                <Navigate to="/"/>
+                window.location.reload();
              }, 1200);
         }
 
        } catch (error) {
         dispatch(hideLoading());
         console.log(error)
+        localStorage.clear();
+
+        dispatch(setUserData(null))
         toast.error(error.response.data, {position:"top-center"}) 
         throw Error(error);
        }

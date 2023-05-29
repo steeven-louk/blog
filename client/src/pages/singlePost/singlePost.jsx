@@ -39,16 +39,16 @@ const SinglePost = ({token}) => {
 
   const addToFavorite = async () => {
     try {
-      const fav = await axios.put(
-        `http://localhost:8080/api/favoris/${user_Id}/${post?._id}`,{
-          headers:{
-            Authorization: `Bearer ${token}`
-          }
+      const fav = await axios.put(`http://localhost:8080/api/favoris/${user_Id}/${post?._id}`,{
+        headers:{
+          Authorization: `Bearer ${token}`
         }
+      }
       );
 
       if (fav.status === 201) {
         toast.success(fav.data.message, { position: "top-center" });
+        window.location.reload();
       }
     } catch (error) {
       toast.error(error?.response?.data, {
@@ -76,6 +76,8 @@ const SinglePost = ({token}) => {
 
       if (del.status === 200) {
         toast.success(del?.data.message, { position: "top-center" });
+        window.location.reload();
+
       }
     } catch (error) {
       toast.error(error?.response?.data.message, {
@@ -168,8 +170,8 @@ const SinglePost = ({token}) => {
           </div>
           <div className="user_group text-dark my-4 d-flex justify-content-between align-items-center">
             <div className="user d-inline-flex align-items-center">
-              {post?.photo ? (
-                <img src="" alt="user" className="user-img" />
+              {post?.user?.photo ? (
+                <img src={`http://localhost:8080/assets/profile/${post?.user?.photo}`} alt="user"  style={{ width:"50px" }} height="50px" className="user-img object-fit-cover rounded-pill" />
               ) : (
                 <div className="rounded-pill border border-success p-2">
                   <FontAwesomeIcon

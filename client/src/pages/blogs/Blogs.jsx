@@ -49,7 +49,6 @@ const Blogs = () => {
   }, []);
 
 
-
   return (
     <div className="blogs pb-4">
       <div className="px-2">
