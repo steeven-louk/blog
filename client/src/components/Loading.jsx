@@ -2,6 +2,7 @@ import React from 'react';
 
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 
 export const LoadingCard = () => {
@@ -49,5 +50,17 @@ export const SinglePageLoading = ()=>{
         <hr />
       </div>
     </SkeletonTheme>
+  )
+}
+
+export const MainLoading = ()=>{
+  return(
+    <div className="mainLoading">
+      <PacmanLoader
+  color="#6be15b"
+  size={50}
+  aria-label="Loading Spinner"
+/>
+    </div>
   )
 }

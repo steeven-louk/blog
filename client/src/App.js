@@ -25,6 +25,7 @@ import EditAdmin from "./admin/EditAdmin";
 
 import { useSelector} from 'react-redux';
 import { AdminRedirect } from "./services/redirection";
+import { MainLoading } from "./components/Loading";
 
 
 function App() {
@@ -37,7 +38,7 @@ return (
     <div className="App">
       <ToastContainer />
 
-      {isLoading ? <h2>loading....</h2> :
+      {isLoading ? <MainLoading/> :
       <Routes>
         <Route path="/admin/" element={<AdminRedirect><DashboardLayout/> </AdminRedirect>}>
           <Route path="dashboard" element={<AdminRedirect><Dashboard token={token}/></AdminRedirect>}/>
