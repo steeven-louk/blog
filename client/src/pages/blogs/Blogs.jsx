@@ -14,7 +14,7 @@ const Blogs = () => {
   const getAllBlog = async () => {
     try {
       setLoading(true);
-      const post = await axios.get("http://localhost:8080/api/post");
+      const post = await axios.get("https://mern-blogapi.vercel.app/api/post");
       if (post.status === 200) {
         let { data } = post;
         setPosts(data.data);
@@ -29,7 +29,7 @@ const Blogs = () => {
   const getAllCategories = async () => {
     try {
       setLoading(true);
-      const getCat = await axios.get("http://localhost:8080/api/categories");
+      const getCat = await axios.get("https://mern-blogapi.vercel.app/api/categories");
       if (getCat.status === 200) {
         let { data } = getCat;
         setCategory(data.data);

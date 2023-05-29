@@ -15,7 +15,7 @@ const Favories = ({token}) => {
     useEffect(() => {
         const getFavoris = async() =>{
             setLoading(true);
-            const fav = await axios.get(`http://localhost:8080/api/favoris/${id}/favoris`,{
+            const fav = await axios.get(`https://mern-blogapi.vercel.app/api/favoris/${id}/favoris`,{
                 headers:{
                   Authorization: `Bearer ${token}`
                 }

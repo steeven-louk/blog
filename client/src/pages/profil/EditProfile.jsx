@@ -29,7 +29,7 @@ const EditProfile = ({show_Edit, userName, token}) => {
           updatePost.photo = filename;
     
           try {
-            await axios.post("http://localhost:8080/api/upload-profile", data);
+            await axios.post("https://mern-blogapi.vercel.app/api/upload-profile", data);
           } catch (error) {
             console.log('err', error.message);
           }
@@ -45,7 +45,7 @@ const EditProfile = ({show_Edit, userName, token}) => {
            
           try {
               
-            await axios.post('http://localhost:8080/api/upload-bg_profile', data);
+            await axios.post('https://mern-blogapi.vercel.app/api/upload-bg_profile', data);
             } catch (error) {
               console.log('err', error)
             }
@@ -53,7 +53,7 @@ const EditProfile = ({show_Edit, userName, token}) => {
         
         try {
 
-          await axios.put("http://localhost:8080/api/user/update/" + userId,updatePost,{
+          await axios.put("https://mern-blogapi.vercel.app/api/user/update/" + userId,updatePost,{
             headers:{
               Authorization: `Bearer ${token}`
             }

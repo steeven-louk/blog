@@ -22,7 +22,7 @@ const Login = () => {
 
        try {
         dispatch(showLoading())
-        const login = await axios.post('http://localhost:8080/api/auth/login',{
+        const login = await axios.post('https://mern-blogapi.vercel.app/api/auth/login',{
             email,
             password
         })

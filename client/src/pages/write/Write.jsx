@@ -66,14 +66,14 @@ const Write = ({token}) => {
       newPost.picture = filename;
 
       try {
-        await axios.post("http://localhost:8080/api/upload-post", data);
+        await axios.post("https://mern-blogapi.vercel.app/api/upload-post", data);
       } catch (error) {
         console.log("err", error.message);
       }
     }
 
     try {
-      await axios.post("http://localhost:8080/api/post/"+id,newPost,
+      await axios.post("https://mern-blogapi.vercel.app/api/post/"+id,newPost,
       {
         headers:{
           Authorization: `Bearer ${token}`
@@ -110,7 +110,7 @@ const Write = ({token}) => {
   useEffect(() => {
     const getCategories = async () => {
       try {
-        const cat = await axios.get("http://localhost:8080/api/categories");
+        const cat = await axios.get("https://mern-blogapi.vercel.app/api/categories");
         if (cat.status === 200) {
           let { data } = cat;
           setCategories(data.data);

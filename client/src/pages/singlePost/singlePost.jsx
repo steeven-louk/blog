@@ -25,7 +25,7 @@ const SinglePost = ({token}) => {
   const getSimilarPost = async () => {
     try {
       const getsimilarPost = await axios.get(
-        `http://localhost:8080/api/user/user-post/${user_Id}`
+        `https://mern-blogapi.vercel.app/api/user/user-post/${user_Id}`
       );
       if (getsimilarPost.status === 200) {
         setSimilar(getsimilarPost.data);
@@ -39,7 +39,7 @@ const SinglePost = ({token}) => {
 
   const addToFavorite = async () => {
     try {
-      const fav = await axios.put(`http://localhost:8080/api/favoris/${user_Id}/${post?._id}`,{
+      const fav = await axios.put(`https://mern-blogapi.vercel.app/api/favoris/${user_Id}/${post?._id}`,{
         headers:{
           Authorization: `Bearer ${token}`
         }
@@ -67,7 +67,7 @@ const SinglePost = ({token}) => {
   const removeToFavorite = async () => {
     try {
       const del = await axios.delete(
-        `http://localhost:8080/api/favoris/${user_Id}/${id}`,{
+        `https://mern-blogapi.vercel.app/api/favoris/${user_Id}/${id}`,{
           headers:{
             Authorization: `Bearer ${token}`
           }
@@ -95,7 +95,7 @@ const SinglePost = ({token}) => {
 
   const deletePost = async () => {
     try {
-      let del = await axios.delete(`http://localhost:8080/api/post/${user_Id}/${id}`,{
+      let del = await axios.delete(`https://mern-blogapi.vercel.app/api/post/${user_Id}/${id}`,{
         headers:{
           Authorization: `Bearer ${token}`
         }
@@ -122,7 +122,7 @@ const SinglePost = ({token}) => {
       try {
         setLoading(true);
 
-        const getPost = await axios.get(`http://localhost:8080/api/post/${id}`,{
+        const getPost = await axios.get(`https://mern-blogapi.vercel.app/api/post/${id}`,{
           headers:{
           Authorization: token
         }} );
@@ -142,7 +142,7 @@ const SinglePost = ({token}) => {
   useEffect(() => {
     const getFavorisId = async () => {
       try {
-        let { data } = await axios.get(`http://localhost:8080/api/favoris/${user_Id}/favoris-ids`,{
+        let { data } = await axios.get(`https://mern-blogapi.vercel.app/api/favoris/${user_Id}/favoris-ids`,{
           headers:{
           Authorization: token
         }} );
@@ -171,7 +171,7 @@ const SinglePost = ({token}) => {
           <div className="user_group text-dark my-4 d-flex justify-content-between align-items-center">
             <div className="user d-inline-flex align-items-center">
               {post?.user?.photo ? (
-                <img src={`http://localhost:8080/assets/profile/${post?.user?.photo}`} alt="user"  style={{ width:"50px" }} height="50px" className="user-img object-fit-cover rounded-pill" />
+                <img src={`https://mern-blogapi.vercel.app/assets/profile/${post?.user?.photo}`} alt="user"  style={{ width:"50px" }} height="50px" className="user-img object-fit-cover rounded-pill" />
               ) : (
                 <div className="rounded-pill border border-success p-2">
                   <FontAwesomeIcon
@@ -192,7 +192,7 @@ const SinglePost = ({token}) => {
           <div className="post-img">
             {post?.picture && (
               <img
-                src={`http://localhost:8080/assets/posts/${post?.picture}`}
+                src={`https://mern-blogapi.vercel.app/assets/posts/${post?.picture}`}
                 alt={post?.title}
                 style={{ height: "25em", width: "100%", objectFit: "cover" }}
                 className="rounded"

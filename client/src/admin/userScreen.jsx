@@ -11,7 +11,7 @@ export const UserScreen = ({token}) => {
     const getAllUsers =async () =>{
       try {
   
-      const getUsers = await axios.get("http://localhost:8080/api/admin/users", {
+      const getUsers = await axios.get("https://mern-blogapi.vercel.app/api/admin/users", {
         headers:{
           Authorization: `Bearer ${token}`
           }
@@ -122,7 +122,7 @@ if (result.isConfirmed) {
                   <td>{index +1}</td>
                   <td>
                   {item?.photo ? 
-                  <img src={`http://localhost:8080/assets/profile/${item?.photo}`} alt="card-img" style={{ "width":"50px", "height": "50px" }}  className="objectFit-cover rounded-pill" />
+                  <img src={`https://mern-blogapi.vercel.app/assets/profile/${item?.photo}`} alt="card-img" style={{ "width":"50px", "height": "50px" }}  className="objectFit-cover rounded-pill" />
                   : 
                     <span className='border border-success rounded-pill p-3'><i className="fa-solid fa-user"></i></span>
                   }

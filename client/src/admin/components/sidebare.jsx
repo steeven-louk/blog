@@ -57,7 +57,7 @@ export const Sidebar = () => {
         if (result.isConfirmed) {
           try {
             let del = await axios.delete(
-              `localhost:8080/api/user/delete/${id}`
+              `https://mern-blogapi.vercel.app/api/user/delete/${id}`
             );
 
             if (del.status === 200) {
@@ -93,7 +93,7 @@ export const Sidebar = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const user = await axios.get("http://localhost:8080/api/user/" + id, {
+        const user = await axios.get("http://https://mern-blogapi.vercel.app/api/user/" + id, {
           headers: {
             Authorization: token,
           },
@@ -117,7 +117,7 @@ export const Sidebar = () => {
             <div className="img_container">
               {userData?.photo ? (
                 <img
-                  src={`http://localhost:8080/assets/profile/${userData?.photo}`}
+                  src={`http://https://mern-blogapi.vercel.app/assets/profile/${userData?.photo}`}
                   style={{ width: "6em", height: "6em", objectFit: "cover" }}
                   alt="profile-img"
                   className="d-block mx-auto img-fluid card-img-top rounded-pill border border-success"

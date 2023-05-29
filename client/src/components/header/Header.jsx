@@ -25,7 +25,7 @@ const Header = ({ token }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const user = await axios.get("http://localhost:8080/api/user/" + id, {
+        const user = await axios.get("https://mern-blogapi.vercel.app/api/user/" + id, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -109,7 +109,7 @@ const Header = ({ token }) => {
                 <div className="user-group ps-2 position-relative">
                   {getDataUser?.photo ? (
                     <img
-                      src={`http://localhost:8080/assets/profile/${getDataUser?.photo}`}
+                      src={`https://mern-blogapi.vercel.app/assets/profile/${getDataUser?.photo}`}
                       onClick={handleClick}
                       width={40}
                       height={40}
@@ -206,7 +206,7 @@ const Header = ({ token }) => {
                 <div className="user-group ps-2 position-relative">
                   {getDataUser?.photo ? (
                     <img
-                      src={`http://localhost:8080/assets/profile/${getDataUser?.photo}`}
+                      src={`https://mern-blogapi.vercel.app/assets/profile/${getDataUser?.photo}`}
                       onClick={handleClick}
                       width={40}
                       height={40}
