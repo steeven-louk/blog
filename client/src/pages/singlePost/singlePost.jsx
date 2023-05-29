@@ -198,7 +198,7 @@ const SinglePost = ({token}) => {
                 className="rounded"
               />
             )}
-            
+              {token &&
               <>
                 {!existingFav(post._id) ? (
                   <button
@@ -215,6 +215,9 @@ const SinglePost = ({token}) => {
                     remove to favoris
                   </button>
                 )}
+                </>
+              }
+                <>
                 {post?.user?._id === user_Id && (
                 <button
                   className="btn text-uppercase fw-semibold btn-outline-danger mt-2 ms-3"
@@ -223,7 +226,8 @@ const SinglePost = ({token}) => {
                   delete post
                 </button>
                 )}
-              </>
+                </>
+           
       
           </div>
 
