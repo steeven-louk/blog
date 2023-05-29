@@ -43,12 +43,12 @@ const Login = async (req, res) => {
         const compare = await bcrypt.compareSync(req.body.password, existingUser.password);
         if (!compare) res.status(404).send('password or email dont match');
 
-        const { password, isAdmin, ...info } = existingUser._doc;
-        const token = await jwt.sign({ id: existingUser._id }, process.env.JWT_TOKEN, { expiresIn: '30d' });
+        const { password, ...info } = existingUser._doc;
+        const token = await jwt.sign({ id: existingUser._id }, process.env.JWT_TOKEN, { expiresIn: '5d' });
         
         res.status(200).json({
-            id: info._id,
-            username: info.username,
+            info,
+            isAdmin: info.isAdmin,
             token
         })
     } catch (error) {
@@ -57,4 +57,16 @@ const Login = async (req, res) => {
 
 }
 
-module.exports = { Register, Login };
+const authUserCheck = async(req, res) =>{
+    try {
+        const user = await User.findOne({_id: req.body.userId});
+        if(!user) return res.status(403).send({message:"user not found"});
+        else{
+            res.status(200).send({success: true, data: user.data});
+        }
+    } catch (error) {
+        res.status(500).json({error: error});
+    }
+}
+
+module.exports = { Register, Login, authUserCheck };

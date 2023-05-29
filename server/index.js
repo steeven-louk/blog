@@ -13,7 +13,8 @@ const catRoute = require('./routes/categoriesRoutes');
 const authRoute = require('./routes/authRoutes');
 const userRoute = require('./routes/userRoute');
 const favorisRoute = require('./routes/favorisRoute');
-// const verifyUserToken = require('./middlewares/authMiddleware');
+const adminRoute = require('./routes/adminRoutes');
+
 
 const app = express();
 
@@ -67,6 +68,7 @@ app.use('/api/user', userRoute);
 app.use('/api/post', postRoute);
 app.use('/api/favoris', favorisRoute);
 app.use('/api/categories', catRoute);
+app.use('/api/admin', adminRoute);
 
 app.use("/assets/posts", express.static(path.join(__dirname,"/assets/posts")));
 app.use("/assets/profile", express.static(path.join(__dirname,"/assets/profile")));

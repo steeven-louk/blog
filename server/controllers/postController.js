@@ -10,8 +10,8 @@ const getAllPost = async (_, res) => {
 
 const addPost = async (req, res) => {
     try {
-
-        const existingUser = await User.findById(req.body.user);
+        const id = req.params.id
+        const existingUser = await User.findById(id);
         if (!existingUser) res.status(401).json("user not found");
         
         const data = await new Post(req.body);
@@ -29,7 +29,7 @@ const getPost = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const post = await Post.findById(id).populate('user', ['username', '_id']);
+        const post = await Post.findById(id).populate('user', ['username', '_id', 'photo']);
         res.status(200).json(post);
     } catch (error) {
         res.status(400).send(error)
@@ -67,7 +67,7 @@ const deletePost = async (req, res) => {
             });
         }
 
-        await user.post.pull(posts);
+        await user.post.pull(postId);
         await user.save();
 
         return res.status(200).send({ message: "blog is deleted" });

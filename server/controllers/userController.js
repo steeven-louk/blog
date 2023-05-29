@@ -1,3 +1,4 @@
+const Post = require('../models/Posts');
 const User = require('../models/user');
 const fs = require('fs');
 
@@ -57,14 +58,12 @@ const addBgPhoto = async (req, res) => {
 
 const  updateUser = async (req, res) =>{
     const userId = req.params.userId;
-
-
     
     try {
         const user = await User.findById(userId);
         if(!user) return res.status(404).send('user not found');
 
-                // Supprime l'image associée au post
+                // Supprime l'image associée du user
                 if (user.photo) {
 
                 await fs.unlink(`./assets/profile/${user.photo}`, (err) => {
@@ -91,7 +90,46 @@ const  updateUser = async (req, res) =>{
     }
 }
 
+const deleteUser = async(req, res) =>{
+    try {
+        const id = req.params.userId;
+        const user = await User.findById(id);
+
+        if(!user) return res.status(404).json({message: "User not found"});
+
+        // vérification si l'utilisateur est autorisé à supprimer ce compte
+        // if(user._id.toString() !== req.user._id.toString()){
+        //     return res.status(401).json({message:"Unauthorized"});
+        // }
+        if (user.photo) {
+
+await fs.unlink(`./assets/profile/${user.photo}`, (err) => {
+    if (err) throw err;
+});
+}
+        // suppression des posts associers à l'utilisateur
+        await Post.deleteMany({user: user._id});
+        //  // Supprime l'image associée au post
+        //  if (posts.picture) {
+
+        //     await fs.unlink(`./assets/posts/${posts.picture}`, (err) => {
+        //         if (err) throw err;
+        //         console.log(' was deleted');
+        //     });
+        // }
+
+
+        // Suppression des posts associés à l'utilisateur
+        await User.findOneAndDelete({_id:user._id})
+        res.json({message:"User as been removed"})
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(error);
+    }
+}
 
 
 
-module.exports = { getPostByUser, getUser, addBgPhoto, addUserPhoto, updateUser };
+
+module.exports = { getPostByUser, getUser, addBgPhoto, addUserPhoto, updateUser, deleteUser };
