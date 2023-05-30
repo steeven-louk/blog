@@ -15,7 +15,6 @@ const Blogs = () => {
 
   const dispatch = useDispatch();
 
-console.log(posts)
   useEffect(() => {
     const getAllBlog = async () => {
       try {
