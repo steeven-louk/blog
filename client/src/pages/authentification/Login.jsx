@@ -22,7 +22,7 @@ const Login = () => {
 
        try {
         dispatch(showLoading())
-        const login = await axios.post('https://mern-blogapi.vercel.app/api/auth/login',{
+        const login = await axios.post('https://tech-talk.loukteck.fr/api/auth/login',{
             email,
             password
         })

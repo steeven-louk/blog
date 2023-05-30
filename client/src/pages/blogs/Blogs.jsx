@@ -3,50 +3,55 @@ import React, { useEffect, useState } from "react";
 import Card from "../../components/card/Card";
 import axios from "axios";
 import { LoadingCard } from "../../components/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { hideLoading, showLoading } from "../../redux/loadingSlice";
 
 
 const Blogs = () => {
   const [posts, setPosts] = useState([]);
   const [category, setCategory] = useState([]);
   const [selectCategory, setSelectCategory] = useState("");
-  const [loading, setLoading] = useState(false);
+  const {isLoading} = useSelector(state => state.loading);
 
-  const getAllBlog = async () => {
-    try {
-      setLoading(true);
-      const post = await axios.get("https://mern-blogapi.vercel.app/api/post");
-      if (post.status === 200) {
-        let { data } = post;
-        setPosts(data.data);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log("err", error);
-      throw new Error(error);
-    }
-  };
- 
-  const getAllCategories = async () => {
-    try {
-      setLoading(true);
-      const getCat = await axios.get("https://mern-blogapi.vercel.app/api/categories");
-      if (getCat.status === 200) {
-        let { data } = getCat;
-        setCategory(data.data);
+  const dispatch = useDispatch();
 
-        setLoading(false);
-      }
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  };
 
   useEffect(() => {
+    const getAllBlog = async () => {
+      try {
+        dispatch(showLoading)
+        const post = await axios.get("https://tech-talk.loukteck.fr/api/post");
+        if (post.status === 200) {
+          let { data } = post;
+          setPosts(data.data);
+          dispatch(hideLoading)
+        }
+      } catch (error) {
+        console.log("err", error);
+        throw new Error(error);
+      }
+    };
     getAllBlog();
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
+    const getAllCategories = async () => {
+      try {
+        dispatch(showLoading)
+  
+        const getCat = await axios.get("https://tech-talk.loukteck.fr/api/categories");
+        if (getCat.status === 200) {
+          let { data } = getCat;
+          setCategory(data.data);
+  
+          dispatch(hideLoading)
+  
+        }
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    };
     getAllCategories();
-  }, []);
+  }, [dispatch]);
 
 
   return (
@@ -78,7 +83,7 @@ const Blogs = () => {
             })
             .map((items, index) => (
               <>
-                {loading ? (
+                {isLoading ? (
                   <LoadingCard key={index} />
                 ) : (
                   <Card key={items?._id} items={items} />

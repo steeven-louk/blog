@@ -43,6 +43,9 @@ img{
    
    .card{
        width: 300px;
+       max-height: 333px;
+       height: 100%;
+       overflow: hidden;
        background-color: #DCDE9F;
 
        .card-header {

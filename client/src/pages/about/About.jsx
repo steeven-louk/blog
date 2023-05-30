@@ -35,7 +35,7 @@ const About = () => {
             </p>
           </div>
           <div className="col-md-6">
-            <img src="./assets/asset21.png" width="100%" alt="header" />
+            <img src="https://tech-talk.loukteck.fr/assets/asset21.png" width="100%" alt="header" />
           </div>
         </div>
       </div>

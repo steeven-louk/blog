@@ -24,7 +24,7 @@ const Heros = () => {
           </div>
           <div className="col-md-6">
             <img
-              src="./assets/Asset21.png"
+              src="https://tech-talk.loukteck.fr/assets/Asset21.png"
               style={{ objectFit: "cover", "width":"100%" }}
               className="img-fluid"
               alt=""

@@ -24,7 +24,7 @@ const Profile = ({token}) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const user = await axios.get("https://mern-blogapi.vercel.app/api/user/" + id,{
+        const user = await axios.get("https://tech-talk.loukteck.fr/api/user/" + id,{
             headers:{
               Authorization: `Bearer ${token}`
             }
@@ -46,7 +46,7 @@ const Profile = ({token}) => {
   useEffect(() => {
     const getBlogs = async () => {
       try {
-        const posts = await axios.get("https://mern-blogapi.vercel.app/api/user/user-post/" + id,{
+        const posts = await axios.get("https://tech-talk.loukteck.fr/api/user/user-post/" + id,{
           headers:{
             Authorization: `Bearer ${token}`
           }
@@ -70,7 +70,7 @@ const Profile = ({token}) => {
          <div className="profile px-3 mt-3">
       <header>
         <div className="profile-background rounded position-relative">
-        {userData?.bg_picture ? <img src={`https://mern-blogapi.vercel.app/assets/profile/bg_picture/${userData?.bg_picture}`} className="rounded" alt="" /> :
+        {userData?.bg_picture ? <img src={`https://tech-talk.loukteck.fr/assets/profile/bg_picture/${userData?.bg_picture}`} className="rounded" alt="" /> :
         <label htmlFor="bg-picture" className="bg-picture_btn">
           <FontAwesomeIcon icon="fa-solid fa-plus" className="icon"/>
         </label>
@@ -84,7 +84,7 @@ const Profile = ({token}) => {
           className="profile_picture  mx-auto position-relative rounded-pill"
         >
         
-        {userData?.photo ? <img src={`https://mern-blogapi.vercel.app/assets/profile/${userData?.photo}`} alt='profil_image' className=""/> :
+        {userData?.photo ? <img src={`https://tech-talk.loukteck.fr/assets/profile/${userData?.photo}`} alt='profil_image' className=""/> :
         <label htmlFor="img-profil" className="user-picture_btn">
             <FontAwesomeIcon icon="fa-solid fa-user" className="icon" />
         </label>

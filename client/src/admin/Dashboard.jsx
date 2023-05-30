@@ -16,7 +16,7 @@ const Dashboard = ({token}) => {
   const getAllBlogs =async () =>{
     try {
 
-      const post = await axios.get("https://mern-blogapi.vercel.app/api/post",{
+      const post = await axios.get("https://tech-talk.loukteck.fr/api/post",{
         headers:{
           Authorization: `Bearer ${token}`
       }
@@ -34,7 +34,7 @@ const Dashboard = ({token}) => {
 }
 
   const getUserCount = async ()=>{
-    let {data} = await axios.get("https://mern-blogapi.vercel.app/api/admin/users/count",{
+    let {data} = await axios.get("https://tech-talk.loukteck.fr/api/admin/users/count",{
       headers:{
         Authorization: `Bearer ${token}`
     }
@@ -42,7 +42,7 @@ const Dashboard = ({token}) => {
     setUserCount(data.count);
   }
   const getPostCount = async ()=>{
-    let {data} = await axios.get("https://mern-blogapi.vercel.app/api/admin/posts/count",{
+    let {data} = await axios.get("https://tech-talk.loukteck.fr/api/admin/posts/count",{
       headers:{
         Authorization: `Bearer ${token}`
     }
@@ -71,7 +71,7 @@ swalWithBootstrapButtons.fire({
 }).then(async(result) => {
   if (result.isConfirmed) {
     try {
-      let del = await axios.delete(`https://mern-blogapi.vercel.app/api/post/${userID}/${postId}`);
+      let del = await axios.delete(`https://tech-talk.loukteck.fr/api/post/${userID}/${postId}`);
 
       if (del.status === 200) {
         
@@ -137,7 +137,7 @@ swalWithBootstrapButtons.fire({
                 <tr key={item?._id}>
                   <td>{index +1}</td>
                   <td>
-                  <img src={`https://mern-blogapi.vercel.app/assets/posts/${item?.picture}`} alt="card-img" width={20} height={50} className="card-img-top object-fit-cover" />
+                  <img src={`https://tech-talk.loukteck.fr/assets/posts/${item?.picture}`} alt="card-img" width={20} height={50} className="card-img-top object-fit-cover" />
                   </td>
                   <td>{item.title} </td>
                   <td className="fw-bold text-uppercase">{item?.user.username}</td>

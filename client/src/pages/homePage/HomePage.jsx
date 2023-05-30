@@ -14,7 +14,7 @@ const HomePage = () => {
   const getLatestBlog = async () =>{
     try {
       setLoading(true)
-      const post = await axios.get('https://mern-blogapi.vercel.app/api/post');
+      const post = await axios.get('https://tech-talk.loukteck.fr/api/post');
       if(post.status === 200){
         let {data} = post;
         setPosts(data.data);

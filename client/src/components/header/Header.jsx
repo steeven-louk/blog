@@ -25,7 +25,7 @@ const Header = ({ token }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const user = await axios.get("https://mern-blogapi.vercel.app/api/user/" + id, {
+        const user = await axios.get("https://tech-talk.loukteck.fr/api/user/" + id, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
