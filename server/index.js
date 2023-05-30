@@ -19,11 +19,11 @@ const adminRoute = require('./routes/adminRoutes');
 const app = express();
 
 
+app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.json({limit:"50mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended:true }));
 app.use(express.json());
-app.use(cors());
 dotEnv.config();
 
 ConnectDb();
