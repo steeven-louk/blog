@@ -1,9 +1,28 @@
 .singlePage{
 
+    .scrollToTop{
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        animation: bounce 4s linear alternate ease-in-out;
+    }
+
+    @keyframes bounce {
+        from{
+            transform: translateY(-10px);
+        }to{
+            transform: translateY(10px);
+
+        }
+    }
     .post-desc {
         p {
             font-size: 23px;
             text-indent: 2px;
+            overflow-wrap: anywhere;
 
             
         img{

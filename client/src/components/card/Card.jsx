@@ -13,7 +13,7 @@ const Card = (props) => {
         <div className="card">
            <Link to={`/singlePost/${_id}`}>
            <div className="card-header position-relative p-0">
-                <img src={`https://tech-talk.loukteck.fr/assets/posts/${picture}`} alt="card-img" width={100} height={154} className="card-img-top object-fit-cover" />
+                <img src={`https://mern-blogapi.vercel.app/assets/posts/${picture}`} alt="card-img" width={100} height={154} className="card-img-top object-fit-cover" />
                     {category && 
                    <span className="category bg-success position-absolute bottom-0 start-0 fw-bold text-warning text-capitalize">
                         {category?.name}

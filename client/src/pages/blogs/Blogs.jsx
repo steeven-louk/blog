@@ -15,12 +15,12 @@ const Blogs = () => {
 
   const dispatch = useDispatch();
 
-
+console.log(posts)
   useEffect(() => {
     const getAllBlog = async () => {
       try {
         dispatch(showLoading)
-        const post = await axios.get("https://tech-talk.loukteck.fr/api/post");
+        const post = await axios.get("https://mern-blogapi.vercel.app/api/post");
         if (post.status === 200) {
           let { data } = post;
           setPosts(data.data);
@@ -38,7 +38,7 @@ const Blogs = () => {
       try {
         dispatch(showLoading)
   
-        const getCat = await axios.get("https://tech-talk.loukteck.fr/api/categories");
+        const getCat = await axios.get("https://mern-blogapi.vercel.app/api/categories");
         if (getCat.status === 200) {
           let { data } = getCat;
           setCategory(data.data);

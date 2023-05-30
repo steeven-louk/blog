@@ -10,7 +10,7 @@ export const CategoryScreen = ({token}) => {
     const addCategory = async (e)=>{
         e.preventDefault();
         try {
-        const data = await axios.post("https://tech-talk.loukteck.fr/api/categories", {
+        const data = await axios.post("https://mern-blogapi.vercel.app/api/categories", {
           name: input
         },
         {
@@ -33,7 +33,7 @@ export const CategoryScreen = ({token}) => {
 
     const getAllCategories = async () => {
 try {
-  const getCat = await axios.get("https://tech-talk.loukteck.fr/api/categories");
+  const getCat = await axios.get("https://mern-blogapi.vercel.app/api/categories");
   if (getCat.status === 200) {
     let { data } = getCat;
     setCategory(data.data);
@@ -47,7 +47,7 @@ try {
     
     const deleteCategory = async ( id)=>{
         try {
-        const data = await axios.delete("https://tech-talk.loukteck.fr/api/categories/"+id,{
+        const data = await axios.delete("https://mern-blogapi.vercel.app/api/categories/"+id,{
           headers:{
             Authorization: `Bearer ${token}`
         }

@@ -23,9 +23,11 @@ const Header = ({ token }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     const getUser = async () => {
+
       try {
-        const user = await axios.get("https://tech-talk.loukteck.fr/api/user/" + id, {
+        const user = await axios.get("https://mern-blogapi.vercel.app/api/user/" + id, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -38,9 +40,10 @@ const Header = ({ token }) => {
       } catch (error) {
         console.log(error);
       }
-    };
-
-    getUser();
+   
+  }
+  // eslint-disable-next-line no-lone-blocks
+  {token &&  getUser()};
   }, [id, token]);
 
   const Logout = () => {
@@ -56,6 +59,14 @@ const Header = ({ token }) => {
       window.location.reload();
     }, 1000);
   };
+
+  
+  useEffect(() => {
+    if(window.onscroll){
+      setToggleMenu(false);
+      setToggleNav(false);
+    }
+  }, [])
 
   return (
     <div className="header ">
@@ -105,7 +116,7 @@ const Header = ({ token }) => {
                 </div>
               )}
 
-              {token && (
+              {token? (
                 <div className="user-group ps-2 position-relative">
                   {getDataUser?.photo ? (
                     <img
@@ -143,12 +154,7 @@ const Header = ({ token }) => {
                         >
                           <Link to="write">write post</Link>
                         </li>
-                        {/* <li
-                          className=" text-white"
-                          onClick={() => setToggleMenu(false)}
-                        >
-                          <Link to="/admin/dashboard">Dashboard</Link>
-                        </li> */}
+                        
                         <li
                           className=" text-white"
                           onClick={() => setToggleMenu(false)}
@@ -162,30 +168,30 @@ const Header = ({ token }) => {
                     </div>
                   )}
                 </div>
-              )}
+              ):""}
             </ul>
 
           <div className={!toggleNav ? 'mobile-menu d-md-none':'mobile-menu card d-md-none active'
           }>
             <ul className="nav d-flex  mx-auto mb-2 fw-bold mb-lg-0">
-              <li className="nav-item" onClick={() => setToggleMenu(false)}>
+              <li className="nav-item" onClick={() => setToggleNav(false)}>
                 <NavLink className="nav-link text-white" to="/">
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item" onClick={() => setToggleMenu(false)}>
+              <li className="nav-item" onClick={() => setToggleNav(false)}>
                 <NavLink className="nav-link text-white" to="/blogs">
                   Blogs
                 </NavLink>
               </li>
 
-              <li className="nav-item" onClick={() => setToggleMenu(false)}>
+              <li className="nav-item" onClick={() => setToggleNav(false)}>
                 <NavLink className="nav-link text-white" to="/about">
                   About
                 </NavLink>
               </li>
 
-              <li className="nav-item" onClick={() => setToggleMenu(false)}>
+              <li className="nav-item" onClick={() => setToggleNav(false)}>
                 <NavLink className="nav-link text-white" to="/contact">
                   Contact
                 </NavLink>

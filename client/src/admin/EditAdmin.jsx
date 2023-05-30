@@ -26,7 +26,7 @@ const EditAdmin = ({token}) => {
     
           console.log('data',data)
           try {
-            await axios.post("https://tech-talk.loukteck.fr/api/upload-profile", data);
+            await axios.post("https://mern-blogapi.vercel.app/api/upload-profile", data);
           } catch (error) {
             console.log('err', error.message);
           }
@@ -34,7 +34,7 @@ const EditAdmin = ({token}) => {
 
         try {
 
-         await axios.put("https://tech-talk.loukteck.fr/api/user/update/" + id,{
+         await axios.put("https://mern-blogapi.vercel.app/api/user/update/" + id,{
           headers:{
             Authorization: `Bearer ${token}`
           }
