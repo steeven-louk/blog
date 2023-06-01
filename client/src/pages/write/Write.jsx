@@ -87,7 +87,7 @@ const Write = ({token}) => {
 
       toast.success("L'article a été publier avec succes", {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -97,7 +97,7 @@ const Write = ({token}) => {
       });
       setTimeout(() => {
         window.location.replace("/blogs");
-      }, 2000);
+      }, 1200);
     } catch (error) {
       toast.error(error?.response.data.msg)
       console.log("errWrite", error);

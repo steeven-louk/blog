@@ -56,11 +56,13 @@
         justify-content: center;
         padding-top: 10px;
     transform: translateY(-10rem);
+    overflow: hidden;
 
     }
    .mobile-menu.active{
     transform: translateY(1rem);
     transition:  .4s all ease-in-out;
+    overflow: visible;
 
 }
 }

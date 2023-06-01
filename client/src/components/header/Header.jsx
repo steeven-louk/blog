@@ -22,6 +22,11 @@ const Header = ({ token }) => {
 
   const dispatch = useDispatch();
 
+  const toggleGroup = ()=>{
+    setToggleMenu(false);
+    setToggleNav(false)
+  }
+
   useEffect(() => {
 
     const getUser = async () => {
@@ -60,13 +65,20 @@ const Header = ({ token }) => {
     }, 1000);
   };
 
-  
   useEffect(() => {
-    if(window.onscroll){
+    const handleScroll = () => {
       setToggleMenu(false);
       setToggleNav(false);
-    }
-  }, [])
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  
 
   return (
     <div className="header ">
@@ -174,24 +186,24 @@ const Header = ({ token }) => {
           <div className={!toggleNav ? 'mobile-menu d-md-none':'mobile-menu card d-md-none active'
           }>
             <ul className="nav d-flex  mx-auto mb-2 fw-bold mb-lg-0">
-              <li className="nav-item" onClick={() => setToggleNav(false)}>
+              <li className="nav-item" onClick={toggleGroup}>
                 <NavLink className="nav-link text-white" to="/">
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item" onClick={() => setToggleNav(false)}>
+              <li className="nav-item" onClick={toggleGroup}>
                 <NavLink className="nav-link text-white" to="/blogs">
                   Blogs
                 </NavLink>
               </li>
 
-              <li className="nav-item" onClick={() => setToggleNav(false)}>
+              <li className="nav-item" onClick={toggleGroup}>
                 <NavLink className="nav-link text-white" to="/about">
                   About
                 </NavLink>
               </li>
 
-              <li className="nav-item" onClick={() => setToggleNav(false)}>
+              <li className="nav-item" onClick={toggleGroup}>
                 <NavLink className="nav-link text-white" to="/contact">
                   Contact
                 </NavLink>
@@ -199,10 +211,10 @@ const Header = ({ token }) => {
 
               {!token && (
                 <div className="authentification mx-3 mt-2 gap-3 d-flex text-capitalize fw-bold">
-                  <NavLink to="/register" className=" text-white">
+                  <NavLink to="/register" onClick={toggleGroup}  className=" text-white">
                     register
                   </NavLink>
-                  <NavLink to="/login" className=" text-white">
+                  <NavLink to="/login" onClick={toggleGroup} className="text-white">
                     login
                   </NavLink>
                 </div>
@@ -236,19 +248,19 @@ const Header = ({ token }) => {
                       <ul className="nav flex-column gap-1 p-0 text-capitalize">
                         <li
                           className=" text-white w-100"
-                          onClick={() => setToggleMenu(false)}
+                          onClick={toggleGroup}
                         >
                           <Link to="/profile">{username}</Link>
                         </li>
                         <li
                           className=" text-white"
-                          onClick={() => setToggleMenu(false)}
+                          onClick={toggleGroup}
                         >
                           <Link to="write">write post</Link>
                         </li>
                         <li
                           className=" text-white"
-                          onClick={() => setToggleMenu(false)}
+                          onClick={toggleGroup}
                         >
                           <Link to={`${id}/favoris`}>favories</Link>
                         </li>

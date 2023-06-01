@@ -41,7 +41,7 @@ const Register = () => {
     <div className="auth">
       <div className="container">
         <div className="row">
-          <div className="col-md-7 p-5 left">
+          <div className="col-md-7 d-none d-md-block p-5 left">
             <h2>hello world.</h2>
             <span>
               have a account?{" "}
@@ -50,7 +50,7 @@ const Register = () => {
               </Link>
             </span>
           </div>
-          <div className="col-md-5 right p-5">
+          <div className="col-md-5 col-sm-12 right p-5">
             <h2 className="fw-bold mb-5">Register</h2>
             
 
@@ -82,12 +82,14 @@ const Register = () => {
                 required
                 className="form-control "
               />
-              <br />
 
               <button className="rounded  text-white bg-success border-0 p-1 fw-semibold">
                 Register
               </button>
+
             </form>
+            <br />
+            <span className='fw-semibold d-md-none'>Have a account? <Link to="/login" className='fw-bold text-dark text-capitalize text-decoration-underline'>login</Link></span>
           </div>
         </div>
       </div>

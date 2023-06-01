@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
 import { useDispatch } from 'react-redux';
@@ -14,7 +14,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     
     const handleSubmit = async (e) =>{
@@ -38,11 +38,10 @@ const Login = () => {
                  localStorage.setItem("isAdmin", JSON.stringify(login?.data?.isAdmin));
             }
             toast.success(`Welcome ${login.data?.info.username}`, {position: "top-center"});
-            
+            console.log(login)
             setTimeout(() => {
-                // navigate("/", {replace: true});
-                <Navigate to="/"/>
-                window.location.reload();
+                navigate("/", {replace: true});
+
              }, 1200);
         }
 
@@ -51,8 +50,9 @@ const Login = () => {
         console.log(error)
         localStorage.clear();
 
+        toast.error(error.response?.data, {position:"top-center"});
+        toast.error(error.message, {position:"top-center"});
         dispatch(setUserData(null))
-        toast.error(error.response.data, {position:"top-center"}) 
         throw Error(error);
        }
     }
@@ -62,7 +62,7 @@ const Login = () => {
 <div className='auth'>
     <div className="container">
         <div className="row">
-            <div className="col-md-7 p-5 left ">
+            <div className="col-md-7 d-none d-md-block p-5 left ">
                 <h2>welcome back.</h2>
                 <br />
                 <span>have not account? <Link to="/register"><em>register</em></Link></span>
@@ -76,6 +76,9 @@ const Login = () => {
                     <br />
                     <button className='rounded text-white bg-success border-0 p-1 fw-semibold'>Login</button>
                 </form>
+                <br />
+                <span className='fw-semibold d-md-none'>Have not account? <Link to="/register" className='fw-bold text-dark text-decoration-underline'>register</Link></span>
+
             </div>
         </div>
     </div>

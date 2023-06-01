@@ -53,7 +53,7 @@ const SinglePost = ({token}) => {
     } catch (error) {
       toast.error(error?.response?.data, {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -75,12 +75,12 @@ const SinglePost = ({token}) => {
       );
 
       if (del.status === 200) {
-        toast.success(del?.data.message, { position: "top-center" });
+        toast.success(del?.data?.message, { position: "top-center" });
         window.location.reload();
 
       }
     } catch (error) {
-      toast.error(error?.response?.data.message, {
+      toast.error(error?.response?.data?.message, {
         position: "top-center",
         autoClose: 1500,
         hideProgressBar: false,
@@ -105,7 +105,7 @@ const SinglePost = ({token}) => {
         toast.info(del.data.message, {
           hideProgressBar: true,
           position: "top-center",
-          autoClose: 2000,
+          autoClose: 1500,
         });
 
         setTimeout(() => {
