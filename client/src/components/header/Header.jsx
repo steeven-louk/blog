@@ -77,6 +77,10 @@ const Header = ({ token }) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  const onToggleNav=()=>{
+   toggleMenu && setToggleMenu(false);
+  setToggleNav(!toggleNav);
+  }
 
   
 
@@ -89,7 +93,7 @@ const Header = ({ token }) => {
           </a>
           <button
             className="navbar-toggler d-md-none"
-            type="button" onClick={()=>setToggleNav(!toggleNav)}>
+            type="button" onClick={onToggleNav}>
             <span className="navbar-toggler-icon"></span>
           </button>
 
