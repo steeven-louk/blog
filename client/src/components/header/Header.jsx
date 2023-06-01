@@ -244,7 +244,7 @@ const Header = ({ token }) => {
                   )}
 
                   {toggleMenu && (
-                    <div className="user-group_subMenu text-white bg-dark rounded start-0  position-absolute">
+                    <div className="user-group_subMenu text-white bg-dark rounded  position-absolute">
                       <ul className="nav flex-column gap-1 p-0 text-capitalize">
                         <li
                           className=" text-white w-100"
