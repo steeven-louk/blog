@@ -73,7 +73,6 @@ const Login = () => {
                 <form onSubmit={handleSubmit} className='form d-flex flex-column gap-3'>
                     <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='email' required className="form-control " />
                     <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='password' required className="form-control " />
-                    <br />
                     <button className='rounded text-white bg-success border-0 p-1 fw-semibold'>Login</button>
                 </form>
                 <br />

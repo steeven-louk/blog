@@ -40,6 +40,9 @@
       }
       .right{
         width: 450px;
+        @media only screen and(max-width: 450px) {
+            padding: 20px!important;
+        }
       }
     }
 
